@@ -24,7 +24,7 @@ class ItemRepository {
  
     getById(id) {
         return new Promise((resolve, reject) => {
-            if(!id) {
+            if(!id || id <= 0) {
                 reject();
             }
             else {
