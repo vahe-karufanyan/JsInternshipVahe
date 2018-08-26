@@ -41,7 +41,7 @@ class ItemRepository {
  
     remove(id) {
         return new Promise((resolve, reject) => {
-            if(!id) {
+            if(!id || !this.items.has(id)) {
                 reject();
             }
             else {
