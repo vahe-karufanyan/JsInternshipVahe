@@ -1,9 +1,9 @@
-import item from '../../models/itemRepositery';
+import user from '../../models/users';
 import Error from '../../helpers/error';
 import mongoose from 'mongoose';
 
 export function _getAll (req, res) {
-    item.find().exec().then(docs => {
+    user.find().exec().then(docs => {
         console.log(docs);
         res.status(200).json(docs);
     }).catch(err => {
@@ -14,7 +14,7 @@ export function _getAll (req, res) {
 
 export function _getById (req, res) {
     const id = req.params.id;
-    item.findById(id).exec().then(doc => {
+    user.findById(id).exec().then(doc => {
         console.log("From database", doc);
         if (doc) {
             res.status(200).json(doc);
@@ -29,32 +29,28 @@ export function _getById (req, res) {
 
 export function _update (req, res) {
     const id = req.params.id;
-    const updatedItem = {
+    const updatedUser = {
         _id : id,
-        type : req.body.type,
         name : req.body.name,
-        price : req.body.price
     };
-    item.update({ _id: id }, { $set: updatedItem }).exec().then(result => {
+    item.update({ _id: id }, { $set: updatedUser }).exec().then(result => {
         console.log(result);
-        res.status(200).json(updatedItem);
+        res.status(200).json(updatedUser);
     }).catch(err => {
         console.log(err);
-        Error(res, 404, 'Item not Found');
+        Error(res, 404, 'User not Found');
     });
 }
 
-export function _addItem (req, res) {
-    const newItem = new item({
+export function _addUser (req, res) {
+    const newUser = new user({
         _id: new mongoose.Types.ObjectId(),
-        type: req.body.type,
         name: req.body.name,
-        price: req.body.price
     });
-    newItem.save().then(result => {
+    newUser.save().then(result => {
         console.log(result);
         res.status(201).json({
-            createdItem: result
+            createdUser: result
         });
     }).catch(err => {
         console.log(err);
@@ -64,7 +60,7 @@ export function _addItem (req, res) {
 
 export function _remove (req, res) {
     const id = req.params.id;
-    item.remove({ _id: id }).exec().then(result => {
+    user.remove({ _id: id }).exec().then(result => {
         res.status(200).send('Successfully removed');
     }).catch(err => {
         console.log(err);
