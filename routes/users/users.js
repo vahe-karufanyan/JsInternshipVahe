@@ -1,5 +1,5 @@
 import express from 'express';
-import {_getAll, _getById, _update, _addItem, _remove, _counter} from './items.controller'
+import {_getAll, _getById, _update, _addUser, _remove} from './users.controller'
 
 
 const router = express.Router();
@@ -8,12 +8,10 @@ router.get('/', _getAll);
 
 router.get('/:id', _getById);
 
-router.put('/:id', _update);
+// router.put('/:id', _update);
 
-router.post('/', _addItem);
+router.post('/', _addUser);
 
 router.delete('/:id', _remove);
-
-//router.post('/', _counter);
 
 export default router;

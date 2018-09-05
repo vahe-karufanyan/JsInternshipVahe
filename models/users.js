@@ -1,8 +1,10 @@
 import mongoose from'mongoose';
 
 const userSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    name: String,
+    id: Number,
+    username: String,
+    password: String,
+    confirmpassword: String
 });
 
 const userModel = mongoose.model('user', userSchema);
