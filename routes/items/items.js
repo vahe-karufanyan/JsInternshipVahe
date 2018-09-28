@@ -14,6 +14,4 @@ router.post('/', _addItem);
 
 router.delete('/:id', _remove);
 
-//router.post('/', _counter);
-
 export default router;

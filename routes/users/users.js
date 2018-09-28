@@ -8,10 +8,4 @@ router.get('/', _getAll);
 
 router.get('/:id', _getById);
 
-// router.put('/:id', _update);
-
-router.post('/', _addUser);
-
-router.delete('/:id', _remove);
-
 export default router;

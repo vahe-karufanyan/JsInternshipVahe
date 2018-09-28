@@ -1,9 +1,9 @@
-import item from '../../models/itemRepositery';
+import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
 import mongoose from 'mongoose';
 
 export function _getAll (req, res) {
-    item.find().exec().then(docs => {
+    Item.find().exec().then(docs => {
         console.log(docs);
         res.status(200).json(docs);
     }).catch(err => {
@@ -14,7 +14,7 @@ export function _getAll (req, res) {
 
 export function _getById (req, res) {
     const id = req.params.id;
-    item.findOne({id: id}).exec().then(doc => {
+    Item.findOne({id: id}).exec().then(doc => {
         console.log("From database", doc);
         if (doc) {
             res.status(200).json(doc);
@@ -34,9 +34,10 @@ export function _update (req, res) {
         id : id,
         type : req.body.type,
         name : req.body.name,
-        price : req.body.price
+        price : req.body.price,
+        counter: req.body.counter
     };
-    item.update({ id: id }, { $set: updatedItem }).exec().then(result => {
+    Item.update({ id: id }, { $set: updatedItem }).exec().then(result => {
         console.log(result);
         res.status(200).json(updatedItem);
     }).catch(err => {
@@ -46,12 +47,13 @@ export function _update (req, res) {
 }
 
 export function _addItem (req, res) {
-    const newItem = new item({
+    const newItem = new Item({
         _id: new mongoose.Types.ObjectId(),
         id: Math.round((Math.random()+1)*100000),
         type: req.body.type,
         name: req.body.name,
         price: req.body.price,
+        counter: req.body.counter
     });
     newItem.save().then(result => {
         console.log(result);
@@ -66,24 +68,10 @@ export function _addItem (req, res) {
 
 export function _remove (req, res) {
     const id = req.params.id;
-    item.remove({ id: id }).exec().then(result => {
-        res.status(200).send('Successfully removed');
+    Item.remove({ id: id }).exec().then(result => {
+        res.status(200).json(result);
     }).catch(err => {
         console.log(err);
         Error(res, 400, 'Bad Request');
     });
 }
-
-export function _counter (req, res) {
-    const thisName = req.params.name
-    const count = item.count({name: thisName});
-    //conole.log(count.size())
-    // .exec().then(result => {
-    //     console.log(result);
-    //     res.status(200).send(result);
-    // }).catch(err => {
-    //     console.log(err);
-    //     Error(res, 404, 'Item not Found');
-    // });;
-}
-
