@@ -1,17 +1,18 @@
 import express from 'express';
-import {_getAll, _getById, _update, _addItem, _remove, _counter} from './items.controller'
+import {_getAll, _getById, _update, _addItem, _remove, _counter} from './items.controller';
+import TokenVerifier from '../../helpers/tokenVerifier'
 
 
 const router = express.Router();
 
-router.get('/', _getAll);
+router.get('/', TokenVerifier(), _getAll);
 
-router.get('/:id', _getById);
+router.get('/:id', TokenVerifier(), _getById);
 
-router.put('/:id', _update);
+router.put('/:id', TokenVerifier(), _update);
 
-router.post('/', _addItem);
+router.post('/', TokenVerifier(), _addItem);
 
-router.delete('/:id', _remove);
+router.delete('/:id', TokenVerifier(), _remove);
 
 export default router;

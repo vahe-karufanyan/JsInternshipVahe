@@ -3,11 +3,13 @@ import bodyParser from 'body-parser';
 import routes from './routes';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 
 class App {
   constructor() {
     this.app = express();
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser())
     this.app.use(morgan('env'));
 
     routes(this.app);
