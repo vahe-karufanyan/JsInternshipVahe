@@ -1,4 +1,4 @@
-import User from '../../models/users';
+import User from '../../models/userRepositery';
 import Error from '../../helpers/error';
 
 export function _getAll (req, res) {
