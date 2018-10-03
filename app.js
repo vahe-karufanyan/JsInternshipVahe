@@ -7,13 +7,13 @@ import cookieParser from 'cookie-parser';
 
 class App {
   constructor() {
+    this.mongooseConnect();
     this.app = express();
     this.app.use(bodyParser.json());
     this.app.use(cookieParser())
     this.app.use(morgan('env'));
 
     routes(this.app);
-    this.mongooseConnect();
   }
 
   mongooseConnect() {
@@ -34,4 +34,3 @@ let app = new App();
 app.start();
 
 export default app;
-  

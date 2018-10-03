@@ -1,7 +1,7 @@
 import itemsRouter from './items/items';
 import usersRouter from './users/users';
 import authentication from './authentication/authentication';
-import search from './search/search'
+import search from './search/search';
 
 var v1 = function(app) {
     app.use("/api/v1/item", itemsRouter);

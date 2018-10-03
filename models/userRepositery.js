@@ -1,4 +1,5 @@
 import mongoose from'mongoose';
+import Joi from 'joi';
 
 const userSchema = mongoose.Schema({
     id: {type: Number, required: true},
@@ -6,6 +7,12 @@ const userSchema = mongoose.Schema({
     password: {type: String, required: true},
 });
 
-const userModel = mongoose.model('user', userSchema);
+userSchema.methods.joiValidate = function(obj) {
+	var schema = {
+		password: Joi.types.String().min(8).max(30).regex(/[a-zA-Z0-9]{3,30}/).required(),
+		email: Joi.types.String().email().required(),
+	}
+	return Joi.validate(obj, schema);
+}
 
-export default userModel;
+export default mongoose.model('user', userSchema);
