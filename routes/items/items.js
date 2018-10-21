@@ -1,18 +1,24 @@
 import express from 'express';
-import {_getAll, _getById, _update, _addItem, _remove, _counter} from './items.controller';
-import IsLoggedIn from '../../helpers/isLoggedIn'
+import {
+  getAll,
+  getById,
+  update,
+  addItem,
+  remove,
+} from './items.controller';
+import IsLoggedIn from '../../helpers/isLoggedIn';
 
 
 const router = express.Router();
 
-router.get('/', IsLoggedIn, _getAll);
+router.get('/', IsLoggedIn, getAll);
 
-router.get('/:id', IsLoggedIn, _getById);
+router.get('/:id', IsLoggedIn, getById);
 
-router.put('/:id', IsLoggedIn, _update);
+router.put('/:id', IsLoggedIn, update);
 
-router.post('/', IsLoggedIn, _addItem);
+router.post('/', IsLoggedIn, addItem);
 
-router.delete('/:id', IsLoggedIn, _remove);
+router.delete('/:id', IsLoggedIn, remove);
 
 export default router;

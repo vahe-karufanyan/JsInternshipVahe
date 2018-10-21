@@ -1,8 +1,8 @@
 import express from 'express';
-import _search from './search.controller';
+import search from './search.controller';
 
 const router = express.Router();
 
-router.get('/:name', _search);
+router.get('/:name', search);
 
 export default router;
