@@ -6,7 +6,7 @@ import {
 } from '../../helpers/joiValidation';
 
 export function getAll(req, res) {
-  Item.find().exec().then(docs => {
+  Item.find().then(docs => {
     res.status(200).json(docs);
   }).catch(err => {
     Error(res, 400, err);
@@ -19,7 +19,7 @@ export function getById(req, res) {
   }
   const id = req.params.id;
   Item.findOne({ id })
-    .exec().then(doc => {
+    .then(doc => {
       if (!doc) {
         return Error(res, 404, 'No valid entry found for provided ID');
       }
@@ -46,7 +46,7 @@ export function update(req, res) {
       res.status(200).json(value);
       return Item.update({ id: updatedItem.id }, { $set: updatedItem });
     })
-    .exec().then(result => {
+    .then(result => {
       res.status(200).json(result);
     })
     .catch(err => {
@@ -83,7 +83,7 @@ export function remove(req, res) {
     return Error(res, 404, 'Id is missing');
   }
   const id = req.params.id;
-  Item.remove({ id }).exec().then(result => {
+  Item.remove({ id }).then(result => {
     res.status(200).json(result);
   }).catch(err => {
     Error(res, 400, err);

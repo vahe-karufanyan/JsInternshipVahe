@@ -27,7 +27,7 @@ export function signUp(req, res) {
       email: newUser.email,
       password: hashedPassword,
     });
-  }).exec()
+  })
     .then(result => {
       res.status(200).send(result);
       return token(newUser.email);
