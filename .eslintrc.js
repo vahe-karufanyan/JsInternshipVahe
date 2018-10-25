@@ -9,6 +9,5 @@ module.exports = {
         "arrow-parens": 0,
         "class-methods-use-this": 0,
         "arrow-body-style": 0,
-        "import/named": 0,
     }
 };

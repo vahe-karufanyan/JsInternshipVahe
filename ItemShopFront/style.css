@@ -1,0 +1,51 @@
+.main-container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+}
+.flexbox {
+	display: flex;
+	flex-direction: column;
+}
+.add-item-box, .log-in-box, .sign-up-box {
+	display: flex;
+	flex-direction: column;
+	font-family: Helvetica, Arial, sans-serif;
+	width: 250px;
+	height: 270px;
+	padding-top: 50px;
+}
+.sign-up-box {
+	height: 350px;
+}
+.add-item-box {
+	height: 250px;
+}
+.user-db {
+	display: flex;
+	flex-direction: row;
+	margin-top: 80px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.db-username-box {
+	display: flex;
+	flex-direction: column;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.edit-delete {
+	display: flex;
+	flex-direction: row;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.proce-box, .edit-delete-box {
+	display: flex;
+	flex-direction: column;
+	font-family: Helvetica, Arial, sans-serif;
+	margin-left: 40px; 
+}
+.item-name, .price {
+	text-transform: uppercase;
+	font-family: Helvetica, Arial, sans-serif;
+	color: skyblue;
+}

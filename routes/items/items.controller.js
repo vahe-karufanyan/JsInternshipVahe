@@ -18,14 +18,16 @@ export function getById(req, res) {
     return Error(res, 404, 'Id is missing');
   }
   const id = req.params.id;
-  Item.findOne({ id }).exec().then(doc => {
-    if (!doc) {
-      return Error(res, 404, 'No valid entry found for provided ID');
-    }
-    res.status(200).json(doc);
-  }).catch(err => {
-    Error(res, 400, err);
-  });
+  Item.findOne({ id })
+    .exec().then(doc => {
+      if (!doc) {
+        return Error(res, 404, 'No valid entry found for provided ID');
+      }
+      res.status(200).json(doc);
+    })
+    .catch(err => {
+      Error(res, 400, err);
+    });
 }
 
 export function update(req, res) {
@@ -39,14 +41,17 @@ export function update(req, res) {
     price: req.body.price,
     counter: req.body.counter,
   };
-  validate(updatedItem, itemSchema).then(value => {
-    res.status(200).json(value);
-    return Item.update({ id: updatedItem.id }, { $set: updatedItem }).exec().then(result => {
+  validate(updatedItem, itemSchema)
+    .then(value => {
+      res.status(200).json(value);
+      return Item.update({ id: updatedItem.id }, { $set: updatedItem });
+    })
+    .exec().then(result => {
       res.status(200).json(result);
+    })
+    .catch(err => {
+      Error(res, 404, err);
     });
-  }).catch(err => {
-    Error(res, 404, err);
-  });
 }
 
 export function addItem(req, res) {
@@ -60,14 +65,17 @@ export function addItem(req, res) {
     price: req.body.price,
     counter: req.body.counter,
   });
-  validate(newItem, itemSchema).then(value => {
-    res.status(200).json(value);
-    return newItem.save().then(result => {
+  validate(newItem, itemSchema)
+    .then(value => {
+      res.status(200).json(value);
+      return newItem.save();
+    })
+    .then(result => {
       res.status(201).json(result);
+    })
+    .catch(err => {
+      Error(res, 400, err);
     });
-  }).catch(err => {
-    Error(res, 400, err);
-  });
 }
 
 export function remove(req, res) {

@@ -21,21 +21,26 @@ export function signUp(req, res) {
   }
   validate(newUser, emailPasswordSchema).then(value => {
     res.status(200).json(value);
-    return hash(newUser.password).then(hashedPassword => {
-      return User.create({
-        email: newUser.email,
-        password: hashedPassword,
-      }).exec().then(result => {
-        return token(res, newUser.email).then(status => {
-          res.status(status).json({
-            createdUser: result,
-          });
-        });
-      });
+    return hash(newUser.password); 
+  }).then(hashedPassword => {
+    return User.create({
+      email: newUser.email,
+      password: hashedPassword,
     });
-  }).catch(error => {
-    Error(res, 400, error);
-  });
+  }).exec()
+    .then(result => {
+      res.status(200).send(result);
+      return token(newUser.email);
+    })
+    .then(generatedToken => {
+      res.cookie('access_token', generatedToken, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 12,
+      });
+    })
+    .catch(error => {
+      Error(res, 400, error);
+    });
 }
 
 export function logIn(req, res) {
@@ -46,19 +51,27 @@ export function logIn(req, res) {
   if (!existingUser.email || !existingUser.password) {
     return Error(res, 404, 'No Email and Password');
   }
-  validate(existingUser, emailPasswordSchema).then(value => {
-    res.status(200).json(value);
-    return User.findOne({ email: existingUser.email }).then(currentUser => {
-      return compair(existingUser.password, currentUser.password).then(result => {
-        if (!result) {
-          return Error(res, 401, 'Not authorized');
-        }
-        return token(res, existingUser.email).then(status => {
-          res.status(status);
-        });
+  validate(existingUser, emailPasswordSchema)
+    .then(value => {
+      res.status(200).json(value);
+      return User.findOne({ email: existingUser.email });
+    })
+    .then(currentUser => {
+      return compair(existingUser.password, currentUser.password);
+    })
+    .then(result => {
+      if (!result) {
+        return Error(res, 401, 'Not authorized');
+      }
+      return token(existingUser.email);
+    })
+    .then(generatedToken => {
+      res.cookie('access_token', generatedToken, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 12,
       });
+    })
+    .catch(err => {
+      Error(res, 400, err);
     });
-  }).catch(err => {
-    Error(res, 400, err);
-  });
 }
