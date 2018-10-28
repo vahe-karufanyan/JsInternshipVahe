@@ -11,7 +11,7 @@ export function hash(password) {
   });
 }
 
-export function compair(password, compairPassword) {
+export function compare(password, compairPassword) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, compairPassword, (err, result) => {
       if (err || !result) {

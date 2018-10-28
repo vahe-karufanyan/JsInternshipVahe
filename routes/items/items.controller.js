@@ -1,8 +1,7 @@
 import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
 import {
-  itemSchema,
-  validate,
+  validateForItems,
 } from '../../helpers/joiValidation';
 
 export function getAll(req, res) {
@@ -41,7 +40,7 @@ export function update(req, res) {
     price: req.body.price,
     counter: req.body.counter,
   };
-  validate(updatedItem, itemSchema)
+  validateForItems(updatedItem)
     .then(value => {
       res.status(200).json(value);
       return Item.update({ id: updatedItem.id }, { $set: updatedItem });
@@ -65,7 +64,7 @@ export function addItem(req, res) {
     price: req.body.price,
     counter: req.body.counter,
   });
-  validate(newItem, itemSchema)
+  validateForItems(newItem)
     .then(value => {
       res.status(200).json(value);
       return newItem.save();

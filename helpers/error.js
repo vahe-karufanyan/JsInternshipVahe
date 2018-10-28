@@ -1,7 +1,3 @@
-function sendError(res, code, error) {
-  return res.status(code).json({
-    error,
-  });
+export default function sendError(res, code, error) {
+  return res.status(code).send(error);
 }
-
-export default sendError;
