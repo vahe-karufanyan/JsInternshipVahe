@@ -38,13 +38,11 @@ export function update(req, res) {
     type: req.body.type,
     name: req.body.name,
     price: req.body.price,
+    barcode: req.body.barcode,
     counter: req.body.counter,
   };
   validateForItems(updatedItem)
-    .then(value => {
-      res.status(200).json(value);
-      return Item.update({ id: updatedItem.id }, { $set: updatedItem });
-    })
+    .then(() => Item.update({ id: updatedItem.id }, { $set: updatedItem }))
     .then(result => {
       res.status(200).json(result);
     })
@@ -62,13 +60,11 @@ export function addItem(req, res) {
     type: req.body.type,
     name: req.body.name,
     price: req.body.price,
+    barcode: req.body.barcode,
     counter: req.body.counter,
   });
   validateForItems(newItem)
-    .then(value => {
-      res.status(200).json(value);
-      return newItem.save();
-    })
+    .then(() => newItem.save())
     .then(result => {
       res.status(201).json(result);
     })

@@ -12,7 +12,7 @@ router.post('/signup', signUp);
 
 router.post('/login', logIn);
 
-router.delete('/logout/:email', logOut);
+router.get('/logout', logOut);
 
 
 export default router;

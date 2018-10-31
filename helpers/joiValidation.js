@@ -19,7 +19,7 @@ export function validateForSignUp(res, object, confirmPassword) {
   }
   return new Promise((resolve, reject) => {
     Joi.validate(object, emailPasswordSchema, (err, value) => {
-      if (err) {
+      if (err || !value) {
         reject(err);
       }
       resolve(value);
@@ -33,7 +33,7 @@ export function validateForSignIn(res, object) {
   }
   return new Promise((resolve, reject) => {
     Joi.validate(object, emailPasswordSchema, (err, value) => {
-      if (err) {
+      if (err || !value) {
         reject(err);
       }
       resolve(value);

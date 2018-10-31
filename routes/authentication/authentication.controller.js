@@ -8,7 +8,9 @@ import {
   validateForSignUp,
   validateForSignIn,
 } from '../../helpers/joiValidation';
-import token from '../../helpers/tokenGenerator';
+import {
+  tokenGenerator,
+} from '../../helpers/JWT';
 
 
 export function signUp(req, res) {
@@ -16,23 +18,18 @@ export function signUp(req, res) {
     password: req.body.password,
     email: req.body.email,
   };
-  validateForSignUp(res, newUser, req.body.confirmPassword).then(value => {
-    if (!value) {
-      return Error(res, 404, 'No Email and Password');
-    }
-    return hash(newUser.password); 
-  })
+  validateForSignUp(res, newUser, req.body.confirmPassword).then(() => hash(newUser.password))
     .then(hashedPassword => User.create({
       email: newUser.email,
       password: hashedPassword,
     }))
-    .then(() => token(newUser.email))
+    .then(() => tokenGenerator(newUser.email))
     .then(generatedToken => {
       res.cookie('access_token', generatedToken, {
         httpOnly: true,
         maxAge: 60 * 60 * 12,
       });
-      res.status(200);
+      res.status(200).send();
     })
     .catch(error => {
       Error(res, 400, error);
@@ -45,27 +42,15 @@ export function logIn(req, res) {
     email: req.body.email,
   };
   validateForSignIn(res, existingUser)
-    .then(value => {
-      if (!value) {
-        return Error(res, 404, 'No Email and Password');
-      }
-      return User.findOne({ email: existingUser.email });
-    })
-    .then((currentUser) => {
-      return compare(existingUser.password, currentUser.password);
-    })
-    .then(result => {
-      if (!result) {
-        return Error(res, 401, 'Not authorized');
-      }
-      return token(existingUser.email);
-    })
+    .then(() => User.findOne({ email: existingUser.email }))
+    .then((currentUser) => compare(existingUser.password, currentUser.password))
+    .then(() => tokenGenerator(existingUser.email))
     .then(generatedToken => {
       res.cookie('access_token', generatedToken, {
         httpOnly: true,
         maxAge: 60 * 60 * 12,
       });
-      res.status(200);
+      res.status(200).send();
     })
     .catch(err => {
       Error(res, 400, err);
@@ -73,13 +58,6 @@ export function logIn(req, res) {
 }
 
 export function logOut(req, res) {
-  const email = req.params.email;
-  if (!email) {
-    return Error(res, 404, 'Email is missing');
-  }
-  User.deleteOne({ email }).then(result => {
-    res.status(200).json(result);
-  }).catch(err => {
-    Error(res, 400, err);
-  });
+  res.clearCookie('access_token');
+  res.status(200).send();
 }

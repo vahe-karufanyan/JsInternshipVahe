@@ -25,7 +25,7 @@
 .user-db {
 	display: flex;
 	flex-direction: row;
-	margin-top: 80px;
+	margin-top: 200px;
 	font-family: Helvetica, Arial, sans-serif;
 }
 .db-username-box {
@@ -38,7 +38,7 @@
 	flex-direction: row;
 	font-family: Helvetica, Arial, sans-serif;
 }
-.proce-box, .edit-delete-box {
+.price-box, .edit-delete-box {
 	display: flex;
 	flex-direction: column;
 	font-family: Helvetica, Arial, sans-serif;
