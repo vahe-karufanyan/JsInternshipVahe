@@ -11,9 +11,9 @@ import IsLoggedIn from '../../helpers/isLoggedIn';
 
 const router = express.Router();
 
-router.get('/', IsLoggedIn, getAll);
+router.get('/', getAll);
 
-router.get('/:id', IsLoggedIn, getById);
+router.get('/:id', getById);
 
 router.put('/:id', IsLoggedIn, update);
 

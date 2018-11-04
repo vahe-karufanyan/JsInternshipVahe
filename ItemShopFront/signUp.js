@@ -17,6 +17,14 @@ $(document).ready(() => {
       type: 'POST',
       url: 'localhost:3000/api/v1/authorisation/signup',
       data: newUser,
+      success: function() {
+        alert('Successfully signed up.');
+        return;
+      },
+      error: function() {
+        alert('Error.');
+        return;
+      },
     });
   });
 });

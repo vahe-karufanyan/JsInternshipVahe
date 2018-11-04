@@ -17,6 +17,14 @@ $(document).ready(() => {
       type: 'POST',
       url: 'localhost:3000/api/v1/item',
       data: newItem,
+      success: function() {
+        alert('Item successfully added.');
+        return;
+      },
+      error: function() {
+        alert('Error.');
+        return;
+      }, 
     });
   });
 });
