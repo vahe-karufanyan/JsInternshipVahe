@@ -5,32 +5,20 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import routes from './routes';
 
-class App {
-  constructor() {
-    this.mongooseConnect();
-    this.app = express();
-    this.app.use(bodyParser.json());
-    this.app.use(cookieParser());
-    this.app.use(morgan('env'));
+mongoose.connect('mongodb://localhost/mydb',
+  {
+    useNewUrlParser: true,
+  });
 
-    routes(this.app);
-  }
+const app = express();
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(morgan('env'));
 
-  mongooseConnect() {
-    mongoose.connect('mongodb://localhost/mydb',
-      {
-        useNewUrlParser: true,
-      });
-  }
+routes(this.app);
 
-  start() {
-    this.app.listen(3000, () => {
-      console.log('Server is up!');
-    });
-  }
-}
-
-const app = new App();
-app.start();
+app.listen(3000, () => {
+  console.log('Server is up!');
+});
 
 export default app;

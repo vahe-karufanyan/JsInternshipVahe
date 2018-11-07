@@ -17,11 +17,11 @@ $(document).ready(() => {
       type: 'POST',
       url: 'localhost:3000/api/v1/item',
       data: newItem,
-      success: function() {
+      success: () => {
         alert('Item successfully added.');
         return;
       },
-      error: function() {
+      error: () => {
         alert('Error.');
         return;
       }, 

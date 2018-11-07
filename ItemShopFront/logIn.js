@@ -11,14 +11,14 @@ $(document).ready(() => {
       type: 'POST',
       url: 'localhost:3000/api/v1/authorisation/logIn',
       data: existingUser,
-      success: function() {
+      success: () => {
         alert('Successfully logged in.');
         return;
       },
-      error: function() {
+      error: () => {
         alert('Error.');
         return;
-    },
+      },
     });
   });
 });

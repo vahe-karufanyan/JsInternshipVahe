@@ -17,11 +17,11 @@ $(document).ready(() => {
       type: 'POST',
       url: 'localhost:3000/api/v1/authorisation/signup',
       data: newUser,
-      success: function() {
+      success: () => {
         alert('Successfully signed up.');
         return;
       },
-      error: function() {
+      error: () => {
         alert('Error.');
         return;
       },
