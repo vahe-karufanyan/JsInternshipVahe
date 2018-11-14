@@ -1,13 +1,10 @@
 import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
-import {
-  validateForItems,
-  validateForId,
-} from '../../helpers/joiValidation';
+import { validateForItems, validateForId } from '../../helpers/joiValidation';
 
 export function getAll(req, res) {
-  Item.find().then(docs => {
-    res.status(200).json(docs);
+  Item.find().then(itemsList => {
+    res.status(200).json(itemsList);
   }).catch(err => {
     Error(res, 400, err);
   });
@@ -15,13 +12,10 @@ export function getAll(req, res) {
 
 export function getById(req, res) {
   const id = req.params.id;
-  const object = {
-    id,
-  };
-  validateForId(object)
+  validateForId({ id })
     .then(() => Item.findOne({ id }))
-    .then(doc => {
-      res.status(200).json(doc);
+    .then(item => {
+      res.status(200).json(item);
     })
     .catch(err => {
       Error(res, 400, err);

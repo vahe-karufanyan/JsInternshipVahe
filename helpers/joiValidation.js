@@ -1,9 +1,9 @@
 import Joi from 'joi';
-import User from '../models/userRepositery';
 
 const emailPasswordSchema = Joi.object().keys({
   email: Joi.string().email({ minDomainAtoms: 2 }).required(),
   password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+  role: Joi.string().min(8).max(30).required(),
 });
 
 const itemSchema = Joi.object().keys({
@@ -22,63 +22,42 @@ const IdSchema = Joi.object().keys({
   name: Joi.number().required(),
 });
 
-export function validateForSignUp(res, object, confirmPassword) {
-  if (object.password !== confirmPassword) {
-    return Error(res, 400, 'Passwords Didn\'t match.');
-  }
-  if (!User.findOne(object.email)) {
-    return Error(res, 400, 'User with this E-mail exists.');
-  }
+export function validateForUser(object) {
   return new Promise((resolve, reject) => {
-    Joi.validate(object, emailPasswordSchema, (err, value) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(value);
-    });
-  });
-}
-
-export function validateForSignIn(res, object) {
-  return new Promise((resolve, reject) => {
-    Joi.validate(object, emailPasswordSchema, (err, value) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(value);
-    });
+    const error = Joi.validate(object, emailPasswordSchema).error;
+    if (error) {
+      reject(error);
+    }
+    resolve();
   });
 }
 
 export function validateForItems(object) {
   return new Promise((resolve, reject) => {
-    Joi.validate(object, itemSchema, (err, value) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(value);
-    });
+    const error = Joi.validate(object, itemSchema).error;
+    if (error) {
+      reject(error);
+    }
+    resolve();
   });
 }
 
 export function validateForSearch(object) {
   return new Promise((resolve, reject) => {
-    Joi.validate(object, searchSchema, (err, value) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(value);
-    });
+    const error = Joi.validate(object, searchSchema).error;
+    if (error) {
+      reject(error);
+    }
+    resolve();
   });
 }
 
 export function validateForId(object) {
   return new Promise((resolve, reject) => {
-    Joi.validate(object, IdSchema, (err, value) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(value);
-    });
+    const error = Joi.validate(object, IdSchema).error;
+    if (error) {
+      reject(error);
+    }
+    resolve();
   });
 }

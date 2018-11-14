@@ -5,17 +5,18 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import routes from './routes';
 
+const app = express();
+
 mongoose.connect('mongodb://localhost/mydb',
   {
     useNewUrlParser: true,
   });
 
-const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan('env'));
 
-routes(this.app);
+routes(app);
 
 app.listen(3000, () => {
   console.log('Server is up!');
