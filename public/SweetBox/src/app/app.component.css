@@ -1,4 +1,4 @@
-body, input[type="text"], button {
-  color: #888;
-  font-family: Cambria, Georgia;
+.background{
+  height: 850px;
+  background-position: 50% 50%;
 }
