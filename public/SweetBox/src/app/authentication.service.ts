@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserLogIn } from './userLogIn';
 import { UserSignUp } from './userSignUp';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
@@ -22,5 +20,4 @@ export class AuthenticationService {
   logOut() {
     return this.http.delete('http://localhost:3000/api/v1/authorisation/logOut');
   }
- 
 }

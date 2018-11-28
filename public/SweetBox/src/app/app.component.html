@@ -1,12 +1,20 @@
-<div>
-  <div class="background" [ngStyle]="{'background-image': getUrl()}">
-    <img width="192.2" height="37.6" alt="Macadamian Logo" src="https://fall.mdtxevent.com/san18/Custom/1329053.jpg">
-    <div style="text-align:center">
-      <h1>
-        Welcome to {{ title }}!
-      </h1>
-      <p><a href="#">Sign in if you already have an Account</a>
-        <br><br>Or<br><br><a href="#">Create an Account</a></p>
+<!--<div class="background" [ngStyle]="{'background-image': getUrl()}">-->
+<img width="192.2" height="37.6" alt="Macadamian Logo" src="https://fall.mdtxevent.com/san18/Custom/1329053.jpg">
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <p><a href="#">Sign in if you already have an Account</a>
+    <br><br>Or<br><br><a href="#">Create an Account</a></p>
+</div>
+<div class="navbar navbar-default">
+  <div class="container">
+    <div id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/">Home</a></li>
+      </ul>
     </div>
   </div>
 </div>
+
+<router-outlet></router-outlet>

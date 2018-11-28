@@ -5,8 +5,12 @@ import User from '../models/userRepositery';
 
 export default function tokenVerifier(req, res, next) {
   const token = req.cookies.access_token;
-  if (User.findOne(isVerified(token).email).role !== 'admin') {
-    return Error(res, 401, Messages.NOT_LOGGED_IN);
-  }
-  next();
+  isVerified(token).then((user) => User.findOne(user.email))
+    .then((existingUser) => {
+      if (existingUser) {
+        next();
+      }
+    }).catch(err => {
+      Error(res, 400, err + Messages.NOT_LOGGED_IN);
+    });
 }

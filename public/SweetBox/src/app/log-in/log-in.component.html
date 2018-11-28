@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h1>Register</h1>
-      <form (submit)="register()">
+      <h1>Sign In</h1>
+      <p class="lead">Not a member? Please <a routerLink="/signUp">SignUp</a> instead.</p>
         <div class="form-group">
           <label for="email">Email address</label>
           <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
@@ -11,8 +11,7 @@
           <label for="password">Password</label>
           <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
         </div>
-        <button type="submit" class="btn btn-default">Register!</button>
-      </form>
+        <button type="submit" class="btn btn-default"><a routerLink="/itemRequests"></a>LogIn</button>
     </div>
   </div>
 </div>
