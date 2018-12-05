@@ -1,20 +1,25 @@
-<!--<div class="background" [ngStyle]="{'background-image': getUrl()}">-->
-<img width="192.2" height="37.6" alt="Macadamian Logo" src="https://fall.mdtxevent.com/san18/Custom/1329053.jpg">
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <p><a href="#">Sign in if you already have an Account</a>
-    <br><br>Or<br><br><a href="#">Create an Account</a></p>
-</div>
-<div class="navbar navbar-default">
-  <div class="container">
-    <div id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li><a routerLink="/">Home</a></li>
-      </ul>
+<!-- <div class="background" [ngStyle]="{'background-image': getUrl()}"> -->
+<div>
+  <img width="192.2" height="37.6" alt="Macadamian Logo" src="https://fall.mdtxevent.com/san18/Custom/1329053.jpg">
+  <div style="text-align: center">
+    <h1>
+      {{ title }}!
+    </h1>
+  <div class="navbar navbar-default">
+    <div class="flex-container">
+      <a routerLink="/">
+        <button type="button" class="btn btn-info">
+          <span class="glyphicon glyphicon-search"></span> Home
+        </button>
+      </a>
+      <a routerLink="/search">
+        <button type="button" class="btn btn-info">
+          <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+      </a>
     </div>
   </div>
 </div>
-
+<!-- </div> -->
+<!-- src="../images/macadamian-logo.jpg" -->
 <router-outlet></router-outlet>

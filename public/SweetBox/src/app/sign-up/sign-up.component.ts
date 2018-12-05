@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserSignUp } from '../userSignUp'
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,6 +14,16 @@ export class SignUpComponent {
     email: '',
     password: '',
     confirmPassword: '',
-    role: ''
   };
-};
+
+  constructor(private _authenticationService: AuthenticationService, private router: Router) { }
+
+  register() {    
+    this._authenticationService.signUp(this.credentials).subscribe(() => {
+      this.router.navigateByUrl('/shop');
+    },
+    (err) => {
+      console.error(err);
+    })
+  }
+}

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserLogIn } from '../userLogIn'
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -12,4 +14,15 @@ export class LogInComponent {
     email: '',
     password: ''
   };
+
+  constructor(private _authenticationService: AuthenticationService, private router: Router) { }
+
+  register() {    
+    this._authenticationService.signIn(this.credentials).subscribe(() => {
+      this.router.navigateByUrl('/shop');
+    },
+    (err) => {
+      console.error(err);
+    })
+  }
 };

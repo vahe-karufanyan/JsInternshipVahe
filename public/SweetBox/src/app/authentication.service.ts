@@ -18,6 +18,6 @@ export class AuthenticationService {
   }
 
   logOut() {
-    return this.http.delete('http://localhost:3000/api/v1/authorisation/logOut');
+    return this.http.get('http://localhost:3000/api/v1/authorisation/logOut');
   }
 }
