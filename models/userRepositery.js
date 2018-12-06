@@ -4,7 +4,7 @@ import Joi from 'joi';
 const userSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
-  role: { type: String, required: true },
+  role: { type: String, default: 'user' },
 });
 
 userSchema.methods.joiValidate = (obj) => {

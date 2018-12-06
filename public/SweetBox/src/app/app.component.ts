@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'SweetBox';
   getUrl()
   {
-    return "url('http://www.clker.com/cliparts/0/y/u/W/H/7/colorful-jelly-beans-md.png')";
+    return "url('../assets/candy-stripes.gif')";
   }
 }
