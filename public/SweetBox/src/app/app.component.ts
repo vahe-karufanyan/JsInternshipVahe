@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'SweetBox';
   getUrl()
   {
-    return "url('../assets/candy-stripes.gif')";
+    return "url('../assets/background-blured.jpg')";
   }
 }
