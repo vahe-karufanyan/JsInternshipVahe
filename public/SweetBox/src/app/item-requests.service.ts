@@ -8,12 +8,20 @@ export class ItemRequests {
 
   constructor(private http: HttpClient) {}
 
-  addItem(user: Item): Observable<Item>{
-    return this.http.post<Item>('http://localhost:3000/api/v1/item', user);
+  getAllItems() {
+    return this.http.get('http://localhost:3000/api/v1/item');
   }
 
-  updateItem(user: Item): Observable<Item>{
-    return this.http.put<Item>('http://localhost:3000/api/v1/item', user);
+  getByName() {
+    return this.http.get('http://localhost:3000/api/v1/item');
+  }
+
+  addItem(item: Item): Observable<Item>{
+    return this.http.post<Item>('http://localhost:3000/api/v1/item', item);
+  }
+
+  updateItem(item: Item): Observable<Item>{
+    return this.http.put<Item>('http://localhost:3000/api/v1/item', item);
   }
 
   remove() {
