@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
 })
 
 export class SignUpComponent {
@@ -19,10 +19,11 @@ export class SignUpComponent {
   constructor(private _authenticationService: AuthenticationService, private router: Router) { }
 
   register() {    
-    this._authenticationService.signUp(this.credentials).subscribe(() => {
+    this._authenticationService.signUp(this.credentials).subscribe(res => {
       this.router.navigateByUrl('/shop');
+      console.log(res);
     },
-    (err) => {
+    err => {
       console.error(err);
     })
   }

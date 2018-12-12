@@ -1,10 +1,8 @@
 <div class="container">
-    <div class="row">
+    <div class="row" *ngFor="let item of item">
       <div class="col-lg-3">
         <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
+          <a href="#" class="list-group-item">{{item.type}}</a>
         </div>
       </div>
       <div class="col-lg-9">
@@ -13,9 +11,9 @@
             <div class="card h-70">
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item One</a>
+                  <a>{{item.name}}</a>
                 </h4>
-                <h5>$24.99</h5>
+                <h5>{{item.price}}</h5>
                 <button type="button" class="btn btn-danger">Buy</button>
               </div>
             </div>

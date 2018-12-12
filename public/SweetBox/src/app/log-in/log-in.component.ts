@@ -17,9 +17,10 @@ export class LogInComponent {
 
   constructor(private _authenticationService: AuthenticationService, private router: Router) { }
 
-  register() {    
-    this._authenticationService.signIn(this.credentials).subscribe(() => {
+  logIn() {
+    this._authenticationService.signIn(this.credentials).subscribe(res => {
       this.router.navigateByUrl('/shop');
+      console.log(res);
     },
     (err) => {
       console.error(err);
