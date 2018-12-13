@@ -4,6 +4,7 @@ import { validateForItems, validateForId } from '../../helpers/joiValidation';
 
 export function getAll(req, res) {
   Item.find().then(itemsList => {
+    console.log('get all');
     res.status(200).json(itemsList);
   }).catch(err => {
     Error(res, 400, err);
@@ -48,10 +49,11 @@ export function addItem(req, res) {
     name: req.body.name,
     price: req.body.price,
     barcode: req.body.barcode,
-    counter: req.body.counter,
+    count: req.body.counter,
   });
+  console.log('something1');
   validateForItems(newItem)
-    .then(() => newItem.save())
+    .then(() => { console.log('something2'); return newItem.save(); })
     .then(result => {
       res.status(201).json(result);
     })
@@ -65,10 +67,9 @@ export function remove(req, res) {
   const object = {
     id,
   };
-  validateForId(object)
-    .then(() => Item.remove({ id }).then(result => {
-      res.status(200).json(result);
-    }).catch(err => {
-      Error(res, 400, err);
-    }));
+  validateForId(object).then(() => Item.remove({ id })).then(result => {
+    res.status(200).json(result);
+  }).catch(err => {
+    Error(res, 400, err);
+  });
 }

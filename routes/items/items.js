@@ -1,11 +1,5 @@
 import express from 'express';
-import {
-  getAll,
-  getById,
-  update,
-  addItem,
-  remove,
-} from './items.controller';
+import { getAll, getById, update, addItem, remove } from './items.controller';
 import IsLoggedIn from '../../helpers/isLoggedIn';
 
 

@@ -15,12 +15,13 @@ export function signUp(req, res) {
     if (newUser.password !== req.body.confirmPassword) {
       return Error(res, 400, Messages.PASSWORD_DIDNT_MATCH);
     }
-    return hash(newUser.password);
-  }).then(() => User.findOne({ email: newUser.email }))
+    return User.findOne({ email: newUser.email });
+  })
     .then((maybeUser) => {
       if (maybeUser) {
         return Error(res, 400, Messages.USER_EXISTS);
       }
+      return hash(newUser.password);
     })
     .then(hashedPassword => User.create({
       email: newUser.email,
@@ -30,7 +31,7 @@ export function signUp(req, res) {
     .then(generatedToken => {
       res.cookie('access_token', generatedToken, {
         httpOnly: true,
-        maxAge: 60 * 60 * 12,
+        maxAge: 60 * 60 * 48,
       });
       res.status(200).send();
     })
@@ -51,13 +52,13 @@ export function logIn(req, res) {
       if (!currentUser) {
         return Error(res, 400, Messages.USER_DOES_NOT_EXIST);
       }
-      return compare(existingUser.password, currentUser.password); //     error is here!!!!!!!!
+      return compare(existingUser.password, currentUser.password);
     })
     .then(() => tokenGenerator(existingUser.email))
     .then(generatedToken => {
       res.cookie('access_token', generatedToken, {
         httpOnly: true,
-        maxAge: 60 * 60 * 12,
+        maxAge: 60 * 60 * 48,
       });
       res.status(200).send();
     })

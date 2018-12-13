@@ -3,7 +3,7 @@ import Joi from 'joi';
 
 const userSchema = mongoose.Schema({
   email: { type: String, required: true },
-  password: { type: String },
+  password: { type: String, required: true },
   role: { type: String, default: 'user' },
 });
 

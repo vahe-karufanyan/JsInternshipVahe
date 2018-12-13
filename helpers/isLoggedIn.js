@@ -5,7 +5,8 @@ import User from '../models/userRepositery';
 
 export default function tokenVerifier(req, res, next) {
   const token = req.cookies.access_token;
-  isVerified(token).then((user) => { console.log(user); return User.findOne(user.email); })
+  isVerified(token)
+    .then((user) => User.findOne({ email: user.email }))
     .then((existingUser) => {
       if (existingUser) {
         next();

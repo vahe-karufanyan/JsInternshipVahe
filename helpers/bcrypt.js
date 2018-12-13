@@ -15,7 +15,6 @@ export function compare(password, compairPassword) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, compairPassword, (err, result) => {
       if (err) {
-        console.log('aaaaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkooooooooooowwwwwwwwwww');
         reject(err);
       }
       resolve(result);

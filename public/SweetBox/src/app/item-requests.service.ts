@@ -15,7 +15,7 @@ export class ItemRequests {
   getByName(name: string) {
     return this.http.get<Item>(`http://localhost:3000/api/v1/search/${name}`);
   }
- 
+
   addItem(item: Item): Observable<Item>{
     return this.http.post<Item>('http://localhost:3000/api/v1/item', item);
   }

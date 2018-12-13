@@ -11,6 +11,7 @@ import { LogInComponent } from './log-in/log-in.component'
 import { HomeComponent } from './home/home.component';
 import { ItemRequestsComponent } from './item-requests/item-requests.component';
 import { ShopComponent } from './shop/shop.component';
+import { ItemRequests } from './item-requests.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -31,7 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, ItemRequests],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
