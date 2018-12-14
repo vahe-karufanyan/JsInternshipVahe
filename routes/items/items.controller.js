@@ -49,9 +49,9 @@ export function addItem(req, res) {
     name: req.body.name,
     price: req.body.price,
     barcode: req.body.barcode,
-    count: req.body.counter,
+    count: req.body.count,
   });
-  console.log('something1');
+  console.log(newItem);
   validateForItems(newItem)
     .then(() => { console.log('something2'); return newItem.save(); })
     .then(result => {

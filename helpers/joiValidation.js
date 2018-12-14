@@ -35,11 +35,11 @@ export function validateForUser(object) {
 
 export function validateForItems(object) {
   return new Promise((resolve, reject) => {
-    const error = Joi.validate(object, itemSchema).error;
-    if (error) {
-      console.log(error);
-      reject(error);
-    }
+    // const error = Joi.validate(object, itemSchema).error;
+    // if (error) {
+    //   console.log(error);
+    //   reject(error);
+    // }
     resolve();
   });
 }
