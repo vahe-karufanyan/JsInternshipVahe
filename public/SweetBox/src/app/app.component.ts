@@ -10,21 +10,25 @@ import { Item } from './item';
 })
 export class AppComponent {
 
-  // name: string;
-  // item: Item;
-  // master = 'Master';
+  name: string;
+  item: Item[];
+  searchResult: boolean;
 
-  // constructor(private _itemRequest: ItemRequests, private router: Router) {}
+  constructor(private _itemRequest: ItemRequests, private router: Router) {}
   
-  // search() {
-  //   this._itemRequest.getByName(this.name).subscribe(res => {
-  //     this.router.navigateByUrl('/search');
-  //     this.item = res;
-  //   },
-  //   err => {
-  //     console.error(err);
-  //   })
-  // }
+  search() {
+    this._itemRequest.getByName(this.name).subscribe(res => {
+      this.item = res;
+      this.searchResult = true;
+    },
+    err => {
+      console.error(err);
+    })
+  }
+
+  authenticationPageBoolian() {
+    this.searchResult = false;
+  }
 
   getUrl() {
     return "url('../assets/background-blured.jpg')";

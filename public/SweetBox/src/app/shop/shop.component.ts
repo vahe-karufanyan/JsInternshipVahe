@@ -16,7 +16,7 @@ export class ShopComponent implements OnInit {
   addAllItems() {    
     this._itemRequest.getAllItems().subscribe(res => {
       this.item = res;
-      console.log(false)
+      console.log(false);
     },
     err => {
       console.error(err);

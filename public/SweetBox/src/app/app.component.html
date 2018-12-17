@@ -1,30 +1,50 @@
 <div class="background" [ngStyle]="{'background-image': getUrl()}">
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(255, 208, 0, 0.74);">
     <div class="container">
-      <a class="navbar-brand" routerLink="/">SweetBox</a>
+      <a class="navbar-brand" (click)="authenticationPageBoolian()" routerLink="/shop">SweetBox</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" routerLink="/">Home
+            <a class="nav-link" (click)="authenticationPageBoolian()" routerLink="/shop">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" (click)="authenticationPageBoolian()" routerLink="/logIn">Sign In
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" [(ngModel)]="name" aria-label="Search">
-              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"  routerLink="/search">Search</button>
-          </form>   
-          <form class="form-inline my-2 my-lg-0">
-              <button class="btn btn-outline-success my-2 my-sm-0" (click)="register()" type="submit" routerLink="/shop">SHOP</button>
-          </form>  
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search">
+              <button class="btn btn-outline-danger my-2 my-sm-0" (click)="search()" type="submit">Search</button>
+          </form>
         </ul>
       </div>
     </div>
   </nav>
   <br><br><br>
-  <!-- <search [item] = item  [master] = 'Master'></search> -->
   <!-- <img width="192.2" height="37.6" alt="Macadamian Logo" src="../assets/macadamian-logo.jpg"> -->
-  <router-outlet></router-outlet>
+  <div *ngIf="!searchResult">
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="searchResult">
+    <div class="col-lg-9" >
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4 text-center" *ngFor="let item of item">
+          <div class="card h-70">
+            <div class="card-body" id="search">
+              <h4 class="card-title">
+                <a>{{item.name}}</a>
+              </h4>
+              <h5>{{item.price}}</h5>
+              <button type="button" class="btn btn-danger">Buy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
