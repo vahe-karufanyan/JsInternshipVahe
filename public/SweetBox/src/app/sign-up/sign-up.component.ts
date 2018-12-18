@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserSignUp } from '../userSignUp'
+import { UserSignUp } from '../models/userSignUp'
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 
@@ -21,10 +21,10 @@ export class SignUpComponent {
   register() {    
     this._authenticationService.signUp(this.credentials).subscribe(res => {
       this.router.navigateByUrl('/shop');
-      console.log(res);
+      localStorage.setItem('token', res.token);
     },
     err => {
-      console.error(err);
+      alert(err);
     })
   }
 }

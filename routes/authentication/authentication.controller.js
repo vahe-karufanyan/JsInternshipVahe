@@ -31,9 +31,9 @@ export function signUp(req, res) {
     .then(generatedToken => {
       res.cookie('access_token', generatedToken, {
         httpOnly: true,
-        maxAge: 60 * 60 * 48,
+        // maxAge: 60 * 60 * 48,
       });
-      res.status(200).send();
+      res.status(200).json({ email: newUser.email, token: generatedToken });
     })
     .catch(err => {
       Error(res, 400, err);
@@ -58,9 +58,9 @@ export function logIn(req, res) {
     .then(generatedToken => {
       res.cookie('access_token', generatedToken, {
         httpOnly: true,
-        maxAge: 60 * 60 * 48,
+        // maxAge: 60 * 60 * 48,
       });
-      res.status(200).send();
+      res.status(200).json({ email: existingUser.email, token: generatedToken });
     })
     .catch(err => {
       Error(res, 400, err);

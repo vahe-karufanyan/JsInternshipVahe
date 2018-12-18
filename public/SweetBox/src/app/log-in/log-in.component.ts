@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserLogIn } from '../userLogIn'
+import { UserLogIn } from '../models/userLogIn'
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 
@@ -20,10 +20,11 @@ export class LogInComponent {
   logIn() {
     this._authenticationService.signIn(this.credentials).subscribe(res => {
       this.router.navigateByUrl('/shop');
-      console.log(res);
+      localStorage.setItem('token', res.token);
+      console.log(res.token);
     },
     (err) => {
-      console.error(err);
+      alert(err);
     })
   }
 };
