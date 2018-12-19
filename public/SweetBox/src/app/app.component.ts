@@ -23,11 +23,18 @@ export class AppComponent {
       this.searchResult = true;
     },
     err => {
+      alert(err);
       console.error(err);
     })
   }
 
   authenticationPageBoolian() {
+    this.searchResult = false;
+  }
+
+  logOut() {
+    this._authenticationService.logOut();
+    localStorage.removeItem('token');
     this.searchResult = false;
   }
 

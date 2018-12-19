@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemRequests } from '../item-requests.service';
 import { Item } from '../models/item'
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -11,7 +13,7 @@ export class ShopComponent implements OnInit {
 
   item: Item[];
 
-  constructor(private _itemRequest: ItemRequests) { }
+  constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) { }
 
   addAllItems() {    
     this._itemRequest.getAllItems().subscribe(res => {
@@ -23,12 +25,17 @@ export class ShopComponent implements OnInit {
     })
   }
 
+  buyIf() {
+    if (!this._authenticationService.isLoggedIn()) {
+      this.router.navigateByUrl('/logIn');
+    }
+  }
+
   noRepeatType() {
     let type;
     let i: number, j: number;
-    // alert(this.item.length);
     for( i = 0; i < this.item.length; i++ ) {
-      // alert(i);
+      console.log(i);
       // alert(this.item.length);
       let notMe = 0;
       type = this.item[i].type;

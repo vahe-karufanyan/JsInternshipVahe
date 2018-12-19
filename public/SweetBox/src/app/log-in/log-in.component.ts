@@ -14,14 +14,13 @@ export class LogInComponent {
     email: '',
     password: ''
   };
-
+  
   constructor(private _authenticationService: AuthenticationService, private router: Router) { }
 
   logIn() {
     this._authenticationService.signIn(this.credentials).subscribe(res => {
       this.router.navigateByUrl('/shop');
       localStorage.setItem('token', res.token);
-      console.log(res.token);
     },
     (err) => {
       alert(err);
