@@ -1,10 +1,8 @@
 <div class="container">
     <div class="row">
       <div class="col-lg-3">
-        <div class="list-group" *ngFor="let item of item">
-          <div *ngIf="noRepeatType()">
-            <a href="#" class="list-group-item">{{item.type}}</a>
-          </div>
+        <div class="list-group" *ngFor="let category of categories">
+          <a href="#" class="list-group-item">{{category}}</a>
         </div>
       </div>
       <div class="col-lg-9">

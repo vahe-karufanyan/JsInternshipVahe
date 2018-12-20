@@ -11,6 +11,15 @@ export function getAll(req, res) {
   });
 }
 
+export function getByType(req, res) {
+  const type = req.params.type;
+  Item.find({ type }).then((items) => {
+    res.status(200).json(items);
+  }).catch(err => {
+    Error(res, 400, err);
+  });
+}
+
 export function getById(req, res) {
   const id = req.params.id;
   validateForId({ id })
@@ -61,6 +70,7 @@ export function addItem(req, res) {
       Error(res, 400, err);
     });
 }
+
 
 export function remove(req, res) {
   const id = req.params.id;

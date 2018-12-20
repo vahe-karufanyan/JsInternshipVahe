@@ -12,13 +12,13 @@ import { Router } from '@angular/router';
 export class ShopComponent implements OnInit {
 
   item: Item[];
+  categories: String[] = [];
 
   constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) { }
 
   addAllItems() {    
     this._itemRequest.getAllItems().subscribe(res => {
       this.item = res;
-      console.log(false);
     },
     err => {
       console.error(err);
@@ -32,34 +32,25 @@ export class ShopComponent implements OnInit {
   }
 
   noRepeatType() {
-    let type;
-    let i: number, j: number;
-    for( i = 0; i < this.item.length; i++ ) {
-      console.log(i);
-      // alert(this.item.length);
-      let notMe = 0;
-      type = this.item[i].type;
-      // alert(type);
-      for( j = 0; j < this.item.length; j++ ) {
-        // alert(i);
-        // alert(this.item.length);
-        if ( type === this.item[j].type ) {
-          notMe = notMe + 1;
-          // alert(type);
-          // alert(notMe);
-          if (notMe !== 1) {
-            // alert('false');
-            return false;
+    let type: string;
+    setTimeout( () => {
+      for(let index in this.item) {
+        let notMe: number = 0;
+        type = this.item[index].type.toString();
+        for(let i = 0; i <= parseInt(index); i++) {
+          if ( type === this.item[i].type ) {
+            notMe++;
           }
         }
-        // alert('true');
-        return true;
+        if (notMe === 1) {
+          this.categories.push(type);
+        }
       }
-    }
+    }, 100)
   }
 
   ngOnInit() {
     this.addAllItems();
+    this.noRepeatType();
   }
-  
 }
