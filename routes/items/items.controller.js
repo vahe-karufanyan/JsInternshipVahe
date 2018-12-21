@@ -4,7 +4,6 @@ import { validateForItems, validateForId } from '../../helpers/joiValidation';
 
 export function getAll(req, res) {
   Item.find().then(itemsList => {
-    console.log('get all');
     res.status(200).json(itemsList);
   }).catch(err => {
     Error(res, 400, err);

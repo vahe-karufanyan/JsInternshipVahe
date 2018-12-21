@@ -13,6 +13,8 @@ export class ShopComponent implements OnInit {
 
   item: Item[];
   categories: String[] = [];
+  categoryItems: Item[];
+  clickedOnType: boolean = false;
 
   constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) { }
 
@@ -29,6 +31,21 @@ export class ShopComponent implements OnInit {
     if (!this._authenticationService.isLoggedIn()) {
       this.router.navigateByUrl('/logIn');
     }
+  }
+
+  showAllItems() {
+    this.clickedOnType = false;
+  }
+
+  getByType(category: string): void {
+    this._itemRequest.getByType(category).subscribe(res => {
+      this.categoryItems = res;
+      this.clickedOnType = true;
+    },
+    err => {
+      alert(err);
+      console.error(err);
+    })
   }
 
   noRepeatType() {

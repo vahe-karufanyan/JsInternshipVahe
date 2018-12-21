@@ -28,6 +28,12 @@ export class AppComponent {
     })
   }
 
+  buyIf() {
+    if (!this._authenticationService.isLoggedIn()) {
+      this.router.navigateByUrl('/logIn');
+    }
+  }
+
   authenticationPageBoolian() {
     this.searchResult = false;
   }

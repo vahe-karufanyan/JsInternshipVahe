@@ -1,6 +1,7 @@
 module.exports = {
     "extends": "airbnb-base",
     "rules": {
+        "object-curly-newline": 0,
         "linebreak-style": 0,
         "eol-last": 0,
         "prefer-destructuring": 0,
