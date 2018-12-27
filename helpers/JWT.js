@@ -16,6 +16,9 @@ export function tokenGenerator(email) {
     if (!email) {
       reject();
     }
-    resolve(JWT.sign({ email }, secret));
+    resolve(JWT.sign({
+      exp: 60 * 60 * 24,
+      email,
+    }, secret));
   });
 }

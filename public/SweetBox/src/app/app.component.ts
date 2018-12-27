@@ -41,6 +41,8 @@ export class AppComponent {
   logOut() {
     this._authenticationService.logOut();
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
     this.searchResult = false;
   }
 

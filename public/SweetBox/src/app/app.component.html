@@ -14,7 +14,7 @@
           </li>
           <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search">
-              <button class="btn btn-outline-danger my-2 my-sm-0" (click)="search()" type="submit">Search</button>
+              <button class="btn btn-outline-danger" (click)="search()" type="submit">Search</button>
           </form>
           <li class="nav-item active" >
             <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" (click)="logOut()" routerLink="/shop">Log Out

@@ -16,7 +16,9 @@ export class ShopComponent implements OnInit {
   categoryItems: Item[];
   clickedOnType: boolean = false;
 
-  constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) { }
+  constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) {
+    this.isLogedIn = this._authenticationService.isLoggedIn()
+   }
 
   addAllItems() {    
     this._itemRequest.getAllItems().subscribe(res => {
@@ -28,28 +30,30 @@ export class ShopComponent implements OnInit {
   }
 
   buyIf() {
-    if (!this._authenticationService.isLoggedIn()) {
+    if (!this.isLogedIn) {
       this.router.navigateByUrl('/logIn');
     }
+
+    //TODO: add buy functionlity here
   }
 
   showAllItems() {
     this.clickedOnType = false;
   }
 
-  getByType(category: string): void {
+  getByType(category: string) {
     this._itemRequest.getByType(category).subscribe(res => {
       this.categoryItems = res;
       this.clickedOnType = true;
     },
     err => {
       alert(err);
-      console.error(err);
     })
   }
 
   noRepeatType() {
     let type: string;
+
     setTimeout( () => {
       for(let index in this.item) {
         let notMe: number = 0;
@@ -68,6 +72,6 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.addAllItems();
-    this.noRepeatType();
+    
   }
 }

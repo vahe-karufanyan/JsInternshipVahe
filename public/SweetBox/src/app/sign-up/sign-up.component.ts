@@ -22,6 +22,8 @@ export class SignUpComponent {
     this._authenticationService.signUp(this.credentials).subscribe(res => {
       this.router.navigateByUrl('/shop');
       localStorage.setItem('token', res.token);
+      localStorage.setItem('email', res.email);
+      localStorage.setItem('role', res.role);
     },
     err => {
       alert(err);

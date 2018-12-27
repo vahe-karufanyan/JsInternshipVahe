@@ -22,7 +22,7 @@ export class AuthenticationService {
     return this.http.get('http://localhost:3000/api/v1/authorisation/logOut');
   }
 
-  isLoggedIn() {
+  isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 }

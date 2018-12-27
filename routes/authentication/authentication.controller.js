@@ -21,19 +21,23 @@ export function signUp(req, res) {
       if (maybeUser) {
         return Error(res, 400, Messages.USER_EXISTS);
       }
+      if (newUser.role !== 'admin') {
+        newUser.role = 'user';
+      }
       return hash(newUser.password);
     })
     .then(hashedPassword => User.create({
       email: newUser.email,
       password: hashedPassword,
+      role: newUser.role,
     }))
     .then(() => tokenGenerator(newUser.email))
     .then(generatedToken => {
-      res.cookie('access_token', generatedToken, {
-        httpOnly: true,
-        // maxAge: 60 * 60 * 48,
+      res.status(200).json({
+        email: newUser.email,
+        token: generatedToken,
+        role: newUser.role,
       });
-      res.status(200).json({ email: newUser.email, token: generatedToken });
     })
     .catch(err => {
       Error(res, 400, err);
@@ -44,23 +48,32 @@ export function logIn(req, res) {
   const existingUser = {
     password: req.body.password,
     email: req.body.email,
-    role: req.body.role,
+    role: '',
   };
   validateForUser(existingUser)
     .then(() => User.findOne({ email: existingUser.email }))
     .then((currentUser) => {
+      existingUser.role = currentUser.role;
       if (!currentUser) {
         return Error(res, 400, Messages.USER_DOES_NOT_EXIST);
       }
       return compare(existingUser.password, currentUser.password);
     })
-    .then(() => tokenGenerator(existingUser.email))
+    .then(bool => {
+      if (existingUser.role !== 'admin' || existingUser.role === undefined) {
+        existingUser.role = 'user';
+      }
+      if (bool) {
+        return tokenGenerator(existingUser.email);
+      }
+      return Error(res, 400, Messages.WRONG_PASSWORD);
+    })
     .then(generatedToken => {
-      res.cookie('access_token', generatedToken, {
-        httpOnly: true,
-        // maxAge: 60 * 60 * 48,
+      res.status(200).json({
+        email: existingUser.email,
+        token: generatedToken,
+        role: existingUser.role,
       });
-      res.status(200).json({ email: existingUser.email, token: generatedToken });
     })
     .catch(err => {
       Error(res, 400, err);
