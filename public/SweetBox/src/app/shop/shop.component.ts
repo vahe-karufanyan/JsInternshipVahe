@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemRequests } from '../item-requests.service';
-import { Item } from '../models/item'
+import { Item } from '../interfaces/item'
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 
@@ -15,21 +15,22 @@ export class ShopComponent implements OnInit {
   categories: String[] = [];
   categoryItems: Item[];
   clickedOnType: boolean = false;
+  isLogedIn = this._authenticationService.isLoggedIn()
 
   constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) {
-    this.isLogedIn = this._authenticationService.isLoggedIn()
    }
 
-  addAllItems() {    
+  addAllItems() {
     this._itemRequest.getAllItems().subscribe(res => {
       this.item = res;
+      this.noRepeatType();
     },
     err => {
       console.error(err);
     })
   }
 
-  buyIf() {
+  buy() {
     if (!this.isLogedIn) {
       this.router.navigateByUrl('/logIn');
     }
@@ -53,25 +54,21 @@ export class ShopComponent implements OnInit {
 
   noRepeatType() {
     let type: string;
-
-    setTimeout( () => {
-      for(let index in this.item) {
-        let notMe: number = 0;
-        type = this.item[index].type.toString();
-        for(let i = 0; i <= parseInt(index); i++) {
-          if ( type === this.item[i].type ) {
-            notMe++;
-          }
-        }
-        if (notMe === 1) {
-          this.categories.push(type);
+    for(let index in this.item) {
+      let notMe: number = 0;
+      type = this.item[index].type.toString();
+      for(let i = 0; i <= parseInt(index); i++) {
+        if ( type === this.item[i].type ) {
+          notMe++;
         }
       }
-    }, 100)
+      if (notMe === 1) {
+        this.categories.push(type);
+      }
+    }
   }
 
   ngOnInit() {
     this.addAllItems();
-    
   }
 }

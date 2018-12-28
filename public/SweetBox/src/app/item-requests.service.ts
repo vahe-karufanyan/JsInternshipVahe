@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Item } from './models/item';
+import { Item } from './interfaces/item';
 
 @Injectable()
 export class ItemRequests {
 
+  url: string = 'http://localhost:3000/api/v1/item';
+
   constructor(private http: HttpClient) {}
 
   getAllItems() {
-    return this.http.get<Item[]>('http://localhost:3000/api/v1/item');
+    return this.http.get<Item[]>(this.url);
   }
 
   getByName(name: string) {
@@ -17,11 +19,11 @@ export class ItemRequests {
   }
 
   getByType(type: string) {
-    return this.http.get<Item[]>(`http://localhost:3000/api/v1/item/getByType/${type}`);
+    return this.http.get<Item[]>(this.url + `/getByType/${type}`);
   }
 
   addItem(item: Item): Observable<Item>{
-    return this.http.post<Item>('http://localhost:3000/api/v1/item', item);
+    return this.http.post<Item>(this.url, item);
   }
 
   // updateItem(item: Item): Observable<Item>{

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserSignUp } from '../models/userSignUp'
+import { UserSignUp } from '../interfaces/userSignUp'
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 
@@ -22,7 +22,6 @@ export class SignUpComponent {
     this._authenticationService.signUp(this.credentials).subscribe(res => {
       this.router.navigateByUrl('/shop');
       localStorage.setItem('token', res.token);
-      localStorage.setItem('email', res.email);
       localStorage.setItem('role', res.role);
     },
     err => {

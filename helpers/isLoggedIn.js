@@ -4,7 +4,8 @@ import Messages from './messages';
 import User from '../models/userRepositery';
 
 export default function tokenVerifier(req, res, next) {
-  const token = req.cookies.access_token;
+  const token = req.body.token;
+  
   isVerified(token)
     .then((user) => User.findOne({ email: user.email }))
     .then((existingUser) => {

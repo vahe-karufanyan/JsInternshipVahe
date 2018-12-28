@@ -9,7 +9,6 @@ export function signUp(req, res) {
   const newUser = {
     password: req.body.password,
     email: req.body.email,
-    role: req.body.role,
   };
   validateForUser(newUser).then(() => {
     if (newUser.password !== req.body.confirmPassword) {
@@ -48,7 +47,6 @@ export function logIn(req, res) {
   const existingUser = {
     password: req.body.password,
     email: req.body.email,
-    role: '',
   };
   validateForUser(existingUser)
     .then(() => User.findOne({ email: existingUser.email }))
@@ -60,7 +58,7 @@ export function logIn(req, res) {
       return compare(existingUser.password, currentUser.password);
     })
     .then(bool => {
-      if (existingUser.role !== 'admin' || existingUser.role === undefined) {
+      if (existingUser.role !== 'admin') {
         existingUser.role = 'user';
       }
       if (bool) {
@@ -78,9 +76,4 @@ export function logIn(req, res) {
     .catch(err => {
       Error(res, 400, err);
     });
-}
-
-export function logOut(req, res) {
-  res.clearCookie('access_token');
-  res.status(200).send();
 }

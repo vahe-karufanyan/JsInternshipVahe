@@ -3,7 +3,6 @@ import Joi from 'joi';
 const emailPasswordSchema = Joi.object().keys({
   email: Joi.string().email({ minDomainAtoms: 2 }).required(),
   password: Joi.string().required(),
-  role: Joi.string(),
 });
 
 const itemSchema = Joi.object().keys({

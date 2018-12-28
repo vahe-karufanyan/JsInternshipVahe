@@ -1,25 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { UserLogIn } from './models/userLogIn';
-import { UserSignUp } from './models/userSignUp';
-import { User } from './models/user';
+import { UserLogIn } from './interfaces/userLogIn';
+import { UserSignUp } from './interfaces/userSignUp';
+import { User } from './interfaces/user';
 
 @Injectable()
 export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
+  url: string = 'http://localhost:3000/api/v1/authorisation/';
+
   signUp(user: UserSignUp): Observable<User>{
-    return this.http.post<User>('http://localhost:3000/api/v1/authorisation/signUp', user);
+    return this.http.post<User>(this.url + 'signUp', user);
   }
 
   signIn(user: UserLogIn): Observable<User>{
-    return this.http.post<User>('http://localhost:3000/api/v1/authorisation/logIn', user);
-  }
-
-  logOut() {
-    return this.http.get('http://localhost:3000/api/v1/authorisation/logOut');
+    return this.http.post<User>(this.url + 'logIn', user);
   }
 
   isLoggedIn(): boolean {

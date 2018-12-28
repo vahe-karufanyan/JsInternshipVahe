@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ItemRequests } from './item-requests.service';
 import { AuthenticationService } from './authentication.service';
 import { Router } from '@angular/router';
-import { Item } from './models/item';
+import { Item } from './interfaces/item';
 
 @Component({
   selector: 'app-root',
@@ -39,9 +39,7 @@ export class AppComponent {
   }
 
   logOut() {
-    this._authenticationService.logOut();
     localStorage.removeItem('token');
-    localStorage.removeItem('email');
     localStorage.removeItem('role');
     this.searchResult = false;
   }
