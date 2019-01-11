@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemRequests } from '../item-requests.service';
-import { Item } from '../interfaces/item'
-import { AuthenticationService } from '../authentication.service';
+import { ItemRequests } from '../../services/item-requests.service';
+import { Item } from '../../interfaces/item'
+import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +20,7 @@ export class ShopComponent implements OnInit {
   constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) {
    }
 
-  addAllItems() {
+  addAllItems(): void {
     this._itemRequest.getAllItems().subscribe(res => {
       this.item = res;
       this.noRepeatType();
@@ -30,7 +30,7 @@ export class ShopComponent implements OnInit {
     })
   }
 
-  buy() {
+  buy(): void {
     if (!this.isLogedIn) {
       this.router.navigateByUrl('/logIn');
     }
@@ -38,11 +38,11 @@ export class ShopComponent implements OnInit {
     //TODO: add buy functionlity here
   }
 
-  showAllItems() {
+  showAllItems(): void {
     this.clickedOnType = false;
   }
 
-  getByType(category: string) {
+  getByType(category: string): void {
     this._itemRequest.getByType(category).subscribe(res => {
       this.categoryItems = res;
       this.clickedOnType = true;
@@ -52,7 +52,7 @@ export class ShopComponent implements OnInit {
     })
   }
 
-  noRepeatType() {
+  noRepeatType(): void {
     let type: string;
     for(let index in this.item) {
       let notMe: number = 0;

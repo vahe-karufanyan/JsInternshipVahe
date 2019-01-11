@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ItemRequests } from './item-requests.service';
-import { AuthenticationService } from './authentication.service';
+import { ItemRequests } from './services/item-requests.service';
+import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
 import { Item } from './interfaces/item';
 
@@ -17,28 +17,21 @@ export class AppComponent {
 
   constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) {}
   
-  search() {
-    this._itemRequest.getByName(this.name).subscribe(res => {
-      this.item = res;
-      this.searchResult = true;
-    },
-    err => {
-      alert(err);
-      console.error(err);
-    })
+  search(): void {
+    this.router.navigateByUrl(`/search/${this.name}`);
   }
 
-  buyIf() {
+  buyIf(): void {
     if (!this._authenticationService.isLoggedIn()) {
       this.router.navigateByUrl('/logIn');
     }
   }
 
-  authenticationPageBoolian() {
+  authenticationPageBoolian(): void {
     this.searchResult = false;
   }
 
-  logOut() {
+  logOut(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.searchResult = false;

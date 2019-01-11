@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UserSignUp } from '../interfaces/userSignUp'
-import { AuthenticationService } from '../authentication.service';
+import { UserSignUp } from '../../interfaces/userSignUp'
+import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({

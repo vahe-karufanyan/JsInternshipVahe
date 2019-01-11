@@ -16,7 +16,7 @@
               <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search">
               <button class="btn btn-outline-danger" (click)="search()" type="submit">Search</button>
           </form>
-          <li class="nav-item active" >
+          <li class="nav-item active">
             <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" (click)="logOut()" routerLink="/shop">Log Out
               <span class="sr-only">(current)</span>
             </a>
@@ -28,25 +28,6 @@
   <br><br><br>
   <!-- <img width="192.2" height="37.6" alt="Macadamian Logo" src="../assets/macadamian-logo.jpg"> -->
   <div class="container">
-    <div *ngIf="!searchResult">
-      <router-outlet></router-outlet>
-    </div>
-    <div *ngIf="searchResult">
-      <div class="col-lg-9" >
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4 text-center" *ngFor="let item of item">
-            <div class="card h-70">
-              <div class="card-body" id="search">
-                <h4 class="card-title">
-                  <a>{{item.name}}</a>
-                </h4>
-                <h5>{{item.price}}</h5>
-                <button type="button" class="btn btn-danger" (click)="buyIf()" (click)="authenticationPageBoolian()">Buy</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

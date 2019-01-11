@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Item } from './interfaces/item';
+import { Item } from '../interfaces/item';
 
 @Injectable()
 export class ItemRequests {

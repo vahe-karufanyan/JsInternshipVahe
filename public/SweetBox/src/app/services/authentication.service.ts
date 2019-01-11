@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { UserLogIn } from './interfaces/userLogIn';
-import { UserSignUp } from './interfaces/userSignUp';
-import { User } from './interfaces/user';
+import { UserLogIn } from '../interfaces/userLogIn';
+import { UserSignUp } from '../interfaces/userSignUp';
+import { User } from '../interfaces/user';
 
 @Injectable()
 export class AuthenticationService {
