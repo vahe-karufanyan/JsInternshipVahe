@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemRequests } from 'src/app/services/item-requests.service';
+import { SearchService } from 'src/app/services/search.service';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/interfaces/item';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-search',
@@ -10,13 +11,12 @@ import { Item } from 'src/app/interfaces/item';
 })
 export class SearchComponent implements OnInit {
 
-  item: Item[];
+ item: Item[];
 
-  constructor(private _itemRequest: ItemRequests, private route: ActivatedRoute) { }
+  constructor(private _searchService: SearchService, private _authenticationService: AuthenticationService, private route: ActivatedRoute) { }
 
   search(): void {
-    console.log(this.route.snapshot.paramMap.get('name'));
-    this._itemRequest.getByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
+    this._searchService.getByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
       this.item = res;
     },
     err => {

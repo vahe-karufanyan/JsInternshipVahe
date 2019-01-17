@@ -51,13 +51,14 @@ export function update(req, res) {
 }
 
 export function addItem(req, res) {
+  console.log(1111111111111);
   const newItem = new Item({
     id: Math.round((Math.random() + 1) * 100000),
-    type: req.body.type,
-    name: req.body.name,
-    price: req.body.price,
-    barcode: req.body.barcode,
-    count: req.body.count,
+    type: req.body.item.type,
+    name: req.body.item.name,
+    price: req.body.item.price,
+    barcode: req.body.item.barcode,
+    count: req.body.item.count,
   });
   console.log(newItem);
   validateForItems(newItem)

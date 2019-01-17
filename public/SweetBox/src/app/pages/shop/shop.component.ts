@@ -24,6 +24,7 @@ export class ShopComponent implements OnInit {
     this._itemRequest.getAllItems().subscribe(res => {
       this.item = res;
       this.noRepeatType();
+      // this.router.navigateByUrl(`/itemList/${this.item}`, { skipLocationChange: true });
     },
     err => {
       console.error(err);

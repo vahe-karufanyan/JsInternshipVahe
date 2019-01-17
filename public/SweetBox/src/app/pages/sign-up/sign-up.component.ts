@@ -20,7 +20,7 @@ export class SignUpComponent {
 
   register() {    
     this._authenticationService.signUp(this.credentials).subscribe(res => {
-      this.router.navigateByUrl('/shop');
+      this.router.navigateByUrl('');
       localStorage.setItem('token', res.token);
       localStorage.setItem('role', res.role);
     },

@@ -19,7 +19,7 @@ export class LogInComponent {
 
   logIn(): void {
     this._authenticationService.signIn(this.credentials).subscribe(res => {
-      this.router.navigateByUrl('/shop');
+      this.router.navigateByUrl('');
       console.log(res);
       localStorage.setItem('token', res.token);
       localStorage.setItem('role', res.role);

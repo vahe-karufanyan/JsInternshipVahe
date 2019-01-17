@@ -2,29 +2,37 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
-import { AppComponent } from './app.component';
+import { SearchService } from './services/search.service';
 import { AuthenticationService } from './services/authentication.service';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { LogInComponent } from './pages/log-in/log-in.component'
-import { HomeComponent } from './pages/home/home.component';
-import { ItemRequestsComponent } from './pages/item-requests/item-requests.component';
-import { ShopComponent } from './pages/shop/shop.component';
 import { ItemRequests } from './services/item-requests.service';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { LogInComponent } from './pages/log-in/log-in.component'
+import { ItemRequestsComponent } from './pages/item-requests/item-requests.component';
+import { ShopComponent } from './pages/shop/shop.component';
+import { AddItemComponent } from './pages/add-item/add-item.component';
+
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
+import { TypeListComponent } from './components/type-list/type-list.component';
 import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
     AppComponent,
     SignUpComponent,
     LogInComponent,
     ItemRequestsComponent,
     ShopComponent,
-    SearchComponent
+    SearchComponent,
+    AddItemComponent,
+    NavBarComponent,
+    ItemListComponent,
+    TypeListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +40,7 @@ import { SearchComponent } from './components/search/search.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, ItemRequests],
+  providers: [AuthenticationService, ItemRequests, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

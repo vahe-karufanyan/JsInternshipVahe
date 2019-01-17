@@ -23,4 +23,12 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  isAdmin(): boolean {
+    if( localStorage.getItem('role') === 'admin' )
+    {
+      return true;
+    }
+    return false;
+  }
 }
