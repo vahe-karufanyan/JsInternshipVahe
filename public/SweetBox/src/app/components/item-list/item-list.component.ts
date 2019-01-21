@@ -12,12 +12,7 @@ export class ItemListComponent implements OnInit {
 
   constructor(private _authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
 
- item: Item[];
-
-//  itemProvider(): void {
-//   this.item[] = this.route.snapshot.paramMap.get('item');
-// }
-
+@Input() item: Item;
 
   buy(): void {
     if (!this._authenticationService.isLoggedIn()) {
