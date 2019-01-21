@@ -51,18 +51,18 @@ export function update(req, res) {
 }
 
 export function addItem(req, res) {
-  console.log(1111111111111);
-  const newItem = new Item({
+  const newItem = {
     id: Math.round((Math.random() + 1) * 100000),
     type: req.body.item.type,
     name: req.body.item.name,
     price: req.body.item.price,
     barcode: req.body.item.barcode,
     count: req.body.item.count,
-  });
-  console.log(newItem);
+  };
   validateForItems(newItem)
-    .then(() => { console.log('something2'); return newItem.save(); })
+    .then(() => {
+      return new Item(newItem).save();
+    })
     .then(result => {
       res.status(201).json(result);
     })

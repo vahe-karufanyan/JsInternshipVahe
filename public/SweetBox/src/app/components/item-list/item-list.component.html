@@ -1,9 +1,10 @@
-<div class="card h-70">
+<div class="card">
   <div class="card-body">
     <h4 class="card-title">
-      <a>{{item.name}}</a>
+      <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" alt="edit" (click)="">
     </h4>
-    <h5>{{item.price}}</h5>
-    <button type="button" class="btn btn-danger" (click)="buy()">Buy</button>
+    <h5><a id="priceColor">{{item.price}}</a>֏</h5>
+    <button id="buyButton" type="button" class="btn btn-danger" (click)="buy()">Buy</button>
+    <div id="countInfo">{{item.count}} left</div>
   </div>
 </div>

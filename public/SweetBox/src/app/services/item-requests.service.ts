@@ -23,9 +23,9 @@ export class ItemRequests {
     return this.http.post<Item>(this.url, { item: item, token: token });
   }
 
-  // updateItem(item: Item): Observable<Item>{
-  //   return this.http.put<Item>('http://localhost:3000/api/v1/item', item);
-  // }
+  updateItem(item: Item, token: string): Observable<Item>{
+    return this.http.put<Item>(this.url, { item: item, token: token });
+  }
 
   // remove() {
   //   return this.http.delete('http://localhost:3000/api/v1/item');

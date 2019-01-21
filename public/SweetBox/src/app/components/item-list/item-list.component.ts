@@ -12,7 +12,7 @@ export class ItemListComponent implements OnInit {
 
   constructor(private _authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
 
-@Input() item: Item;
+  @Input() item: Item;
 
   buy(): void {
     if (!this._authenticationService.isLoggedIn()) {
@@ -20,6 +20,10 @@ export class ItemListComponent implements OnInit {
     }
 
     //TODO: add buy functionlity here
+  }
+
+  edit(): void {
+    this.router.navigateByUrl(`/edit`, { skipLocationChange: true });
   }
 
   ngOnInit() {

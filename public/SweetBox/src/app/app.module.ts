@@ -14,10 +14,10 @@ import { LogInComponent } from './pages/log-in/log-in.component'
 import { ItemRequestsComponent } from './pages/item-requests/item-requests.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { AddItemComponent } from './pages/add-item/add-item.component';
+import { EditItemComponent } from './pages/edit-item/edit-item.component';
 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
-import { TypeListComponent } from './components/type-list/type-list.component';
 import { SearchComponent } from './components/search/search.component';
 
 
@@ -32,7 +32,7 @@ import { SearchComponent } from './components/search/search.component';
     AddItemComponent,
     NavBarComponent,
     ItemListComponent,
-    TypeListComponent
+    EditItemComponent
   ],
   imports: [
     BrowserModule,

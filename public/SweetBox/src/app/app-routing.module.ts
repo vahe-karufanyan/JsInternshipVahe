@@ -7,7 +7,7 @@ import { ShopComponent } from './pages/shop/shop.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddItemComponent } from './pages/add-item/add-item.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
-
+import { EditItemComponent } from './pages/edit-item/edit-item.component';
 
 const appRoutes: Routes =[
   { path: '', component: ShopComponent },
@@ -16,7 +16,8 @@ const appRoutes: Routes =[
   { path: 'itemRequests', component: ItemRequestsComponent },
   { path: 'search/:name', component: SearchComponent },
   { path: 'addItem', component: AddItemComponent },
-  { path: 'itemList', component: ItemListComponent }
+  { path: 'edit', component: EditItemComponent },  
+  { path: 'itemList', component: ItemListComponent }  
 ];
 
 @NgModule({
