@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/app/interfaces/item';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-item-list',
@@ -10,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ItemListComponent implements OnInit {
 
-  constructor(private _authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private _storeService: StoreService, private _authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
 
   @Input() item: Item;
 
@@ -23,7 +24,8 @@ export class ItemListComponent implements OnInit {
   }
 
   edit(): void {
-    this.router.navigateByUrl(`/edit`, { skipLocationChange: true });
+    this._storeService.storeDara(this.item);
+    this.router.navigateByUrl('/edit');
   }
 
   ngOnInit() {

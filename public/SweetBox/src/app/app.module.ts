@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SearchService } from './services/search.service';
 import { AuthenticationService } from './services/authentication.service';
 import { ItemRequests } from './services/item-requests.service';
+import { StoreService } from './services/store.service';
 
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
@@ -40,7 +41,7 @@ import { SearchComponent } from './components/search/search.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, ItemRequests, SearchService],
+  providers: [AuthenticationService, ItemRequests, SearchService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

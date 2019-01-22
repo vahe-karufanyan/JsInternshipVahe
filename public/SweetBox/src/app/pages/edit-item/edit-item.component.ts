@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ItemRequests } from 'src/app/services/item-requests.service';
 import { Item } from 'src/app/interfaces/item';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-edit-item',
@@ -11,21 +12,13 @@ export class EditItemComponent implements OnInit {
 
   itemToUpdate: Item;
 
-  constructor(private _itemRequests: ItemRequests) { }
+  constructor(private _storeService: StoreService, private _itemRequests: ItemRequests) { }
 
-  credentials: Item = {
-    type: this.itemToUpdate.type,
-    name: this.itemToUpdate.name,
-    price: this.itemToUpdate.price,
-    barcode: this.itemToUpdate.barcode,
-    count: this.itemToUpdate.count
-  };
-
-  updateItem() {    
+  updateItem():void {
     if (localStorage.getItem('role') === 'admin') {
-      this._itemRequests.updateItem(this.credentials, localStorage.getItem('token')).subscribe(res => {
+      this._itemRequests.updateItem(this.itemToUpdate, localStorage.getItem('token')).subscribe(res => {
         console.log(res);
-        alert('item has been added' + res);
+        alert('item has been updated' + res);
       },
       err => {
         console.log(err);
@@ -34,8 +27,12 @@ export class EditItemComponent implements OnInit {
     }
   }
 
+  currentItem():void {
+    this.itemToUpdate = this._storeService.getData();
+  }
 
   ngOnInit() {
+    this.currentItem();
   }
 
 }

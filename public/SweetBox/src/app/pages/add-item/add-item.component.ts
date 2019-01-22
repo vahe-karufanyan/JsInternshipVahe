@@ -12,6 +12,7 @@ export class AddItemComponent implements OnInit {
   constructor(private _itemRequests: ItemRequests) { }
 
   credentials: Item = {
+    id: 0,
     type: '',
     name: '',
     price: 0,

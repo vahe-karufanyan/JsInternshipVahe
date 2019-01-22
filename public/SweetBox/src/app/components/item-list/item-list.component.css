@@ -11,10 +11,16 @@
 }
 
 #priceColor {
-  color:rgb(156, 156, 156)
+  color:rgb(156, 156, 156);
 }
 
 #edit-icon {
+  cursor: pointer;
   height: 12px;
-  width: 12px
+  width: 12px;
+}
+
+#x-icon {
+  cursor: pointer;
+  color: #dc3545;
 }

@@ -8,6 +8,7 @@ import { Item } from '../../interfaces/item'
 })
 export class ItemRequestsComponent{
   credentials: Item = {
+    id: 0,
     type: '',
     name: '',
     price: 1,

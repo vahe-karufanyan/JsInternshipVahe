@@ -4,9 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Item } from '../interfaces/item';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SearchService {
 
   constructor(private http: HttpClient) { }

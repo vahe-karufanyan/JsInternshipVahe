@@ -24,7 +24,7 @@ export class ItemRequests {
   }
 
   updateItem(item: Item, token: string): Observable<Item>{
-    return this.http.put<Item>(this.url, { item: item, token: token });
+    return this.http.put<Item>(this.url + `/${item.id}`, { item: item, token: token });
   }
 
   // remove() {

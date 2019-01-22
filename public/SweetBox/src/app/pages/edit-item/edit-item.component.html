@@ -4,25 +4,25 @@
       <h2>You can edit itams of your shop</h2>
         <div class="form-group">
           <label for="type">Type</label>
-          <input type="type" class="form-control" name="type" placeholder="Enter type" [(ngModel)]="credentials.type">
+          <input type="type" class="form-control" name="type" placeholder="{{itemToUpdate.type}}" [(ngModel)]="itemToUpdate.type">
         </div>
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="name" class="form-control" name="name" placeholder="Enter Name" [(ngModel)]="credentials.name">
+          <input type="name" class="form-control" name="name" placeholder="{{itemToUpdate.name}}" [(ngModel)]="itemToUpdate.name">
         </div>
         <div class="form-group">
           <label for="price">Price</label>
-          <input type="price" class="form-control" name="price" placeholder="Enter Price" [(ngModel)]="credentials.price" (keydown.enter)="addItem()">
+          <input type="price" class="form-control" name="price" placeholder="{{itemToUpdate.price}}" [(ngModel)]="itemToUpdate.price" (keydown.enter)="addItem()">
         </div>
         <div class="form-group">
           <label for="price">Barcode</label>
-          <input type="price" class="form-control" name="barcode" placeholder="Enter Barcode" [(ngModel)]="credentials.barcode">
+          <input type="price" class="form-control" name="barcode" placeholder="{{itemToUpdate.barcode}}" [(ngModel)]="itemToUpdate.barcode">
         </div>
         <div class="form-group">
           <label for="price">count</label>
-          <input type="price" class="form-control" name="count" placeholder="Enter Price" [(ngModel)]="credentials.count" (keydown.enter)="addItem()">
+          <input type="price" class="form-control" name="count" placeholder="{{itemToUpdate.count}}" [(ngModel)]="itemToUpdate.count" (keydown.enter)="updateItem()">
         </div>
-        <button type="submit" class="btn btn-danger" (click)="addItem()">Add Item</button>
+        <button type="submit" class="btn btn-danger" (click)="updateItem()">Update Item</button>
     </div>
   </div>
 </div>
