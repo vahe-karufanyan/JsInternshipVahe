@@ -34,11 +34,11 @@ export function getById(req, res) {
 export function update(req, res) {
   const updatedItem = {
     id: req.params.id,
-    type: req.body.type,
-    name: req.body.name,
-    price: req.body.price,
-    barcode: req.body.barcode,
-    counter: req.body.counter,
+    type: req.body.item.type,
+    name: req.body.item.name,
+    price: req.body.item.price,
+    barcode: req.body.item.barcode,
+    count: req.body.item.count,
   };
   validateForItems(updatedItem)
     .then(() => Item.update({ id: updatedItem.id }, { $set: updatedItem }))

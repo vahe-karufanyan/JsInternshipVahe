@@ -9,7 +9,7 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  getByName(name: string) {
+  getByName(name: string): Observable<Item[]>{
     return this.http.get<Item[]>(`http://localhost:3000/api/v1/search/${name}`);
   }
 }

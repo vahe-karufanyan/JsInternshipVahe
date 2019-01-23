@@ -10,11 +10,11 @@ export class ItemRequests {
 
   constructor( private http: HttpClient ) {}
 
-  getAllItems() {
+  getAllItems(): Observable<Item[]>{
     return this.http.get<Item[]>(this.url);
   }
 
-  getByType(type: string) {
+  getByType(type: string): Observable<Item[]>{
     return this.http.get<Item[]>(this.url + `/getByType/${type}`);
   }
 

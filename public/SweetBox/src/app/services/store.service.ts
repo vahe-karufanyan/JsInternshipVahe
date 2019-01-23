@@ -18,11 +18,11 @@ export class StoreService {
 
   public subject = new Rx.BehaviorSubject<Item>(this.emptyItem);
 
-  storeDara(item: Item) {
+  storeDara(item: Item): void {
     this.subject.next(item);
   }
 
-  getData() {
+  getData(): Item {
     return this.subject.value;
   }
 }
