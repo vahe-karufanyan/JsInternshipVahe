@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" *ngIf="_authenticationService.isAdmin()" routerLink="/addItem">Add Items</a>
+          <a class="nav-link" *ngIf="_authenticationService.isAdmin()" routerLink="/addItem">Add Item</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" *ngIf="!_authenticationService.isLoggedIn()" routerLink="/logIn">Sign In

@@ -12,6 +12,6 @@ export default function tokenVerifier(req, res, next) {
         next();
       }
     }).catch(err => {
-      Error(res, 400, err + Messages.NOT_LOGGED_IN);
+      Error(res, 400, { error: err + Messages.NOT_LOGGED_IN });
     });
 }

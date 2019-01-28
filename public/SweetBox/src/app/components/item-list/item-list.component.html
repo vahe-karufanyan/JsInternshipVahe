@@ -1,10 +1,30 @@
-<div class="card">
-  <div class="card-body">
-    <h4 class="card-title">
-      <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" alt="edit" (click)="edit()"><a id="x-icon"> x</a>
-    </h4>
-    <h5><a id="priceColor">{{item.price}}</a>֏</h5>
-    <button id="buyButton" type="button" class="btn btn-danger" (click)="buy()">Buy</button>
+<div class="card border-danger">
+    <div class="card-body">
+      <div *ngIf="_authenticationService.isAdmin()" id="x" data-toggle="modal" data-target="#myModal"><h5>x</h5></div>
+      <h4 class="card-title">
+        <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" alt="edit" (click)="edit()">
+      </h4>
+      <h5><a id="priceColor">{{item.price}}</a>֏</h5>
+      <button id="buyButton" type="button" class="btn btn-danger" (click)="buy()">Buy</button>
     <div id="countInfo">{{item.count}} left</div>
+  </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Are you sure you want to delete the following item?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+        &nbsp;
+        <button type="button" class="btn btn-dark" data-dismiss="modal">No</button>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
   </div>
 </div>

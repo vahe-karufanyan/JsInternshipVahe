@@ -20,7 +20,10 @@
   width: 12px;
 }
 
-#x-icon {
+#x {
+  position: absolute;
+  right: 5px;
+  top: -3px;
   cursor: pointer;
   color: #dc3545;
 }

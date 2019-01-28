@@ -12,13 +12,13 @@ export function signUp(req, res) {
   };
   validateForUser(newUser).then(() => {
     if (newUser.password !== req.body.confirmPassword) {
-      return Error(res, 400, Messages.PASSWORD_DIDNT_MATCH);
+      return Error(res, 400, { error: Messages.PASSWORD_DIDNT_MATCH });
     }
     return User.findOne({ email: newUser.email });
   })
     .then((maybeUser) => {
       if (maybeUser) {
-        return Error(res, 400, Messages.USER_EXISTS);
+        return Error(res, 400, { error: Messages.USER_EXISTS });
       }
       if (newUser.role !== 'admin') {
         newUser.role = 'user';
@@ -38,8 +38,8 @@ export function signUp(req, res) {
         role: newUser.role,
       });
     })
-    .catch(err => {
-      Error(res, 400, err);
+    .catch(error => {
+      Error(res, 400, { error });
     });
 }
 
@@ -73,7 +73,7 @@ export function logIn(req, res) {
         role: existingUser.role,
       });
     })
-    .catch(err => {
-      Error(res, 400, err);
+    .catch(error => {
+      Error(res, 400, { error });
     });
 }

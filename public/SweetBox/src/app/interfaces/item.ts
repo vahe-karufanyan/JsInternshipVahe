@@ -1,8 +1,8 @@
 export interface Item {
-    id: Number,
-    type: String,
-    name: String,
-    price: Number,
-    barcode: String,
-    count: Number
+    id: number,
+    type: string,
+    name: string,
+    price: number,
+    barcode: string,
+    count: number,
 }
