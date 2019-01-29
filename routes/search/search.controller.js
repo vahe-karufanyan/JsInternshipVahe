@@ -14,8 +14,8 @@ function search(req, res) {
     .then(doc => {
       res.status(200).json(doc);
     })
-    .catch(err => {
-      Error(res, 400, err);
+    .catch(error => {
+      Error(res, 400, { error });
     });
 }
 

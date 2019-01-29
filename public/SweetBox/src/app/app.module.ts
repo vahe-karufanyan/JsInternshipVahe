@@ -20,6 +20,8 @@ import { EditItemComponent } from './pages/edit-item/edit-item.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { DeleteItemComponent } from './components/delete-item/delete-item.component';
+import { BuyService } from './services/buy.service';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { SearchComponent } from './components/search/search.component';
     AddItemComponent,
     NavBarComponent,
     ItemListComponent,
-    EditItemComponent
+    EditItemComponent,
+    DeleteItemComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ import { SearchComponent } from './components/search/search.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, ItemRequests, SearchService, StoreService],
+  providers: [AuthenticationService, ItemRequests, SearchService, StoreService, BuyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 export interface UserLogIn {
-    email: string;
-    password: string;
+    email: string,
+    password: string,
+    error?: object,
 }

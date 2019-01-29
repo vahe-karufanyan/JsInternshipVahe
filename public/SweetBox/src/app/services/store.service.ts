@@ -18,7 +18,7 @@ export class StoreService {
 
   public subject = new Rx.BehaviorSubject<Item>(this.emptyItem);
 
-  storeDara(item: Item): void {
+  storeData(item: Item): void {
     this.subject.next(item);
   }
 

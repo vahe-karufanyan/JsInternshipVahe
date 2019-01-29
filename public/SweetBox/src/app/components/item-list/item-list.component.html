@@ -1,10 +1,29 @@
 <div class="card border-danger">
   <div class="card-body">
+    <div *ngIf="_authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal" (click)="showModal = true" data-target="#deleteModal"><h5>&times;</h5></div>
     <h4 class="card-title">
-      <a>{{item.name}} </a><a *ngIf="_authenticationService.isAdmin()"><img id="edit-icon" src="../../../assets/edit-icon.svg" alt="edit" (click)="edit()"><a id="x-icon"> x</a></a>
+      <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
     </h4>
     <h5><a id="priceColor">{{item.price}}</a>֏</h5>
     <button id="buyButton" type="button" class="btn btn-danger" (click)="buy()">Buy</button>
     <div id="countInfo">{{item.count}} left</div>
+  </div>
+</div>
+<div *ngIf="showModal" (click)="showModal = false">
+  <!-- <app-delete-item [itemId]="id"></app-delete-item> -->
+  <div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Are you sure you want to delete {{item.name}}?</h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
+        </div>
+        <div class="modal-body">
+          <button type="button" class="btn btn-danger" (click)="remove()" data-dismiss="modal">Delete</button>
+          &nbsp;
+          <button type="button" class="btn btn-dark" (click)="showModal = false" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

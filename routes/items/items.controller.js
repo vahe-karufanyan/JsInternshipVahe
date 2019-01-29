@@ -5,8 +5,8 @@ import { validateForItems, validateForId } from '../../helpers/joiValidation';
 export function getAll(req, res) {
   Item.find().then(itemsList => {
     res.status(200).json(itemsList);
-  }).catch(err => {
-    Error(res, 400, err);
+  }).catch(error => {
+    Error(res, 400, { error });
   });
 }
 
@@ -14,8 +14,8 @@ export function getByType(req, res) {
   const type = req.params.type;
   Item.find({ type }).then((items) => {
     res.status(200).json(items);
-  }).catch(err => {
-    Error(res, 400, err);
+  }).catch(error => {
+    Error(res, 400, { error });
   });
 }
 
@@ -26,8 +26,8 @@ export function getById(req, res) {
     .then(item => {
       res.status(200).json(item);
     })
-    .catch(err => {
-      Error(res, 400, err);
+    .catch(error => {
+      Error(res, 400, { error });
     });
 }
 
@@ -45,8 +45,8 @@ export function update(req, res) {
     .then(result => {
       res.status(200).json(result);
     })
-    .catch(err => {
-      Error(res, 404, err);
+    .catch(error => {
+      Error(res, 404, { error });
     });
 }
 
@@ -66,8 +66,8 @@ export function addItem(req, res) {
     .then(result => {
       res.status(201).json(result);
     })
-    .catch(err => {
-      Error(res, 400, err);
+    .catch(error => {
+      Error(res, 400, { error });
     });
 }
 
@@ -79,7 +79,7 @@ export function remove(req, res) {
   };
   validateForId(object).then(() => Item.remove({ id })).then(result => {
     res.status(200).json(result);
-  }).catch(err => {
-    Error(res, 400, err);
+  }).catch(error => {
+    Error(res, 400, { error });
   });
 }

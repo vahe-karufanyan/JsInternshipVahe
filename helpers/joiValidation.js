@@ -7,15 +7,15 @@ const emailPasswordSchema = Joi.object().keys({
 
 const itemSchema = Joi.object().keys({
   id: Joi.number().required(),
-  type: Joi.string().min(3).max(20).required(),
-  name: Joi.string().min(3).max(20).required(),
+  type: Joi.string().min(2).max(20).required(),
+  name: Joi.string().min(2).max(20).required(),
   barcode: Joi.string(),
   price: Joi.number().max(10000).required(),
   count: Joi.number(),
 });
 
 const searchSchema = Joi.object().keys({
-  name: Joi.string().min(3).max(20).required(),
+  name: Joi.string().min(2).max(20).required(),
 });
 
 const IdSchema = Joi.object().keys({
