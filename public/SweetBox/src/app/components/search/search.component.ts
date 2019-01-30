@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/services/search.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/interfaces/item';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-search',
@@ -11,12 +12,25 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class SearchComponent implements OnInit {
 
- item: Item[];
+  item: Item[];
+  searchingName: string;
 
-  constructor(private _searchService: SearchService, private _authenticationService: AuthenticationService, private route: ActivatedRoute) { }
+  constructor(private _storeService: StoreService, private _searchService: SearchService, private _authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router) { }
+
+  getSearchingName(): void {
+    this._storeService.getSearchData().subscribe(searchingName => {
+      if(!searchingName) {
+        alert();
+        this.router.navigateByUrl(`/shop`);
+      } else {
+        this.searchingName = searchingName;
+        this.search();
+      }
+    })
+  }
 
   search(): void {
-    this._searchService.getByName(this.route.snapshot.paramMap.get('name')).subscribe(res => {
+    this._searchService.getByName(this.searchingName).subscribe(res => {
       this.item = res;
     },
     err => {
@@ -26,7 +40,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.search()
+    this.getSearchingName();
   }
 
 }

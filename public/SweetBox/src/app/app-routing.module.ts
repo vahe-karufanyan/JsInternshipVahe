@@ -14,7 +14,7 @@ const appRoutes: Routes =[
   { path: 'signUp', component: SignUpComponent },
   { path: 'logIn', component: LogInComponent },
   { path: 'itemRequests', component: ItemRequestsComponent },
-  { path: 'search/:name', component: SearchComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'addItem', component: AddItemComponent },
   { path: 'edit', component: EditItemComponent },  
   { path: 'itemList', component: ItemListComponent }  

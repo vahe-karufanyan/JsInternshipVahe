@@ -20,8 +20,10 @@ export class SignUpComponent {
   register(): void {    
     this._authenticationService.signUp(this.credentials).subscribe(res => {  // .first()-y chashxatec
       this.router.navigateByUrl('');
+      localStorage.setItem('email', res.email);
       localStorage.setItem('token', res.token);
       localStorage.setItem('role', res.role);
+      localStorage.setItem('toPay', res.toPay.toString());
     },
     err => {
       alert(err);

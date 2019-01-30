@@ -28,6 +28,7 @@ export function signUp(req, res) {
     .then(hashedPassword => User.create({
       email: newUser.email,
       password: hashedPassword,
+      toPay: 0,
       role: newUser.role,
     }))
     .then(() => tokenGenerator(newUser.email))
@@ -35,6 +36,7 @@ export function signUp(req, res) {
       res.status(200).json({
         email: newUser.email,
         token: generatedToken,
+        toPay: 0,
         role: newUser.role,
       });
     })
@@ -51,6 +53,7 @@ export function logIn(req, res) {
   validateForUser(existingUser)
     .then(() => User.findOne({ email: existingUser.email }))
     .then((currentUser) => {
+      existingUser.toPay = currentUser.toPay;
       existingUser.role = currentUser.role;
       if (!currentUser) {
         return Error(res, 400, Messages.USER_DOES_NOT_EXIST);
@@ -70,6 +73,7 @@ export function logIn(req, res) {
       res.status(200).json({
         email: existingUser.email,
         token: generatedToken,
+        toPay: existingUser.toPay,
         role: existingUser.role,
       });
     })

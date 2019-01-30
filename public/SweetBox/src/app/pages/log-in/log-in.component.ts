@@ -21,8 +21,10 @@ export class LogInComponent {
     this._authenticationService.signIn(this.credentials).subscribe(res => {
       this.router.navigateByUrl('');
       console.log(res);
+      localStorage.setItem('email', res.email);
       localStorage.setItem('token', res.token);
       localStorage.setItem('role', res.role);
+      localStorage.setItem('toPay', res.toPay.toString());
     },
     (err) => {
       alert(err);

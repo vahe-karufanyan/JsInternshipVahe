@@ -7,6 +7,9 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
+          <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()">You have to pay: <span style="color:#dc3545">{{toPayAmount}}</span>֏</a>
+        </li>
+        <li class="nav-item active">
           <a class="nav-link" *ngIf="_authenticationService.isAdmin()" routerLink="/addItem">Add Item</a>
         </li>
         <li class="nav-item active">

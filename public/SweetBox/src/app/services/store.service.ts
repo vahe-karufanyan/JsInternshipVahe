@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import * as Rx from "rxjs";
 import { Item } from '../interfaces/item';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class StoreService {
 
-  emptyItem: Item = {
+  editItem: Item = {
     id: 0,
     type: '',
     name: '',
@@ -14,15 +14,26 @@ export class StoreService {
     count: 1
   };
 
+  searchingItem: string = '';
+
   constructor() { }
 
-  public subject = new Rx.BehaviorSubject<Item>(this.emptyItem);
+  public subjectForEdit = new BehaviorSubject<Item>(this.editItem);
+  public subjectForSearch = new BehaviorSubject<string>(this.searchingItem);
 
-  storeData(item: Item): void {
-    this.subject.next(item);
+  storeSearchData(name: string): void {
+    this.subjectForSearch.next(name);
   }
 
-  getData(): Item {
-    return this.subject.value;
+  getSearchData(): BehaviorSubject<string> {
+    return this.subjectForSearch;
+  }
+
+  storeEditData(item: Item): void {
+    this.subjectForEdit.next(item);
+  }
+
+  getEditData(): BehaviorSubject<Item> {
+    return this.subjectForEdit;
   }
 }
