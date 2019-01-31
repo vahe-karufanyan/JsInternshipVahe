@@ -5,18 +5,18 @@ import Error from '../../helpers/error';
 function buy(req, res) {
   const email = req.body.email;
   const id = req.body.id;
-  const count = req.body.count;
+  const quality = req.body.quality;
   const price = req.body.price;
   let toPay;
   Item.findOne({ id })
     .then(item => {
-      item.count -= count;
+      item.count -= quality;
       return Item.update({ id }, { $set: item });
     }).then(() => {
       return User.findOne({ email });
     })
     .then(user => {
-      user.toPay += price * count;
+      user.toPay += price * quality;
       toPay = user.toPay;
       return User.update({ email }, { $set: user });
     })

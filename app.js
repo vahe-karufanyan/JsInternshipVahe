@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import routes from './routes';
 
@@ -17,7 +16,6 @@ mongoose.connect('mongodb://localhost/mydb',
 
 app.use(cors({ origin: whitelist }));
 app.use(bodyParser.json());
-app.use(cookieParser());
 app.use(morgan('env'));
 
 routes(app);

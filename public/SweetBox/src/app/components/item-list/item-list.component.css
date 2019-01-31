@@ -1,5 +1,5 @@
 .card {
-  height: 160px;
+  height: 213px;
 }
 
 #buyButton:hover + #countInfo {
@@ -12,6 +12,10 @@
 
 #priceColor {
   color:rgb(156, 156, 156);
+}
+
+#qualityInput {
+  width: 40px;
 }
 
 #edit-icon {

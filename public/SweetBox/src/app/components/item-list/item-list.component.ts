@@ -17,13 +17,14 @@ export class ItemListComponent implements OnInit {
 
   showModal: boolean = false;
   @Input() item: Item;
-  count: number = 1;
+  quality: number = 1;
 
   buy(): void {
+    this.showModal = false;
     if (!this._authenticationService.isLoggedIn()) {
       this.router.navigateByUrl('/logIn');
     } else {
-      this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.item.id, this.item.price, this.count).subscribe(res => {
+      this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.item.id, this.item.price, this.quality).subscribe(res => {
         if (res.error) {
           console.log(res.error);
           alert(res.error);
@@ -34,6 +35,11 @@ export class ItemListComponent implements OnInit {
       }
     })
     }
+  }
+  
+  addToCart(): void {
+    this.showModal = false;
+    
   }
 
   edit(): void {
@@ -51,7 +57,7 @@ export class ItemListComponent implements OnInit {
         } else {
           window.location.reload();
           console.log(res);
-          alert('item has been removed' + res);
+          alert('item has been removed');
         }
       })
     }

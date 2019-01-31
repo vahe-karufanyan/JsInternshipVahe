@@ -15,16 +15,16 @@ export class NavBarComponent implements OnInit {
 
   constructor(private _storeService: StoreService, private _authenticationService: AuthenticationService, private router: Router) { }
 
-  search(): void {
+  public search(): void {
     this._storeService.storeSearchData(this.name);
     this.router.navigateByUrl(`/search`, { skipLocationChange: true });
   }
   
-  getToPayValue(): void {
-    this.toPayAmount = localStorage.getItem('toPay')
+  private getToPayValue(): void {
+    this.toPayAmount = localStorage.getItem('toPay');
   }
 
-  logOut(): void {
+  public logOut(): void {
     localStorage.removeItem('email');
     localStorage.removeItem('token');
     localStorage.removeItem('role');

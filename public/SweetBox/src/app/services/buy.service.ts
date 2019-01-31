@@ -8,13 +8,13 @@ export class BuyService {
 
   constructor(private http: HttpClient) { }
 
-  buy(token: string, email: string, id: number, price: number, count: number): Observable<any>{
+  buy(token: string, email: string, id: number, price: number, quality: number): Observable<any>{
     return this.http.post<any>('http://localhost:3000/api/v1/buy', { 
       token,
       email,
       id,
       price,
-      count
+      quality
      });
   }
 }
