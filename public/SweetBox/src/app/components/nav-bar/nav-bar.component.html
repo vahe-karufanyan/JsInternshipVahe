@@ -22,6 +22,12 @@
             <button class="btn btn-outline-danger" (click)="search()" type="submit">Search</button>
         </form>
         <li class="nav-item active">
+          <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" routerLink="/cart"><img id="cart" src="../../../assets/white-shopping-cart.png" title="Cart">
+            <!-- <img id="circle" src="../../../assets/redCirclesvg.png"> -->
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item active">
           <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" data-toggle="modal" data-target="#logOutModal" routerLink="">Log Out
             <span class="sr-only">(current)</span>
           </a>

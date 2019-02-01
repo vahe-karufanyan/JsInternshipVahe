@@ -6,8 +6,8 @@ import { ItemRequestsComponent } from './pages/item-requests/item-requests.compo
 import { ShopComponent } from './pages/shop/shop.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddItemComponent } from './pages/add-item/add-item.component';
-import { ItemListComponent } from './components/item-list/item-list.component';
 import { EditItemComponent } from './pages/edit-item/edit-item.component';
+import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 
 const appRoutes: Routes =[
   { path: '', component: ShopComponent },
@@ -17,7 +17,7 @@ const appRoutes: Routes =[
   { path: 'search', component: SearchComponent },
   { path: 'addItem', component: AddItemComponent },
   { path: 'edit', component: EditItemComponent },  
-  { path: 'itemList', component: ItemListComponent }  
+  { path: 'cart', component: ShoppingCartComponent }
 ];
 
 @NgModule({

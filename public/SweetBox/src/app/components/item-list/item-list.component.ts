@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { StoreService } from 'src/app/services/store.service';
 import { ItemRequests } from 'src/app/services/item-requests.service';
 import { BuyService } from 'src/app/services/buy.service';
+import { Shopping } from 'src/app/interfaces/shopping';
 
 @Component({
   selector: 'app-item-list',
@@ -18,6 +19,7 @@ export class ItemListComponent implements OnInit {
   showModal: boolean = false;
   @Input() item: Item;
   quality: number = 1;
+  shoppingData: Shopping;
 
   buy(): void {
     this.showModal = false;
@@ -39,7 +41,11 @@ export class ItemListComponent implements OnInit {
   
   addToCart(): void {
     this.showModal = false;
-    
+    console.log(this.item);
+    this.shoppingData.id = this.item.id;
+    this.shoppingData.price = this.item.price;
+    this.shoppingData.quality = this.quality;
+    this._storeService.storeShoppingData(this.shoppingData);
   }
 
   edit(): void {
