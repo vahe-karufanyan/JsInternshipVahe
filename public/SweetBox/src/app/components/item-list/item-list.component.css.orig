@@ -26,8 +26,13 @@
 
 #x {
   position: absolute;
+<<<<<<< HEAD
+  right: 5px;
+  top: -3px;
+=======
   right: 4px;
   top: -2px;
+>>>>>>> 11e8458d0d6bfb82e9669a60e85f652a23167d34
   cursor: pointer;
   color: #dc3545;
 }

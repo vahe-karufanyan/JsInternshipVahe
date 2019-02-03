@@ -1,0 +1,21 @@
+#logOutModal {
+  text-align: center;
+  justify-content: center;
+  color: #000;
+}
+
+#cart {
+  height: 27px;
+  width: 27px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+/* #circle {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  right: 285px;
+  top: 15px;
+  cursor: pointer;
+} */

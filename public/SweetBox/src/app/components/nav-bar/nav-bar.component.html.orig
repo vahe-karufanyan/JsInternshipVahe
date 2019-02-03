@@ -7,9 +7,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-	<a class="nav-link" *ngIf="_authenticationService.isLoggedIn()"> You have to pay: <span style="color:#dc3545">{{toPayAmount}}</span>֏</a>
+<<<<<<< HEAD
+=======
+          <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()"> You have to pay: <span style="color:#dc3545">{{toPayAmount}}</span>֏</a>
         </li>
         <li class="nav-item active">
+>>>>>>> 11e8458d0d6bfb82e9669a60e85f652a23167d34
           <a class="nav-link" *ngIf="_authenticationService.isAdmin()" routerLink="/addItem">Add Item</a>
         </li>
         <li class="nav-item active">

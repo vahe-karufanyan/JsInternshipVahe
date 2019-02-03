@@ -1,17 +1,12 @@
 <div class="card border-danger">
+<<<<<<< HEAD
     <div class="card-body">
-<div *ngIf="_authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal" (click)="showModal = true" data-target="#deleteModal"><h5>&times;</h5></div>
+      <div *ngIf="_authenticationService.isAdmin()" id="x" data-toggle="modal" data-target="#myModal"><h5>x</h5></div>
       <h4 class="card-title">
-<a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
+        <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" alt="edit" (click)="edit()">
       </h4>
       <h5><a id="priceColor">{{item.price}}</a>֏</h5>
-<div class="form-group row" style="justify-content: center;">
-      <h4>Quality:&nbsp;</h4>
-      <div id="qualityInput">
-        <input class="form-control" style="width: 60px" type="number" value="1" id="example-number-input" [(ngModel)]="quality">
-      </div>
-    </div>
-    <button id="buyButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#buyModal" (click)="showModal = true">Buy</button>
+      <button id="buyButton" type="button" class="btn btn-danger" (click)="buy()">Buy</button>
     <div id="countInfo">{{item.count}} left</div>
   </div>
 </div>
@@ -32,6 +27,23 @@
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div> -->
     </div>
+  </div>
+</div>
+=======
+  <div class="card-body">
+    <div *ngIf="_authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal" (click)="showModal = true" data-target="#deleteModal"><h5>&times;</h5></div>
+    <h4 class="card-title">
+      <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
+    </h4>
+    <h5><a id="priceColor">{{item.price}}</a>֏</h5>
+    <div class="form-group row" style="justify-content: center;">
+      <h4>Quality:&nbsp;</h4>
+      <div id="qualityInput">
+        <input class="form-control" style="width: 60px" type="number" value="1" id="example-number-input" [(ngModel)]="quality">
+      </div>
+    </div>
+    <button id="buyButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#buyModal" (click)="showModal = true">Buy</button>
+    <div id="countInfo">{{item.count}} left</div>
   </div>
 </div>
 <div *ngIf="showModal" (click)="showModal = false">
@@ -98,3 +110,4 @@
     </div> -->
   </div>
 </div>
+>>>>>>> 11e8458d0d6bfb82e9669a60e85f652a23167d34

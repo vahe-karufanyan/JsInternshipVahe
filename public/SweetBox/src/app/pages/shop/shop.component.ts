@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ShopComponent implements OnInit {
 
   item: Item[];
-  categories: String[] = [];
+  categories: string[] = [];
   categoryItems: Item[];
   clickedOnType: boolean = false;
   isLogedIn = this._authenticationService.isLoggedIn()

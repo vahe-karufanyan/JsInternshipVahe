@@ -20,8 +20,11 @@ export class ItemRequests {
   }
 
   addItem(item: Item, token: string): Observable<ResponseForItem>{
+<<<<<<< HEAD
+    console.log(item, token);
+=======
+>>>>>>> 11e8458d0d6bfb82e9669a60e85f652a23167d34
     return this.http.post<ResponseForItem>(this.url, { item: item, token: token });
-
   }
 
   updateItem(item: Item, token: string): Observable<ResponseForItem>{
@@ -31,4 +34,8 @@ export class ItemRequests {
   remove(id: number, token: string): Observable<ResponseForItem>{
     return this.http.request<ResponseForItem>('delete', `${this.url}/${id}`, { body: { token: token } });
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 11e8458d0d6bfb82e9669a60e85f652a23167d34
