@@ -1,0 +1,39 @@
+div {
+  color: #000;
+}
+
+.card {
+  height: 213px;
+}
+
+#removeButton:hover + #countInfo {
+  display: block;
+}
+
+#countInfo {
+  display: none;
+}
+
+#priceColor {
+  color:rgb(156, 156, 156);
+}
+
+#priceCard {
+  height: 74px;
+  width: 340px;
+}
+
+#buyAllButton {
+  height: 40px;
+  position: absolute;
+  top: 22%;
+  right: 18px;
+}
+
+#x {
+  position: absolute;
+  right: 4px;
+  top: -2px;
+  cursor: pointer;
+  color: #dc3545;
+}

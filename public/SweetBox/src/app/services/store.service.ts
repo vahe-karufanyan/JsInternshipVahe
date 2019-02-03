@@ -20,6 +20,8 @@ export class StoreService {
   searchingItem: string = '';
 
   item: Shopping[] = [{
+    name: '',
+    count: 0,
     id: 0,
     price: 0,
     quality: 0

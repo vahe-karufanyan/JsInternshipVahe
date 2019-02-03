@@ -19,7 +19,13 @@ export class ItemListComponent implements OnInit {
   showModal: boolean = false;
   @Input() item: Item;
   quality: number = 1;
-  shoppingData: Shopping;
+  shoppingData: Shopping = {
+    name: '',
+    count: 0,
+    id: 0,
+    price: 0,
+    quality: 0,
+  };
 
   buy(): void {
     this.showModal = false;
@@ -42,6 +48,8 @@ export class ItemListComponent implements OnInit {
   addToCart(): void {
     this.showModal = false;
     console.log(this.item);
+    this.shoppingData.name = this.item.name;
+    this.shoppingData.count = this.item.count;
     this.shoppingData.id = this.item.id;
     this.shoppingData.price = this.item.price;
     this.shoppingData.quality = this.quality;
