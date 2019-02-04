@@ -19,7 +19,7 @@ export class EditItemComponent implements OnInit {
     if (localStorage.getItem('role') === 'admin') {
       this._itemRequests.updateItem(this.itemToUpdate, localStorage.getItem('token')).subscribe(res => {
         console.log(res);
-        this.router.navigateByUrl(`/shop`);
+        this.router.navigateByUrl('');
         alert('item has been updated');
       },
       err => {

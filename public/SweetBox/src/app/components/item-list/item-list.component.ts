@@ -14,7 +14,7 @@ import { Shopping } from 'src/app/interfaces/shopping';
 })
 export class ItemListComponent implements OnInit {
 
-  constructor(private _storeService: StoreService, private _itemRequests: ItemRequests, private _authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute,private  _buyService: BuyService) { }
+  constructor(private _storeService: StoreService, private _itemRequests: ItemRequests, private _authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute, private  _buyService: BuyService) { }
 
   showModal: boolean = false;
   @Input() item: Item;

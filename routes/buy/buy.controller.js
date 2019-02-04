@@ -7,7 +7,7 @@ function buy(req, res) {
   const id = req.body.id;
   const quality = req.body.quality;
   const price = req.body.price;
-  let toPay;
+  let toPay = req.body.toPay;
   Item.findOne({ id })
     .then(item => {
       item.count -= quality;
@@ -16,6 +16,10 @@ function buy(req, res) {
       return User.findOne({ email });
     })
     .then(user => {
+      if (toPay) {
+        user.toPay = toPay;
+        return User.update({ email }, { $set: user });
+      }
       user.toPay += price * quality;
       toPay = user.toPay;
       return User.update({ email }, { $set: user });
