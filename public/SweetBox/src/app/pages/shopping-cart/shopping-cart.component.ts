@@ -15,27 +15,40 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private _storeService: StoreService, private _authenticationService: AuthenticationService, private  _buyService: BuyService, private router: Router) { }
 
   addedItems: Shopping[] = [];
-  notReapeatingItms: Shopping[] = [];
   noItem: boolean = true;
   totalPrice: number = 0;
   toPay: number;
 
   getAddedItems(): void {
     this._storeService.getShoppingData().subscribe(addedItems => {
-      addedItems.forEach((item: Shopping, index: number, array: Shopping[]) => {
-        let repeat: number;
-        addedItems.forEach((checkItem: Shopping, checkIndex: number) => {
-          if (item.name = checkItem.name) {
-            repeat++;
+      if (addedItems[0].name !== '') {
+        this.noItem = false;
+        let changedItems = addedItems;
+        addedItems.forEach((item: Shopping, index: number) => {
+          let repeat: number = 0;
+          let repeatIndex: number[] = [];
+          addedItems.forEach((checkItem: Shopping, checkIndex: number) => {
+            if (item.name === checkItem.name) {
+              repeat++;
+              if (index !== checkIndex && repeat > 1) {
+                repeatIndex.push(checkIndex);
+              }
+            }
+          })
+          if (repeat > 1) {
+            while(repeatIndex.length !== 0) {
+              changedItems[index].quality += changedItems[repeatIndex[repeatIndex.length - 1]].quality;
+              changedItems.splice(repeatIndex[repeatIndex.length - 1])
+              repeatIndex.pop();
+            } 
           }
+          this.addedItems.push(changedItems[index]);
         })
-        if (repeat === 1) {
-          this.addedItems.push(item)
-        }
-
-        //to do
-
-      })
+        this.addedItems.forEach((item: Shopping) => {
+          this.totalPrice += item.price * item.quality;
+        })
+        console.log(this.addedItems)
+      }
     })
   }
 
@@ -104,25 +117,46 @@ export class ShoppingCartComponent implements OnInit {
 
   buyAll(): void {
     if (this._authenticationService.isLoggedIn()) {
-      for(let i: number = this.addedItems.length - 1; i >= 0; i--) {
-        this.toPay += this.addedItems[i].quality * this.addedItems[i].price;
-        this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.addedItems[i].id, this.addedItems[i].price, this.addedItems[i].quality, this.toPay).subscribe(res => {
-          if (res.error) {
-            console.log(res.error);
-            alert(res.error);
-          } else {
-            console.log(this.addedItems[i].id, this.addedItems[i].price, this.addedItems[i].quality);
-          localStorage.setItem('toPay', res.toPay.toString());
-          console.log(res);
-          if (i === 0) {
-            this.router.navigateByUrl('');
-            window.location.reload();
-          }
-          }
-        })
-      }
+      this.addedItems.forEach((item: Shopping, index: number) => {
+        this.toPay += item.quality * item.price;
+        this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), item.id, item.price, item.quality, this.toPay).subscribe(res => {
+        if (res.error) {
+          console.log(res.error);
+          alert(res.error);
+        } else {
+        localStorage.setItem('toPay', res.toPay.toString());
+        console.log(res);
+        if (index === this.addedItems.length - 1) {
+          this.router.navigateByUrl('');
+          window.location.reload();
+        }
+        }
+      })
+      })
     }
   }
+
+  // buyAll(): void {
+  //   if (this._authenticationService.isLoggedIn()) {
+  //     for(let i: number = this.addedItems.length - 1; i >= 0; i--) {
+  //       this.toPay += this.addedItems[i].quality * this.addedItems[i].price;
+  //       this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.addedItems[i].id, this.addedItems[i].price, this.addedItems[i].quality, this.toPay).subscribe(res => {
+  //         if (res.error) {
+  //           console.log(res.error);
+  //           alert(res.error);
+  //         } else {
+  //           console.log(this.addedItems[i].id, this.addedItems[i].price, this.addedItems[i].quality);
+  //         localStorage.setItem('toPay', res.toPay.toString());
+  //         console.log(res);
+  //         if (i === 0) {
+  //           this.router.navigateByUrl('');
+  //           window.location.reload();
+  //         }
+  //         }
+  //       })
+  //     }
+  //   }
+  // }
 
   ngOnInit() {
     this.getAddedItems();

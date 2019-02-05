@@ -7,6 +7,8 @@ import Messages from '../../helpers/messages';
 
 export function signUp(req, res) {
   const newUser = {
+    name: req.body.name,
+    surname: req.body.surname,
     password: req.body.password,
     email: req.body.email,
   };
@@ -26,6 +28,8 @@ export function signUp(req, res) {
       return hash(newUser.password);
     })
     .then(hashedPassword => User.create({
+      name: newUser.name,
+      surname: newUser.surname,
       email: newUser.email,
       password: hashedPassword,
       toPay: 0,
@@ -47,6 +51,8 @@ export function signUp(req, res) {
 
 export function logIn(req, res) {
   const existingUser = {
+    name: req.body.name,
+    surname: req.body.surname,
     password: req.body.password,
     email: req.body.email,
   };
@@ -71,6 +77,8 @@ export function logIn(req, res) {
     })
     .then(generatedToken => {
       res.status(200).json({
+        name: existingUser.name,
+        surname: existingUser.surname,
         email: existingUser.email,
         token: generatedToken,
         toPay: existingUser.toPay,

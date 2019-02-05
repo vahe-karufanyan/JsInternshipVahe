@@ -4,20 +4,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AppComponent } from './app.component';
+
 import { SearchService } from './services/search.service';
 import { AuthenticationService } from './services/authentication.service';
 import { ItemRequests } from './services/item-requests.service';
 import { StoreService } from './services/store.service';
 import { BuyService } from './services/buy.service';
+import { UserRequestsService } from './services/user-requests.service';
 
-import { AppComponent } from './app.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { LogInComponent } from './pages/log-in/log-in.component'
-import { ItemRequestsComponent } from './pages/item-requests/item-requests.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { AddItemComponent } from './pages/add-item/add-item.component';
 import { EditItemComponent } from './pages/edit-item/edit-item.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
@@ -30,7 +32,6 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     AppComponent,
     SignUpComponent,
     LogInComponent,
-    ItemRequestsComponent,
     ShopComponent,
     SearchComponent,
     AddItemComponent,
@@ -38,7 +39,8 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     ItemListComponent,
     EditItemComponent,
     DeleteItemComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, ItemRequests, SearchService, StoreService, BuyService],
+  providers: [AuthenticationService, ItemRequests, SearchService, StoreService, BuyService, UserRequestsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

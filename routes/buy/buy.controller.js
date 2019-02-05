@@ -17,14 +17,16 @@ function buy(req, res) {
     })
     .then(user => {
       if (toPay) {
+        console.log('1 -', toPay);
         user.toPay = toPay;
         return User.update({ email }, { $set: user });
       }
       user.toPay += price * quality;
       toPay = user.toPay;
+      console.log('2 ', toPay);
       return User.update({ email }, { $set: user });
     })
-    .then(() => { res.status(200).send({ toPay }); })
+    .then(() => { console.log('3 ', toPay); res.status(200).send({ toPay }); })
     .catch(error => {
       Error(res, 400, { error });
     });

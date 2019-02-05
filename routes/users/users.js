@@ -1,11 +1,11 @@
-// import express from 'express';
-// import {_getAll, _getById, _update, _addUser, _remove} from './users.controller'
+import express from 'express';
+import { getAll, getByEmail } from './users.controller';
 
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get('/', _getAll);
+router.get('/', getAll);
 
-// router.get('/:id', _getById);
+router.get('/:id', getByEmail);
 
-// export default router;
+export default router;

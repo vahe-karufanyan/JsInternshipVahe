@@ -1,6 +1,8 @@
 import Joi from 'joi';
 
 const emailPasswordSchema = Joi.object().keys({
+  name: Joi.string().min(2).max(20).required(),
+  surname: Joi.string().min(2).max(20).required(),
   email: Joi.string().email({ minDomainAtoms: 2 }).required(),
   password: Joi.string().required(),
 });
