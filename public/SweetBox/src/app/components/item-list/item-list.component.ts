@@ -18,13 +18,14 @@ export class ItemListComponent implements OnInit {
 
   showModal: boolean = false;
   @Input() item: Item;
-  quality: number = 1;
+  quantity: number = 1;
+  toPay: number;
   shoppingData: Shopping = {
     name: '',
     count: 0,
     id: 0,
     price: 0,
-    quality: 0,
+    quantity: 0,
   };
 
   buy(): void {
@@ -32,10 +33,11 @@ export class ItemListComponent implements OnInit {
     if (!this._authenticationService.isLoggedIn()) {
       this.router.navigateByUrl('/logIn');
     } else {
-      this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.item.id, this.item.price, this.quality).subscribe(res => {
-        if (res.error) {
-          console.log(res.error);
-          alert(res.error);
+      this.toPay += this.quantity * this.item.price;
+      this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.item.id, this.quantity, this.toPay).subscribe(res => {
+      if (res.error) {
+        console.log(res.error);
+        alert(res.error);
       } else {
         localStorage.setItem('toPay', res.toPay.toString());
         console.log(res);
@@ -52,7 +54,7 @@ export class ItemListComponent implements OnInit {
     this.shoppingData.count = this.item.count;
     this.shoppingData.id = this.item.id;
     this.shoppingData.price = this.item.price;
-    this.shoppingData.quality = this.quality;
+    this.shoppingData.quantity = this.quantity;
     this._storeService.storeShoppingData(this.shoppingData);
   }
 
@@ -78,6 +80,7 @@ export class ItemListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.toPay = parseInt(localStorage.getItem('toPay'))
   }
 
 }

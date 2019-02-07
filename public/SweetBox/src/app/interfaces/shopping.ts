@@ -3,5 +3,5 @@ export interface Shopping {
   count: number,
   id: number,
   price: number,
-  quality: number,
+  quantity: number,
 }

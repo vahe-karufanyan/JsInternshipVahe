@@ -15,7 +15,7 @@ export class StoreService {
     count: 1
   };
 
-  Products: Shopping[] = [];
+  products: Shopping[] = [];
 
   searchingItem: string = '';
 
@@ -24,7 +24,7 @@ export class StoreService {
     count: 0,
     id: 0,
     price: 0,
-    quality: 0
+    quantity: 0
   }];
 
   constructor() { }
@@ -34,12 +34,20 @@ export class StoreService {
   public subjectForSearch = new BehaviorSubject<string>(this.searchingItem);
 
   storeShoppingData(item: Shopping): void {
-    this.Products.push(item);
-    this.subjectForShopping.next(this.Products);
+    this.products.push(item);
+    this.subjectForShopping.next(this.products);
   }
 
   getShoppingData(): BehaviorSubject<Shopping[]> {
     return this.subjectForShopping;
+  }
+
+  removeItemFromCart(name: string): void {
+    this.products.forEach((item: Shopping, index: number) => {
+      if (item.name === name) {
+        this.products.splice(index);
+      }
+    })
   }
 
   storeSearchData(name: string): void {

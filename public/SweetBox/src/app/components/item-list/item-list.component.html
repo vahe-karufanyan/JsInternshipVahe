@@ -6,9 +6,9 @@
     </h4>
     <h5><a id="priceColor">{{item.price}}</a>֏</h5>
     <div class="form-group row" style="justify-content: center;">
-      <h4>Quality:&nbsp;</h4>
-      <div id="qualityInput">
-        <input class="form-control" style="width: 60px" type="number" min="1" value="1" id="example-number-input" [(ngModel)]="quality">
+      <h4>Quantity:&nbsp;</h4>
+      <div id="quantityInput">
+        <input class="form-control" style="width: 60px" type="number" min="1" max="{{item.count}}" value="1" id="example-number-input" [(ngModel)]="quantity">
       </div>
     </div>
     <button id="buyButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#buyModal" (click)="showModal = true">Buy</button>

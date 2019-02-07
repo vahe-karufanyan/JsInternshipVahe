@@ -2,34 +2,46 @@ import User from '../../models/userRepositery';
 import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
 
-function buy(req, res) {
+export function buy(req, res) {
   const email = req.body.email;
   const id = req.body.id;
-  const quality = req.body.quality;
-  const price = req.body.price;
-  let toPay = req.body.toPay;
+  const quantity = req.body.quantity;
+  const toPay = req.body.toPay;
   Item.findOne({ id })
     .then(item => {
-      item.count -= quality;
+      item.count -= quantity;
       return Item.update({ id }, { $set: item });
     }).then(() => {
       return User.findOne({ email });
     })
-    .then(user => {
-      if (toPay) {
-        console.log('1 -', toPay);
-        user.toPay = toPay;
-        return User.update({ email }, { $set: user });
-      }
-      user.toPay += price * quality;
-      toPay = user.toPay;
-      console.log('2 ', toPay);
+    .then(user => {  
+      user.toPay = toPay;
       return User.update({ email }, { $set: user });
     })
-    .then(() => { console.log('3 ', toPay); res.status(200).send({ toPay }); })
+    .then(() => { res.status(200).send({ toPay }); })
     .catch(error => {
       Error(res, 400, { error });
     });
 }
 
-export default buy;
+export function buyAll(req, res) {
+  const email = req.body.email;
+  const idCount = req.body.idCount;
+  const toPay = req.body.toPay;
+  idCount.forEach((item) => {
+    const id = item.id;
+    Item.findOne({ id }).then(existingItem => {
+      existingItem.count = item.count;
+      return Item.update({ id }, { $set: existingItem });
+    }).then();
+  });
+  User.findOne({ email }).then(user => {
+    user.toPay = toPay;
+    console.log(user.toPay);
+    return User.update({ email }, { $set: user });
+  })
+    .then(() => { res.status(200).send({ toPay }); })
+    .catch(error => {
+      Error(res, 400, { error });
+    });
+}

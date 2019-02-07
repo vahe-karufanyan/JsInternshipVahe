@@ -8,15 +8,15 @@
       <div class="col-lg-3 col-md-6 mb-4 text-center" *ngFor="let item of addedItems">
         <div class="card border-danger">
           <div class="card-body">
-            <div title="Remove" id="x" data-toggle="modal" data-target="#removeModal"><h5>&times;</h5></div>
+            <div title="Remove" id="x" data-toggle="modal" data-target="#removeModal" (click)="storeItemToRemoveData(item)"><h5>&times;</h5></div>
             <h4 class="card-title">
               <a>{{item.name}} </a>
             </h4>
             <h5><a id="priceColor">{{item.price}}</a>֏</h5>
             <div class="form-group row" style="justify-content: center;">
-              <h4>Quality: {{item.quality}}</h4>
+              <h4>Quantity: {{item.quantity}}</h4>
             </div>
-            <button id="removeButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeModal">Remove</button>
+            <button id="removeButton" type="button" class="btn btn-danger" data-toggle="modal" (click)="storeItemToRemoveData(item)" data-target="#removeModal">Remove</button>
             <div id="countInfo">{{item.count}} left</div>
           </div>
         </div>
@@ -26,9 +26,49 @@
   <div id="priceCard" class="card border-danger" *ngIf="!noItem">
     <div class="row">
       <div style="margin-left: 18px" class="card-body"><h4>Total Price: <span style="color: rgb(156, 156, 156);">{{totalPrice}}</span>֏</h4></div>
-      <button id="buyAllButton" type="button" class="btn btn-danger" (click)="buyAll()">Buy All</button>
+      <button id="buyAllButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#buyAllModal" (click)="showModal = true">Buy All</button>
     </div>
   </div>
 </div>
 
+<!-- Remove Modal -->
+
+<div *ngIf="showDeleteModal" (click)="showModal = false">
+  <div class="modal fade" id="removeModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Are you sure you want to remove {{itemToRemove.name}} from cart?</h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
+        </div>
+        <div class="modal-body">
+          <button type="button" class="btn btn-danger" (click)="remove()" data-dismiss="modal">Remove</button>
+          &nbsp;
+          <button type="button" class="btn btn-dark" (click)="showModal = false" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Buy all modal-->
+
+<div *ngIf="showModal" (click)="showModal = false">
+  <div class="modal fade" id="buyAllModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Are you sure you want to buy all items in cart?</h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
+        </div>
+        <div class="modal-body">
+          <button type="button" class="btn btn-danger" (click)="buyAll()" data-dismiss="modal">Buy All</button>
+          &nbsp;
+          <button type="button" class="btn btn-dark" (click)="showModal = false" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
 

@@ -4,6 +4,7 @@ import { Shopping } from 'src/app/interfaces/shopping';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { BuyService } from 'src/app/services/buy.service';
 import { Router } from '@angular/router';
+import { idCount } from 'src/app/interfaces/idCount';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,9 +16,13 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private _storeService: StoreService, private _authenticationService: AuthenticationService, private  _buyService: BuyService, private router: Router) { }
 
   addedItems: Shopping[] = [];
+  showModal: boolean = false;
+  showDeleteModal: boolean = false;
   noItem: boolean = true;
   totalPrice: number = 0;
   toPay: number;
+  itemToRemove: Shopping;
+  updatedItemCounts: idCount[] = [];
 
   getAddedItems(): void {
     this._storeService.getShoppingData().subscribe(addedItems => {
@@ -37,7 +42,7 @@ export class ShoppingCartComponent implements OnInit {
           })
           if (repeat > 1) {
             while(repeatIndex.length !== 0) {
-              changedItems[index].quality += changedItems[repeatIndex[repeatIndex.length - 1]].quality;
+              changedItems[index].quantity += changedItems[repeatIndex[repeatIndex.length - 1]].quantity;
               changedItems.splice(repeatIndex[repeatIndex.length - 1])
               repeatIndex.pop();
             } 
@@ -45,118 +50,50 @@ export class ShoppingCartComponent implements OnInit {
           this.addedItems.push(changedItems[index]);
         })
         this.addedItems.forEach((item: Shopping) => {
-          this.totalPrice += item.price * item.quality;
+          this.totalPrice += item.price * item.quantity;
         })
         console.log(this.addedItems)
       }
     })
   }
 
+  storeItemToRemoveData(item: Shopping): void {
+    this.showDeleteModal = true;
+    this.itemToRemove = item;
+  }
 
-  // getAddedItems(): void {
-  //   this.addedItems = [];
-  //   this.notReapeatingItms = [];
-  //   this._storeService.getShoppingData().subscribe(addedItems => {
-  //     if (addedItems[0].name !== '') {
-  //       this.noItem = false;
-  //       console.log (addedItems);
-  //       let name: string;
-  //       for(let index in addedItems) {
-  //         let notMe: number = 0;
-  //         let repeatIndex: number[] = [];
-  //         let firstItem: number;
-  //         name = addedItems[index].name.toString();
-  //         for(let i = 0; i <= parseInt(index); i++) {
-  //           if ( name === addedItems[i].name ) {
-  //             notMe++;
-  //             if (notMe === 1) {
-  //               firstItem = i;
-  //             }
-  //             if (notMe > 1) {
-  //               repeatIndex[notMe-2] = i;
-  //             }
-  //           }
-  //         }
-  //         if (notMe === 1) {
-  //           this.addedItems.push(addedItems[firstItem]);
-  //         } else {
-  //           if (repeatIndex.length > 1) {
-  //             console.log(repeatIndex);
-  //             for(let j: number = repeatIndex.length - 1; j >= 0; j--) {
-  //               addedItems[firstItem].quality += addedItems[repeatIndex[j]].quality;
-  //             }
-  //             this.addedItems.push(addedItems[firstItem]);
-  //           } 
-  //           if (repeatIndex.length === 1) {
-  //             addedItems[firstItem].quality += addedItems[repeatIndex[0]].quality;
-  //             this.addedItems.push(addedItems[firstItem]);
-  //           }
-  //         }
-  //       }
-  //       // for(let index in this.addedItems) {
-  //       //   let notMe: number = 0;
-  //       //   name = this.addedItems[index].name.toString();
-  //       //   for(let i = 0; i <= parseInt(index); i++) {
-  //       //     if ( name === this.addedItems[i].name ) {
-  //       //       notMe++;
-  //       //     }
-  //       //   }
-  //       //   if (notMe === 1) {
-  //       //     this.notReapeatingItms.push(this.addedItems[index]);
-  //       //   }
-  //       // }
-  //       // for(let i: number = this.notReapeatingItms.length-1; i >= 0; i--) {
-  //       //   this.totalPrice += this.notReapeatingItms[i].price * this.notReapeatingItms[i].quality;
-  //       // }
-  //       for(let i: number = this.addedItems.length-1; i >= 0; i--) {
-  //         this.totalPrice += this.addedItems[i].price * this.addedItems[i].quality;
-  //       }
-  //     } 
-  //   })
-  // }
+  remove(): void {
+    this.showDeleteModal = false;
+    this.totalPrice -= this.itemToRemove.price * this.itemToRemove.quantity;
+    this._storeService.removeItemFromCart(this.itemToRemove.name)
+    this.addedItems.forEach((item: Shopping, index: number) => {
+      if (item.name === this.itemToRemove.name) {
+        this.addedItems.splice(index, 1);
+      }
+    })
+  }
 
   buyAll(): void {
     if (this._authenticationService.isLoggedIn()) {
-      this.addedItems.forEach((item: Shopping, index: number) => {
-        this.toPay += item.quality * item.price;
-        this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), item.id, item.price, item.quality, this.toPay).subscribe(res => {
+      this.addedItems.forEach((item: Shopping, index: number, array: Shopping[]) => {
+        this.toPay += item.quantity * item.price;
+        array[index].count -= item.quantity;
+        console.log(array[index]);
+        this.updatedItemCounts.push({ id: item.id, count: array[index].count });
+      })
+        this._buyService.buyAll(localStorage.getItem('token'), localStorage.getItem('email'), this.updatedItemCounts, this.toPay).subscribe(res => {
         if (res.error) {
           console.log(res.error);
           alert(res.error);
         } else {
         localStorage.setItem('toPay', res.toPay.toString());
         console.log(res);
-        if (index === this.addedItems.length - 1) {
-          this.router.navigateByUrl('');
-          window.location.reload();
+        this.router.navigateByUrl('');
+        window.location.reload();
         }
-        }
-      })
       })
     }
   }
-
-  // buyAll(): void {
-  //   if (this._authenticationService.isLoggedIn()) {
-  //     for(let i: number = this.addedItems.length - 1; i >= 0; i--) {
-  //       this.toPay += this.addedItems[i].quality * this.addedItems[i].price;
-  //       this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.addedItems[i].id, this.addedItems[i].price, this.addedItems[i].quality, this.toPay).subscribe(res => {
-  //         if (res.error) {
-  //           console.log(res.error);
-  //           alert(res.error);
-  //         } else {
-  //           console.log(this.addedItems[i].id, this.addedItems[i].price, this.addedItems[i].quality);
-  //         localStorage.setItem('toPay', res.toPay.toString());
-  //         console.log(res);
-  //         if (i === 0) {
-  //           this.router.navigateByUrl('');
-  //           window.location.reload();
-  //         }
-  //         }
-  //       })
-  //     }
-  //   }
-  // }
 
   ngOnInit() {
     this.getAddedItems();

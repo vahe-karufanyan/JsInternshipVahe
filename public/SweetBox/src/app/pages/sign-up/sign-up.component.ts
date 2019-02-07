@@ -11,6 +11,8 @@ import { User } from 'src/app/interfaces/user';
 })
 export class SignUpComponent {
   public credentials: UserSignUp = {
+    name: '',
+    surname: '',
     email: '',
     password: '',
     confirmPassword: '',

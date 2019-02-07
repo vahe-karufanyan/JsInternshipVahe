@@ -1,7 +1,7 @@
 import User from '../../models/userRepositery';
 import Error from '../../helpers/error';
 import { hash, compare } from '../../helpers/bcrypt';
-import { validateForUser } from '../../helpers/joiValidation';
+import { validateForUser, validateForLogIn } from '../../helpers/joiValidation';
 import { tokenGenerator } from '../../helpers/JWT';
 import Messages from '../../helpers/messages';
 
@@ -51,12 +51,10 @@ export function signUp(req, res) {
 
 export function logIn(req, res) {
   const existingUser = {
-    name: req.body.name,
-    surname: req.body.surname,
     password: req.body.password,
     email: req.body.email,
   };
-  validateForUser(existingUser)
+  validateForLogIn(existingUser)
     .then(() => User.findOne({ email: existingUser.email }))
     .then((currentUser) => {
       existingUser.toPay = currentUser.toPay;
@@ -77,8 +75,6 @@ export function logIn(req, res) {
     })
     .then(generatedToken => {
       res.status(200).json({
-        name: existingUser.name,
-        surname: existingUser.surname,
         email: existingUser.email,
         token: generatedToken,
         toPay: existingUser.toPay,

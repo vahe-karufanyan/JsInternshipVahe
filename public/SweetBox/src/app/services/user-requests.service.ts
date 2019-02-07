@@ -10,8 +10,8 @@ export class UserRequestsService {
 
   url: string = 'http://localhost:3000/api/v1/users/';
 
-  getAllUsers(): Observable<UserData>{
-    return this.http.get<UserData>(this.url);
+  getAllUsers(): Observable<UserData[]>{
+    return this.http.get<UserData[]>(this.url);
   }
 
 }

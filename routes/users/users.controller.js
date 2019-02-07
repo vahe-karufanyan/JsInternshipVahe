@@ -4,12 +4,7 @@ import Error from '../../helpers/error';
 export function getAll(req, res) {
   User.find().exec().then(allUsers => {
     console.log(allUsers);
-    res.status(200).json({
-      name: allUsers.name,
-      surname: allUsers.surname,
-      email: allUsers.email,
-      toPay: allUsers.toPay,
-    });
+    res.status(200).send(allUsers);
   }).catch(err => {
     Error(res, 400, err);
   });

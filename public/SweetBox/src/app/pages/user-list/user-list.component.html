@@ -1,3 +1,20 @@
-<p>
-  user-list works!
-</p>
+<table class="table table-light table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Debt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.name}}</td>
+      <td>{{user.surname}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.toPay}}</td>
+      <td><button type="button" class="btn btn-danger">Reset</button></td>
+    </tr>
+  </tbody>
+</table>
+<button id="" type="button" class="btn btn-danger">Reset All</button>

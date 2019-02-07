@@ -1,6 +1,11 @@
 import Joi from 'joi';
 
 const emailPasswordSchema = Joi.object().keys({
+  email: Joi.string().email({ minDomainAtoms: 2 }).required(),
+  password: Joi.string().required(),
+});
+
+const userSchema = Joi.object().keys({
   name: Joi.string().min(2).max(20).required(),
   surname: Joi.string().min(2).max(20).required(),
   email: Joi.string().email({ minDomainAtoms: 2 }).required(),
@@ -25,6 +30,16 @@ const IdSchema = Joi.object().keys({
 });
 
 export function validateForUser(object) {
+  return new Promise((resolve, reject) => {
+    const error = Joi.validate(object, userSchema).error;
+    if (error) {
+      reject(error);
+    }
+    resolve();
+  });
+}
+
+export function validateForLogIn(object) {
   return new Promise((resolve, reject) => {
     const error = Joi.validate(object, emailPasswordSchema).error;
     if (error) {

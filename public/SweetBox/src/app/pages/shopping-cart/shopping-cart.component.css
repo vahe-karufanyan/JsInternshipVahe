@@ -37,3 +37,13 @@ div {
   cursor: pointer;
   color: #dc3545;
 }
+
+#removeModal {
+  text-align: center;
+  justify-content: center;
+}
+
+#buyAllModal {
+  text-align: center;
+  justify-content: center;
+}
