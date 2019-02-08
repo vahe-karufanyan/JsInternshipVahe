@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserLogIn } from '../../interfaces/userLogIn'
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { FormGroup, FormBuilder } from '@angular/forms'
 
 @Component({
   selector: 'app-log-in',
@@ -10,13 +11,15 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./log-in.component.css']
 })
 
-export class LogInComponent {
+export class LogInComponent implements OnInit{
+
+  logInForm: FormGroup;
   credentials: UserLogIn = {
     email: '',
     password: ''
   };
   
-  constructor(private _authenticationService: AuthenticationService, private router: Router) { }
+  constructor(private fb: FormBuilder, private _authenticationService: AuthenticationService, private router: Router) { }
 
   public logIn(): void {
     this._authenticationService.signIn(this.credentials).subscribe((res: User) => {
@@ -29,6 +32,13 @@ export class LogInComponent {
     },
     (err) => {
       alert(err);
+    })
+  }
+
+  ngOnInit() {
+    this.logInForm = this.fb.group({
+      email: '',
+      password: ''
     })
   }
 };

@@ -14,6 +14,7 @@
       </div>
     </div>
     <div class="col-lg-9" *ngIf="clickedOnType">
+      <div id="categoryTag"><h4>{{currentCategory}}</h4></div>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4 text-center" *ngFor="let item of categoryItems">
           <app-item-list [item]="item"></app-item-list>

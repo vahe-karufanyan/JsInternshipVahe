@@ -55,6 +55,7 @@ export class ItemListComponent implements OnInit {
     this.shoppingData.id = this.item.id;
     this.shoppingData.price = this.item.price;
     this.shoppingData.quantity = this.quantity;
+    console.log(this.shoppingData.quantity);
     this._storeService.storeShoppingData(this.shoppingData);
   }
 

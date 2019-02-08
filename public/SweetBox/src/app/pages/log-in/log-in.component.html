@@ -3,6 +3,14 @@
     <div class="col-md-6">
       <h1>Sign In</h1>
       <p class="lead">Not a member?<br> Please <a routerLink="/signUp" style="color:#dc3545">SignUp</a> instead.</p>
+      <form [formGroup]="logInForm">
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </form>
         <div class="form-group">
           <label for="email">Email address</label>
           <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">

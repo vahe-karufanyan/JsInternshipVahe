@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class ShopComponent implements OnInit {
 
   item: Item[];
+  currentCategory: string;
   categories: string[] = [];
   categoryItems: Item[];
   clickedOnType: boolean = false;
@@ -35,6 +36,7 @@ export class ShopComponent implements OnInit {
   }
 
   getByType(category: string): void {
+    this.currentCategory = category;
     this._itemRequest.getByType(category).subscribe(res => {
       this.categoryItems = res;
       this.clickedOnType = true;

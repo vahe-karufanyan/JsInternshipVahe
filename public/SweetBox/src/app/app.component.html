@@ -1,4 +1,5 @@
-<div class="background" [ngStyle]="{'background-image': getUrl()}">
+<div class="background" [ngStyle]="{'background-image': getUrl(), 'background-repeat': 'no-repeat', 'background-size': 'cover'}">
+  <!-- , 'background-repeat': 'no-repeat', 'width': '100vh', 'height': '100vh', 'background-size': '100% 800px' -->
   <app-nav-bar></app-nav-bar>
   <div class="container" id="main-module">
     <router-outlet></router-outlet>
