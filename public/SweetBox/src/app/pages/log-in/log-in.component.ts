@@ -3,7 +3,7 @@ import { UserLogIn } from '../../interfaces/userLogIn'
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
-import { FormGroup, FormBuilder } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-log-in',
@@ -37,8 +37,13 @@ export class LogInComponent implements OnInit{
 
   ngOnInit() {
     this.logInForm = this.fb.group({
-      email: '',
-      password: ''
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.minLength(6)
+      ]]
     })
   }
 };

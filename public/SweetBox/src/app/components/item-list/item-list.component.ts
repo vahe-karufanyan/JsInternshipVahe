@@ -64,6 +64,10 @@ export class ItemListComponent implements OnInit {
     this.router.navigateByUrl('/edit');
   }
 
+  eventStopPropagation(event) {
+    event.stopPropagation();
+  }
+
   remove(): void {
     console.log(this.item);
     if (localStorage.getItem('role') === 'admin') {

@@ -10,7 +10,7 @@ export class AppComponent {
   constructor() {}
 
   getUrl() {
-    return "url('../assets/blue-pink.png')";
+    return "url('../assets/blue-candy-bg.png')";
     //"url('../assets/background-sweets.jpg')"
   }
 }

@@ -19,7 +19,7 @@
 <div *ngIf="showModal" (click)="showModal = false">
   <div class="modal fade" id="deleteModal" role="dialog">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" (click)="eventStopPropagation($event)">
         <div class="modal-header">
           <h4 class="modal-title">Are you sure you want to delete {{item.name}}?</h4>
           <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
@@ -37,7 +37,7 @@
 <div *ngIf="showModal" (click)="showModal = false">
   <div class="modal fade" id="buyModal" role="dialog">
     <div *ngIf="_authenticationService.isLoggedIn()" class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" (click)="eventStopPropagation($event)">
         <div class="modal-header">
           <h4 class="modal-title">Are you sure you want to Buy {{item.name}}?</h4>
           <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div *ngIf="!_authenticationService.isLoggedIn()" class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" (click)="eventStopPropagation($event)">
         <div class="modal-header">
           <h4 class="modal-title">You are not signed in please sign in or, sign up if you are new.</h4>
           <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
@@ -64,18 +64,5 @@
         </div>
       </div>
     </div>
-    <!-- <div *ngIf="{{item.count}} === 0" class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Sorry, we have no {{item.name}}.</h4>
-          <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
-        </div>
-        <div class="modal-body">
-          <button type="button" class="btn btn-danger" [routerLink]="['/logIn']" (click)="showModal = false" data-dismiss="modal">Sign In</button>
-          &nbsp;
-          <button type="button" class="btn btn-dark" [routerLink]="['/signUp']" (click)="showModal = false" data-dismiss="modal">Sign Up</button>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
