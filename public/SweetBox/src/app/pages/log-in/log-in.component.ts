@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLogIn } from '../../interfaces/userLogIn'
+import { UserLogIn } from '../../interfaces/userLogIn';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-log-in',
@@ -11,14 +11,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./log-in.component.css']
 })
 
-export class LogInComponent implements OnInit{
+export class LogInComponent implements OnInit {
 
   logInForm: FormGroup;
   credentials: UserLogIn = {
     email: '',
     password: ''
   };
-  
+
   constructor(private fb: FormBuilder, private _authenticationService: AuthenticationService, private router: Router) { }
 
   public logIn(): void {
@@ -32,7 +32,7 @@ export class LogInComponent implements OnInit{
     },
     (err) => {
       alert(err);
-    })
+    });
   }
 
   ngOnInit() {
@@ -44,6 +44,6 @@ export class LogInComponent implements OnInit{
       password: ['', [
         Validators.minLength(6)
       ]]
-    })
+    });
   }
-};
+}

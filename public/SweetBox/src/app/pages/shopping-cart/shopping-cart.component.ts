@@ -31,7 +31,7 @@ export class ShoppingCartComponent implements OnInit {
         let changedItems = addedItems;
         addedItems.forEach((item: Shopping, index: number) => {
           let repeat: number = 0;
-          let repeatIndex: number[] = [];
+          const repeatIndex: number[] = [];
           addedItems.forEach((checkItem: Shopping, checkIndex: number) => {
             if (item.name === checkItem.name) {
               repeat++;
@@ -39,22 +39,22 @@ export class ShoppingCartComponent implements OnInit {
                 repeatIndex.push(checkIndex);
               }
             }
-          })
+          });
           if (repeat > 1) {
-            while(repeatIndex.length !== 0) {
+            while (repeatIndex.length !== 0) {
               changedItems[index].quantity += changedItems[repeatIndex[repeatIndex.length - 1]].quantity;
-              changedItems.splice(repeatIndex[repeatIndex.length - 1])
+              changedItems.splice(repeatIndex[repeatIndex.length - 1]);
               repeatIndex.pop();
-            } 
+            }
           }
           this.addedItems.push(changedItems[index]);
-        })
+        });
         this.addedItems.forEach((item: Shopping) => {
           this.totalPrice += item.price * item.quantity;
-        })
-        console.log(this.addedItems)
+        });
+        console.log(this.addedItems);
       }
-    })
+    });
   }
 
   storeItemToRemoveData(item: Shopping): void {
@@ -70,7 +70,7 @@ export class ShoppingCartComponent implements OnInit {
       if (item.name === this.itemToRemove.name) {
         this.addedItems.splice(index, 1);
       }
-    })
+    });
   }
 
   buyAll(): void {

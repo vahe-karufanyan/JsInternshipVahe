@@ -21,8 +21,9 @@
           </a>
         </li>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search">
-            <button class="btn btn-outline-danger" (click)="search()" type="submit">Search</button>
+            <input id="typeahead-basic" name="name" type="text" class="form-control" placeholder="Search" [(ngModel)]="name" (keyup.enter)="search()" [ngbTypeahead]="autocomplete"/>
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search"> -->
+            <!-- <button class="btn btn-outline-danger" (click)="search()" type="submit">Search</button> -->
         </form>
         <li class="nav-item active">
           <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" routerLink="/cart"><img id="cart" src="../../../assets/white-shopping-cart.png" title="Cart">

@@ -17,6 +17,8 @@ export class StoreService {
 
   products: Shopping[] = [];
 
+  names: string[] = [];
+
   searchingItem: string = '';
 
   item: Shopping[] = [{
@@ -31,7 +33,16 @@ export class StoreService {
 
   public subjectForShopping = new BehaviorSubject<Shopping[]>(this.item);
   public subjectForEdit = new BehaviorSubject<Item>(this.editItem);
+  public passingNamesToSearchSubject = new BehaviorSubject<string[]>(this.names);
   public subjectForSearch = new BehaviorSubject<string>(this.searchingItem);
+
+  storePassingNamesToSearch (name: string[]) {
+    this.passingNamesToSearchSubject.next(name);
+  }
+
+  getPassingNamesToSearch () {
+    return this.passingNamesToSearchSubject;
+  }
 
   storeShoppingData(item: Shopping): void {
     this.products.push(item);

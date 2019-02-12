@@ -3,6 +3,7 @@ import { ItemRequests } from '../../services/item-requests.service';
 import { Item } from '../../interfaces/item'
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-shop',
@@ -16,15 +17,19 @@ export class ShopComponent implements OnInit {
   categories: string[] = [];
   categoryItems: Item[];
   clickedOnType: boolean = false;
-  isLogedIn = this._authenticationService.isLoggedIn()
 
-  constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router) {
+  constructor(private _authenticationService: AuthenticationService, private _itemRequest: ItemRequests, private router: Router, private _storeService: StoreService ) {
    }
 
   addAllItems(): void {
     this._itemRequest.getAllItems().subscribe(res => {
+      const names: string[] = [];
       this.item = res;
       this.noRepeatType();
+      this.item.forEach((item: Item) => {
+        names.push(item.name);
+        this._storeService.storePassingNamesToSearch(names);
+      })
     },
     err => {
       console.error(err);

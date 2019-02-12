@@ -31,6 +31,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule.forRoot()
   ],
   providers: [
     AuthenticationService,
