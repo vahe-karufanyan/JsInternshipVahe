@@ -28,7 +28,6 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component'
 import { UserListComponent } from './pages/user-list/user-list.component'
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { DeleteItemComponent } from './components/delete-item/delete-item.component'
 import { ItemListComponent } from './components/item-list/item-list.component'
 import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { SearchComponent } from './components/search/search.component'
@@ -45,7 +44,6 @@ import { SearchComponent } from './components/search/search.component'
     NavBarComponent,
     ItemListComponent,
     EditItemComponent,
-    DeleteItemComponent,
     ShoppingCartComponent,
     UserListComponent
   ],
