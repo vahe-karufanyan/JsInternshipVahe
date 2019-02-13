@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Shopping } from '../interfaces/shopping';
-import { idCount } from '../interfaces/idCount';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+import { Buy } from '../interfaces/buy'
+import { IdCount } from '../interfaces/idCount'
 
 
 @Injectable()
@@ -10,23 +10,25 @@ export class BuyService {
 
   constructor(private http: HttpClient) { }
 
-  buy(token: string, email: string, id: number, quality: number, toPay: number): Observable<any>{
-    return this.http.post<any>('http://localhost:3000/api/v1/buy', { 
+  private _url = 'http://localhost:3000/api/v1/buy'
+
+  public buy(token: string, email: string, id: number, quality: number, toPay: number): Observable<Buy> {
+    return this.http.post<Buy>(this._url, {
       token,
       email,
       id,
       quality,
       toPay
-     });
+     })
   }
 
-  buyAll(token: string, email: string, idCount: idCount[], toPay: number): Observable<any>{
-    return this.http.post<any>('http://localhost:3000/api/v1/buy/buyAll', {
+  public buyAll(token: string, email: string, idCount: IdCount[], toPay: number): Observable<Buy> {
+    return this.http.post<Buy>(this._url + '/buyAll', {
       idCount,
       email,
       toPay,
       token
-     });
+     })
   }
 
 }

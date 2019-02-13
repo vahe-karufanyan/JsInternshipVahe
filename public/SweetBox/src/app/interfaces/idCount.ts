@@ -1,4 +1,4 @@
-export interface idCount {
+export interface IdCount {
   id: number,
   count: number,
 }

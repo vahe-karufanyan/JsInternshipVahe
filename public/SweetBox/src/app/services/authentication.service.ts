@@ -1,34 +1,33 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { UserLogIn } from '../interfaces/userLogIn';
-import { UserSignUp } from '../interfaces/userSignUp';
-import { User } from '../interfaces/user';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+import { User } from '../interfaces/user'
+import { UserLogIn } from '../interfaces/userLogIn'
+import { UserSignUp } from '../interfaces/userSignUp'
 
 @Injectable()
 export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  url: string = 'http://localhost:3000/api/v1/authorisation/';
+  private url = 'http://localhost:3000/api/v1/authorisation/'
 
-  signUp(user: UserSignUp): Observable<User>{
-    return this.http.post<User>(this.url + 'signUp', user);
+  public signUp(user: UserSignUp): Observable<User> {
+    return this.http.post<User>(this.url + 'signUp', user)
   }
 
-  signIn(user: UserLogIn): Observable<User>{
-    return this.http.post<User>(this.url + 'logIn', user);
+  public signIn(user: UserLogIn): Observable<User> {
+    return this.http.post<User>(this.url + 'logIn', user)
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+  public isLoggedIn(): boolean {
+    return !!localStorage.getItem('token')
   }
 
-  isAdmin(): boolean {
-    if( localStorage.getItem('role') === 'admin' )
-    {
-      return true;
+  public isAdmin(): boolean {
+    if (localStorage.getItem('role') === 'admin') {
+      return true
     }
-    return false;
+    return false
   }
 }

@@ -1,17 +1,21 @@
 <div class="card border-danger">
   <div class="card-body">
-    <div *ngIf="_authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal" (click)="showModal = true" data-target="#deleteModal"><h5>&times;</h5></div>
+    <div *ngIf="_authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal"
+    (click)="showModal = true" data-target="#deleteModal"><h5>&times;</h5></div>
     <h4 class="card-title">
-      <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon" src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
+      <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon"
+                src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
     </h4>
     <h5><a id="priceColor">{{item.price}}</a>֏</h5>
     <div class="form-group row" style="justify-content: center;">
       <h4>Quantity:&nbsp;</h4>
       <div id="quantityInput">
-        <input class="form-control" style="width: 60px" type="number" min="1" max="{{item.count}}" value="1" id="example-number-input" [(ngModel)]="quantity">
+        <input class="form-control" style="width: 60px" type="number" min="1" max="{{item.count}}"
+                value="1" id="example-number-input" [(ngModel)]="quantity">
       </div>
     </div>
-    <button id="buyButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#buyModal" (click)="showModal = true">Buy</button>
+    <button id="buyButton" type="button" class="btn btn-danger" data-toggle="modal"
+            data-target="#buyModal" (click)="showModal = true">Buy</button>
     <div id="countInfo">{{item.count}} left</div>
   </div>
 </div>
@@ -58,9 +62,11 @@
           <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
         </div>
         <div class="modal-body">
-          <button type="button" class="btn btn-danger" [routerLink]="['/logIn']" (click)="showModal = false" data-dismiss="modal">Sign In</button>
+          <button type="button" class="btn btn-danger" [routerLink]="['/logIn']"
+                  (click)="showModal = false" data-dismiss="modal">Sign In</button>
           &nbsp;
-          <button type="button" class="btn btn-dark" [routerLink]="['/signUp']" (click)="showModal = false" data-dismiss="modal">Sign Up</button>
+          <button type="button" class="btn btn-dark" [routerLink]="['/signUp']"
+                  (click)="showModal = false" data-dismiss="modal">Sign Up</button>
         </div>
       </div>
     </div>
