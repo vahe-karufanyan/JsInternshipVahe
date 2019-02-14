@@ -36,6 +36,7 @@ export class ItemListComponent implements OnInit {
     if (!this._authenticationService.isLoggedIn()) {
       this.router.navigateByUrl('/logIn')
     } else {
+      console.log(this.quantity)
       this._toPay += this.quantity * this.item.price
       this._buyService.buy(localStorage.getItem('token'), localStorage.getItem('email'), this.item.id,
       this.quantity, this._toPay).subscribe(res => {

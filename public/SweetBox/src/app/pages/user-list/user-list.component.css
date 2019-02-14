@@ -1,3 +1,9 @@
 table {
   color: #000;
 }
+
+#resetModal {
+  text-align: center;
+  justify-content: center;
+  color: black;
+}

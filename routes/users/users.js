@@ -4,7 +4,7 @@ import { getAll, getByEmail, reset } from './users.controller';
 
 const router = express.Router();
 
-router.put('/', getAll);
+router.get('/', getAll);
 
 router.put('/', reset);
 

@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-lg-3 col-md-12 mb-4">
       <div class="list-group">
+        <h4 class="title">Categories</h4>
         <a class="list-group-item list-group-item-action border-danger"
         style="cursor:pointer; font-weight:bold" *ngIf="clickedOnType"
         (click)="showAllItems()">All Items</a>
@@ -11,6 +12,7 @@
       </div>
     </div>
     <div class="col-lg-9" *ngIf="!clickedOnType">
+      <h4 class="title">All Items</h4>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4 text-center" *ngFor="let item of item">
           <sb-item-list [item]="item"></sb-item-list>
@@ -18,7 +20,7 @@
       </div>
     </div>
     <div class="col-lg-9" *ngIf="clickedOnType">
-      <div id="categoryTag"><h4>{{currentCategory}}</h4></div>
+      <div class="title"><h4>{{currentCategory}}</h4></div>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4 text-center" *ngFor="let item of categoryItems">
           <sb-item-list [item]="item"></sb-item-list>

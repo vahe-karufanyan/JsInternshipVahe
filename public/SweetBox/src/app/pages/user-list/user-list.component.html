@@ -13,8 +13,27 @@
       <td>{{user.surname}}</td>
       <td>{{user.email}}</td>
       <td>{{user.toPay}}</td>
-      <td><button type="button" class="btn btn-danger" >Reset</button></td>
+      <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#resetModal">Reset</button></td>
     </tr>
   </tbody>
 </table>
 <button type="button" class="btn btn-danger">Reset All</button>
+
+
+<!-- Reset modal -->
+
+<div class="modal fade" id="resetModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Are you sure you want to remove {{itemToRemove.name}} from cart?</h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-danger" (click)="reset()" data-dismiss="modal">Reset</button>
+        &nbsp;
+        <button type="button" class="btn btn-dark" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>

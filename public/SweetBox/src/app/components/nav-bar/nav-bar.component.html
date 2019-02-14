@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(0, 0, 0, 0.74);">
   <div class="container">
     <a class="navbar-brand" routerLink="">SweetBox</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -10,7 +11,8 @@
           <a class="nav-link" *ngIf="_authenticationService.isAdmin()" routerLink="/users">All Users</a>
         </li>
         <li class="nav-item active">
-	        <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()"> You have to pay: <span style="color:#dc3545">{{toPayAmount}}</span>֏</a>
+	        <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()"> You have to pay: 
+            <span style="color:#dc3545">{{toPayAmount}}</span>֏</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" *ngIf="_authenticationService.isAdmin()" routerLink="/addItem">Add Item</a>
@@ -21,18 +23,23 @@
           </a>
         </li>
         <form class="form-inline my-2 my-lg-0">
-            <input id="typeahead-basic" name="name" type="text" class="form-control" placeholder="Search" [(ngModel)]="name" (keyup.enter)="search()" [ngbTypeahead]="autocomplete"/>
-            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name" (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search"> -->
+            <input id="typeahead-basic" name="name" type="text" class="form-control" placeholder="Search"
+                    [(ngModel)]="name" (keyup.enter)="search()" [ngbTypeahead]="autocomplete"/>
+            <img id="searchIcon" src="../../../assets/search-icon-white.svg">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name"
+                        (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search"> -->
             <!-- <button class="btn btn-outline-danger" (click)="search()" type="submit">Search</button> -->
         </form>
         <li class="nav-item active">
-          <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" routerLink="/cart"><img id="cart" src="../../../assets/white-shopping-cart.png" title="Cart">
+          <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" routerLink="/cart"><img id="cart"
+              src="../../../assets/white-shopping-cart.png" title="Cart">
             <!-- <img id="circle" src="../../../assets/redCirclesvg.png"> -->
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" data-toggle="modal" data-target="#logOutModal" routerLink="">Log Out
+          <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" data-toggle="modal"
+              data-target="#logOutModal" routerLink="">Log Out
             <span class="sr-only">(current)</span>
           </a>
         </li>

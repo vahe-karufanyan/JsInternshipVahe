@@ -11,6 +11,10 @@
   transform: scaleX(-1);
 }
 
+#searchIcon {
+  height: 35px;
+}
+
 /* #circle {
   height: 15px;
   width: 15px;

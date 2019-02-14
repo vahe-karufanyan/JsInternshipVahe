@@ -2,7 +2,7 @@ div {
     color: black;
 }
 
-#categoryTag {
+.title {
   color: white;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }

@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
     this._storeService.getSearchData().subscribe(searchingName => {
       if (!searchingName) {
         alert('asdasdasd')
-        this.router.navigateByUrl(`/shop`)
+        this.router.navigateByUrl('')
       } else {
         this._searchingName = searchingName
         this._search()

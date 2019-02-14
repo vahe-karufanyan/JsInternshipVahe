@@ -27,7 +27,7 @@ export class NavBarComponent implements OnInit {
 
   public search(): void {
     this._storeService.storeSearchData(this.name)
-    this.router.navigateByUrl(`/search`, { skipLocationChange: true })
+    this.router.navigateByUrl(`/search`)
   }
 
   public logOut(): void {

@@ -9,6 +9,8 @@ export function buy(req, res) {
   const toPay = req.body.toPay;
   Item.findOne({ id })
     .then(item => {
+      console.log(item);
+      console.log(quantity);
       item.count -= quantity;
       return Item.update({ id }, { $set: item });
     }).then(() => {

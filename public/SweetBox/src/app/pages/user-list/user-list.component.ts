@@ -10,6 +10,7 @@ import { UserRequestsService } from 'src/app/services/user-requests.service'
 export class UserListComponent implements OnInit {
 
   public users: UserData[] = []
+  public newToPay: number
 
   constructor(private _userService: UserRequestsService) { }
 
@@ -17,7 +18,13 @@ export class UserListComponent implements OnInit {
     this._addUsers()
   }
 
-  public reset(email: string, ): void {
+  public reset(): void {
+    const email: string = localStorage.getItem('email')
+    this._userService.reset(email, toPay).subscribe(res => {
+      if (res) {
+        localStorage.setItem('toPay', res.toString())
+      }
+    })
     // add to pay new value to modal if there is no value then just reset to 0
   }
 

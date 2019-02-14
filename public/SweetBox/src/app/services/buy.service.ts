@@ -12,12 +12,12 @@ export class BuyService {
 
   private _url = 'http://localhost:3000/api/v1/buy'
 
-  public buy(token: string, email: string, id: number, quality: number, toPay: number): Observable<Buy> {
+  public buy(token: string, email: string, id: number, quantity: number, toPay: number): Observable<Buy> {
     return this.http.post<Buy>(this._url, {
       token,
       email,
       id,
-      quality,
+      quantity,
       toPay
      })
   }
