@@ -1,10 +1,12 @@
 import express from 'express';
-import { getAll, getByEmail } from './users.controller';
+import { getAll, getByEmail, reset } from './users.controller';
 
 
 const router = express.Router();
 
-router.get('/', getAll);
+router.put('/', getAll);
+
+router.put('/', reset);
 
 router.get('/:id', getByEmail);
 

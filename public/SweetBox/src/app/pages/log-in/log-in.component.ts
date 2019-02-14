@@ -32,6 +32,7 @@ export class LogInComponent implements OnInit {
       localStorage.setItem('token', res.token)
       localStorage.setItem('role', res.role)
       this.router.navigateByUrl('')
+      window.location.reload()
       console.log(res)
     },
     (err) => {

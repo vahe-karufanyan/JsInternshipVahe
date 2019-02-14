@@ -17,8 +17,8 @@ export class UserListComponent implements OnInit {
     this._addUsers()
   }
 
-  public reset(email: string): void {
-    // to Do
+  public reset(email: string, ): void {
+    // add to pay new value to modal if there is no value then just reset to 0
   }
 
   private _addUsers(): void {

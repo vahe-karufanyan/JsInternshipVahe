@@ -14,7 +14,7 @@ export function buy(req, res) {
     }).then(() => {
       return User.findOne({ email });
     })
-    .then(user => {  
+    .then(user => {
       user.toPay = toPay;
       return User.update({ email }, { $set: user });
     })
