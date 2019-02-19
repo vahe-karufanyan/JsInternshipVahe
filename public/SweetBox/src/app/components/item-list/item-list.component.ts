@@ -69,7 +69,7 @@ export class ItemListComponent implements OnInit {
     this.router.navigateByUrl('/edit')
   }
 
-  public eventStopPropagation(event): void {
+  public eventStopPropagation(event: Event): void {
     event.stopPropagation()
   }
 

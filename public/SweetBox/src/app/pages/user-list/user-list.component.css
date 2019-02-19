@@ -2,8 +2,16 @@ table {
   color: #000;
 }
 
-#resetModal {
+#resetModal, #resetAllModal {
   text-align: center;
   justify-content: center;
   color: black;
+}
+
+#resetButton {
+  float: right;
+}
+
+#debtInput {
+  width: 100px;
 }

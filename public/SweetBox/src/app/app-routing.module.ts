@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { SearchComponent } from './components/search/search.component'
 import { AddItemComponent } from './pages/add-item/add-item.component'
 import { EditItemComponent } from './pages/edit-item/edit-item.component'
+import { ItemComponent } from './pages/item/item.component'
 import { LogInComponent } from './pages/log-in/log-in.component'
 import { ShopComponent } from './pages/shop/shop.component'
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component'
@@ -17,7 +18,9 @@ const appRoutes: Routes = [
   { path: 'addItem', component: AddItemComponent },
   { path: 'edit', component: EditItemComponent },
   { path: 'cart', component: ShoppingCartComponent },
-  { path: 'users', component: UserListComponent }
+  { path: 'users', component: UserListComponent },
+  { path: 'item', component: ItemComponent }
+  // { path: 'item/:name', component: ItemComponent }
 ]
 
 @NgModule({

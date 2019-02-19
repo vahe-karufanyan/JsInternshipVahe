@@ -21,6 +21,7 @@ import { UserRequestsService } from './services/user-requests.service'
 
 import { AddItemComponent } from './pages/add-item/add-item.component'
 import { EditItemComponent } from './pages/edit-item/edit-item.component'
+import { ItemComponent } from './pages/item/item.component'
 import { LogInComponent } from './pages/log-in/log-in.component'
 import { ShopComponent } from './pages/shop/shop.component'
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component'
@@ -45,9 +46,11 @@ import { SearchComponent } from './components/search/search.component'
     ItemListComponent,
     EditItemComponent,
     ShoppingCartComponent,
-    UserListComponent
+    UserListComponent,
+    ItemComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     MatChipsModule,
     MatCheckboxModule,
     MatButtonModule,
@@ -58,8 +61,7 @@ import { SearchComponent } from './components/search/search.component'
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    NgbModule.forRoot()
+    BrowserAnimationsModule
   ],
   providers: [
     AuthenticationService,

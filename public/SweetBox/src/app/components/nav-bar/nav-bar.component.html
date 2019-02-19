@@ -12,7 +12,7 @@
         </li>
         <li class="nav-item active">
 	        <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()"> You have to pay: 
-            <span style="color:#dc3545">{{toPayAmount}}</span>֏</a>
+            <span style="color:#5bc0de">{{toPayAmount}}</span>֏</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" *ngIf="_authenticationService.isAdmin()" routerLink="/addItem">Add Item</a>
@@ -25,10 +25,10 @@
         <form class="form-inline my-2 my-lg-0">
             <input id="typeahead-basic" name="name" type="text" class="form-control" placeholder="Search"
                     [(ngModel)]="name" (keyup.enter)="search()" [ngbTypeahead]="autocomplete"/>
-            <img id="searchIcon" src="../../../assets/search-icon-white.svg">
+            <img id="searchIcon" src="../../../assets/search-icon-white.svg" (click)="search()">
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" name="name"
                         (keydown.enter)="search()" [(ngModel)]="name" aria-label="Search"> -->
-            <!-- <button class="btn btn-outline-danger" (click)="search()" type="submit">Search</button> -->
+            <!-- <button class="btn btn-outline-danger"  type="submit">Search</button> -->
         </form>
         <li class="nav-item active">
           <a class="nav-link" *ngIf="_authenticationService.isLoggedIn()" routerLink="/cart"><img id="cart"
@@ -55,9 +55,8 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <button type="button" class="btn btn-danger" (click)="logOut()" data-dismiss="modal">Log Out</button>
-        &nbsp;
-        <button type="button" class="btn btn-dark" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-info mr-3" (click)="logOut()" data-dismiss="modal">Log Out</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
       </div>
     </div>
   </div>

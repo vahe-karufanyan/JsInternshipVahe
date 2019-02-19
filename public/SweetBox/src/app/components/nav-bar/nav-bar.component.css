@@ -12,6 +12,7 @@
 }
 
 #searchIcon {
+  cursor: pointer;
   height: 35px;
 }
 

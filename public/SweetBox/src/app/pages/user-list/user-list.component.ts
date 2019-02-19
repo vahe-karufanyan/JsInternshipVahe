@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { UserData } from 'src/app/interfaces/userData'
+import { AuthenticationService } from 'src/app/services/authentication.service'
 import { UserRequestsService } from 'src/app/services/user-requests.service'
 
 @Component({
@@ -10,28 +11,59 @@ import { UserRequestsService } from 'src/app/services/user-requests.service'
 export class UserListComponent implements OnInit {
 
   public users: UserData[] = []
-  public newToPay: number
+  public newDebt: number
+  public email: string
 
-  constructor(private _userService: UserRequestsService) { }
+  constructor(private _userService: UserRequestsService, private _authenticationService: AuthenticationService) { }
 
   public ngOnInit(): void {
     this._addUsers()
   }
 
-  public reset(): void {
-    const email: string = localStorage.getItem('email')
-    this._userService.reset(email, toPay).subscribe(res => {
-      if (res) {
-        localStorage.setItem('toPay', res.toString())
+  public storeEmailToResetDebt(email: string): void {
+    this.email = email
+  }
+
+  public reset(resetValue?: number): void {
+    if (this._authenticationService.isAdmin()) {
+      let newDebt: number = this.newDebt
+      if (resetValue === 0) {
+        newDebt = 0
       }
-    })
-    // add to pay new value to modal if there is no value then just reset to 0
+      this._userService.reset(this.email, newDebt).subscribe(res => {
+        this.users.forEach((user: UserData, index: number, array: UserData[]) => {
+          if (user.email === this.email) {
+            array[index].toPay = newDebt
+          }
+        })
+      },
+      err => {
+        console.error(err)
+      }
+      )
+    }
+  }
+
+  public resetAll(): void {
+    if (this._authenticationService.isAdmin()) {
+      const emails: string[] = []
+      this.users.forEach((user: UserData) => {
+        emails.push(user.email)
+      })
+      this._userService.resetAll(emails).subscribe(res => {
+        this.users.forEach((user: UserData, index: number, array: UserData[]) => {
+          array[index].toPay = 0
+        })
+      },
+      err => {
+        console.error(err)
+      })
+    }
   }
 
   private _addUsers(): void {
     this._userService.getAllUsers().subscribe((res: UserData[]) => {
       this.users = res
-      console.log(res)
     })
   }
 

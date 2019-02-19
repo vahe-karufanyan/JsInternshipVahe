@@ -13,12 +13,12 @@
       <td>{{user.surname}}</td>
       <td>{{user.email}}</td>
       <td>{{user.toPay}}</td>
-      <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#resetModal">Reset</button></td>
+      <td><button id="resetbutton" type="button" class="btn btn-info" data-toggle="modal" data-target="#resetModal"
+                  (click)="storeEmailToResetDebt(user.email)">Reset or Change debt value</button></td>
     </tr>
   </tbody>
 </table>
-<button type="button" class="btn btn-danger">Reset All</button>
-
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#resetAllModal">Reset All</button>
 
 <!-- Reset modal -->
 
@@ -26,13 +26,34 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Are you sure you want to remove {{itemToRemove.name}} from cart?</h4>
+        <h4 class="modal-title">Enter change value or reset.</h4>
         <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
       </div>
       <div class="modal-body">
-        <button type="button" class="btn btn-danger" (click)="reset()" data-dismiss="modal">Reset</button>
-        &nbsp;
-        <button type="button" class="btn btn-dark" data-dismiss="modal">No</button>
+        <div class="input-group">
+          <input type="number" class="form-control" name="newDebt" placeholder="New debt" [(ngModel)]="newDebt">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button" (click)="reset()" data-dismiss="modal">Change</button>
+            <button class="btn btn-info" type="button" (click)="reset(0)" data-dismiss="modal">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reset All Modal -->
+
+<div class="modal fade" id="resetAllModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Are you sure you want to reset all debts?</h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button class="btn btn-info mr-3" type="button" (click)="resetAll()" data-dismiss="modal">Reset All</button>
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">no</button>
       </div>
     </div>
   </div>

@@ -14,8 +14,11 @@ export class UserRequestsService {
     return this.http.get<UserData[]>(this._url)
   }
 
-  public reset(email: string, newToPayValue: number): Observable<number> {
-    return this.http.put<number>(this._url + email, newToPayValue)
+  public reset(email: string, newDebt: number): Observable<number> {
+    return this.http.put<number>(this._url + email, { newDebt })
   }
 
+  public resetAll(emails: string[]): Observable<string> {
+    return this.http.post<string>(this._url, { emails })
+  }
 }
