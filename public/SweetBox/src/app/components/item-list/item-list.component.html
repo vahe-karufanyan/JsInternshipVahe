@@ -3,8 +3,8 @@
     <div *ngIf="_authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal"
     (click)="showModal = true" data-target="#deleteModal"><h5>&times;</h5></div>
     <h4 class="card-title">
-      <a>{{item.name}} </a><img *ngIf="_authenticationService.isAdmin()" id="edit-icon"
-                src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
+      <a id="itemName" (click)="itemPage()">{{item.name}}</a><img *ngIf="_authenticationService.isAdmin()" 
+          id="edit-icon" src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
     </h4>
     <h5><a id="priceColor">{{item.price}}</a>֏</h5>
     <div class="form-group row" style="justify-content: center;">
@@ -29,7 +29,7 @@
           <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
         </div>
         <div class="modal-body">
-          <button type="button" class="btn btn-info mr-3" (click)="remove()" data-dismiss="modal">Delete</button>
+          <button type="button" class="btn btn-info mr-2" (click)="remove()" data-dismiss="modal">Delete</button>
           
           <button type="button" class="btn btn-secondary" (click)="showModal = false" data-dismiss="modal">No</button>
         </div>
@@ -47,8 +47,8 @@
           <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
         </div>
         <div class="modal-body">
-          <button type="button" class="btn btn-info mr-3" (click)="buy()" data-dismiss="modal">Buy</button>
-          <button type="button" class="btn btn-info mr-3" (click)="addToCart()" data-dismiss="modal">Add To Cart</button>
+          <button type="button" class="btn btn-info mr-2" (click)="buy()" data-dismiss="modal">Buy</button>
+          <button type="button" class="btn btn-info mr-2" (click)="addToCart()" data-dismiss="modal">Add To Cart</button>
           <button type="button" class="btn btn-secondary" (click)="showModal = false" data-dismiss="modal">No</button>
         </div>
       </div>
@@ -60,7 +60,7 @@
           <button type="button" class="close" data-dismiss="modal" (click)="showModal = false">&times;</button>
         </div>
         <div class="modal-body">
-          <button type="button" class="btn btn-info mr-3" [routerLink]="['/logIn']"
+          <button type="button" class="btn btn-info mr-2" [routerLink]="['/logIn']"
                   (click)="showModal = false" data-dismiss="modal">Sign In</button>
           
           <button type="button" class="btn btn-secondary" [routerLink]="['/signUp']"

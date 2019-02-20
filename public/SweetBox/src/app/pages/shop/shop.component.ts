@@ -26,7 +26,7 @@ export class ShopComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.addAllItems()
+    this._addAllItems()
   }
 
   public getByType(category: string): void {
@@ -40,7 +40,7 @@ export class ShopComponent implements OnInit {
     })
   }
 
-  private addAllItems(): void {
+  private _addAllItems(): void {
     this._itemRequest.getAllItems().subscribe(res => {
       const names: string[] = []
       this.item = res
@@ -59,7 +59,6 @@ export class ShopComponent implements OnInit {
     const allTypes: string[] = []
     let type: string
     this.item.forEach((item: Item) => {
-      console.log(item.type)
       type = item.type.toString()
       allTypes.push(type)
     })

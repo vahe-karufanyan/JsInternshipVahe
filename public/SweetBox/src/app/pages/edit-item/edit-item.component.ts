@@ -34,7 +34,7 @@ export class EditItemComponent implements OnInit {
   }
 
   private _currentItem(): void {
-    this._storeService.getEditData().subscribe(itemToEdit => {
+    this._storeService.getItemData().subscribe(itemToEdit => {
       this.itemToUpdate = itemToEdit
     })
   }

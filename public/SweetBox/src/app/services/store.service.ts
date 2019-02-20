@@ -15,7 +15,7 @@ export class StoreService {
       quantity: 0
     }]
   )
-  public subjectForEdit = new BehaviorSubject<Item>({
+  public subjectForItem = new BehaviorSubject<Item>({
       id: 0,
       type: '',
       name: '',
@@ -64,11 +64,11 @@ export class StoreService {
     return this.subjectForSearch
   }
 
-  public storeEditData(item: Item): void {
-    this.subjectForEdit.next(item)
+  public storeItemData(item: Item): void {
+    this.subjectForItem.next(item)
   }
 
-  public getEditData(): BehaviorSubject<Item> {
-    return this.subjectForEdit
+  public getItemData(): BehaviorSubject<Item> {
+    return this.subjectForItem
   }
 }

@@ -3,5 +3,19 @@ div {
 }
 
 #itemBody {
-  width: 500px;
+  margin: auto;
+  max-width: 800px;
+  min-width: 443px;
+}
+
+#priceColor {
+  color:rgb(156, 156, 156);
+}
+
+#quantityInput {
+  width: 40px;
+}
+
+#quantityBlock {
+  margin-left: 0px;
 }

@@ -65,8 +65,17 @@ export class ItemListComponent implements OnInit {
   }
 
   public edit(): void {
-    this._storeService.storeEditData(this.item)
+    this._storeItem()
     this.router.navigateByUrl('/edit')
+  }
+
+  public itemPage(): void {
+    this._storeItem()
+    this.router.navigateByUrl('item')
+  }
+
+  public _storeItem(): void {
+    this._storeService.storeItemData(this.item)
   }
 
   public eventStopPropagation(event: Event): void {

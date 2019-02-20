@@ -1,14 +1,23 @@
-<div class="card flex-row flex-wrap row-lg-12">
-  <div class="card-header border-0">
-      <img src="//placehold.it/400" alt="">
-  </div>
-  <div id="itemBody" class="card-body  ml-4">
-      <h4 class="card-title">Title</h4>
-      <p class="card-text">Description</p>
-      <button class="btn btn-info">Buy</button>
-  </div>
-  <div class="w-100"></div>
-  <div class="card-footer w-100 text-muted">
-      FOOTER
+<div class="col-lg-12 col-md-8 col-sm-10">
+  <div id="itemBody" class="card border-info flex-row flex-wrap">
+    <div class="card-header">
+        <img class="card-img-left" src="//placehold.it/400" alt="Card image cap">
+    </div>
+    <div class="card-body ml-4">
+      <h3 class="card-title">{{item.name}}</h3>
+      <h5 class="card-text"><a id="priceColor">{{item.type}}</a></h5>
+      <h5 class="card-text"><a id="priceColor">{{item.count}}</a> left</h5>
+      <h5 class="card-text">Barcode: <a id="priceColor">{{item.barcode}}</a></h5>
+      <span id="quantityBlock" class="row">
+        <h5 class="card-text">Quantity:&nbsp;</h5>
+        <div id="quantityInput">
+          <input class="form-control" style="width: 60px" type="number" min="1" max="{{item.count}}"
+                value="1" id="example-number-input" [(ngModel)]="quantity">
+        </div>
+      </span>
+      <h4 class="card-text">Price: <a id="priceColor">{{item.price}}</a>֏</h4>
+      <button class="btn btn-info mr-2 mt-2">Buy</button>
+      <button class="btn btn-info mt-2">Add to cart</button>
+    </div>
   </div>
 </div>
