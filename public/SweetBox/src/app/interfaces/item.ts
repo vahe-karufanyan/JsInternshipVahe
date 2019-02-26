@@ -1,3 +1,4 @@
+
 export interface Item {
     id: number,
     type: string,
@@ -5,4 +6,5 @@ export interface Item {
     price: number,
     barcode: string,
     count: number,
+    image: string | ArrayBuffer
 }

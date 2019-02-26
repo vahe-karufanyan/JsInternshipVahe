@@ -19,8 +19,7 @@ const appRoutes: Routes = [
   { path: 'edit', component: EditItemComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'users', component: UserListComponent },
-  { path: 'item', component: ItemComponent }
-  // { path: 'item/:name', component: ItemComponent }
+  { path: ':name', component: ItemComponent }
 ]
 
 @NgModule({

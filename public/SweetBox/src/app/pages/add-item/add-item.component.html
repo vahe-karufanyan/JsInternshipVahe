@@ -4,23 +4,28 @@
       <h2>You can Add itams to your shop</h2>
         <div class="form-group">
           <label for="type">Type<a style="color:red">*</a></label>
-          <input type="type" class="form-control" name="type" placeholder="Enter type" [(ngModel)]="credentials.type">
+          <input type="type" class="form-control" id="type" name="type" placeholder="Enter Type" [(ngModel)]="credentials.type">
         </div>
         <div class="form-group">
           <label for="name">Name<a style="color:red">*</a></label>
-          <input type="name" class="form-control" name="name" placeholder="Enter Name" [(ngModel)]="credentials.name">
+          <input type="name" class="form-control" id="name" name="name" placeholder="Enter Name" [(ngModel)]="credentials.name">
         </div>
         <div class="form-group">
           <label for="price">Price<a style="color:red">*</a></label>
-          <input type="price" class="form-control" name="price" placeholder="Enter Price" [(ngModel)]="credentials.price" (keydown.enter)="addItem()">
+          <input type="number" class="form-control" id="price" name="price" placeholder="Enter Price" [(ngModel)]="credentials.price" (keydown.enter)="addItem()">
         </div>
         <div class="form-group">
-          <label for="price">Barcode</label>
-          <input type="price" class="form-control" name="barcode" placeholder="Enter Barcode" [(ngModel)]="credentials.barcode">
+          <label for="barcode">Barcode</label>
+          <input type="text" class="form-control" id="barcode" name="barcode" placeholder="Enter Barcode" [(ngModel)]="credentials.barcode">
         </div>
         <div class="form-group">
-          <label for="price">count</label>
-          <input type="price" class="form-control" name="count" placeholder="Enter Price" [(ngModel)]="credentials.count" (keydown.enter)="addItem()">
+          <label for="count">Count</label>
+          <input type="number" class="form-control" id="count" name="count" placeholder="Enter Count" [(ngModel)]="credentials.count" (keydown.enter)="addItem()">
+        </div>
+        <div class="form-group">
+          <label style="margin-right: 10px;" for="selectImage">Image:</label>
+          <input type="file" class="form-control-file" (change)="imputImage($event)" name="file" id="file" #fileInput>
+          <button class="btn btn-defauly" name="selectImage" id="selectImage" (click)="fileInput.click()">Select File</button>
         </div>
         <button type="submit" class="btn btn-info" (click)="addItem()">Add Item</button>
     </div>

@@ -6,6 +6,7 @@ import { tokenGenerator } from '../../helpers/JWT';
 import Messages from '../../helpers/messages';
 
 export function signUp(req, res) {
+  console.log(1111111111);
   const newUser = {
     name: req.body.name,
     surname: req.body.surname,
@@ -14,6 +15,7 @@ export function signUp(req, res) {
   };
   validateForUser(newUser).then(() => {
     if (newUser.password !== req.body.confirmPassword) {
+      console.log(1);
       return Error(res, 400, { error: Messages.PASSWORD_DIDNT_MATCH });
     }
     return User.findOne({ email: newUser.email });
@@ -37,7 +39,7 @@ export function signUp(req, res) {
     }))
     .then(() => tokenGenerator(newUser.email))
     .then(generatedToken => {
-      res.status(200).json({
+      return res.status(200).json({
         email: newUser.email,
         token: generatedToken,
         toPay: 0,
@@ -45,7 +47,8 @@ export function signUp(req, res) {
       });
     })
     .catch(error => {
-      Error(res, 400, { error });
+      console.log(error);
+      return Error(res, 400, { error });
     });
 }
 
@@ -74,7 +77,7 @@ export function logIn(req, res) {
       return Error(res, 400, Messages.WRONG_PASSWORD);
     })
     .then(generatedToken => {
-      res.status(200).json({
+      return res.status(200).json({
         email: existingUser.email,
         token: generatedToken,
         toPay: existingUser.toPay,

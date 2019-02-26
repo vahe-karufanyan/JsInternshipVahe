@@ -19,21 +19,14 @@ export class ItemListComponent implements OnInit {
   public quantity = 1
 
   constructor(private _storeService: StoreService, private _itemRequests: ItemRequests,
-  private _authenticationService: AuthenticationService, private router: Router, private route: ActivatedRoute,
-  private  _buyService: BuyService) { }
+              public authenticationService: AuthenticationService, private router: Router,
+              private  _buyService: BuyService) { }
 
   private _toPay: number
-  private _shoppingData: Shopping = {
-    name: '',
-    count: 0,
-    id: 0,
-    price: 0,
-    quantity: 0,
-  }
 
   public buy(): void {
     this.showModal = false
-    if (!this._authenticationService.isLoggedIn()) {
+    if (!this.authenticationService.isLoggedIn()) {
       this.router.navigateByUrl('/logIn')
     } else {
       console.log(this.quantity)
@@ -55,13 +48,20 @@ export class ItemListComponent implements OnInit {
   public addToCart(): void {
     this.showModal = false
     console.log(this.item)
-    this._shoppingData.name = this.item.name
-    this._shoppingData.count = this.item.count
-    this._shoppingData.id = this.item.id
-    this._shoppingData.price = this.item.price
-    this._shoppingData.quantity = this.quantity
-    console.log(this._shoppingData.quantity)
-    this._storeService.storeShoppingData(this._shoppingData)
+    const shoppingData: Shopping = {
+      name: '',
+      count: 0,
+      id: 0,
+      price: 0,
+      quantity: 0,
+    }
+    shoppingData.name = this.item.name
+    shoppingData.count = this.item.count
+    shoppingData.id = this.item.id
+    shoppingData.price = this.item.price
+    shoppingData.quantity = this.quantity
+    console.log(shoppingData.quantity)
+    this._storeService.storeShoppingData(shoppingData)
   }
 
   public edit(): void {
@@ -71,7 +71,7 @@ export class ItemListComponent implements OnInit {
 
   public itemPage(): void {
     this._storeItem()
-    this.router.navigateByUrl('item')
+    this.router.navigateByUrl(`${this.item.name}`)
   }
 
   public _storeItem(): void {

@@ -234,7 +234,6 @@
       true,
       "ignore-params"
     ],
-    "no-any": true,
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-shadowed-variable": true,

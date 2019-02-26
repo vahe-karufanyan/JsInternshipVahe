@@ -4,8 +4,9 @@
       <h1>Sign In</h1>
       <p class="lead">Not a member?
       <br> Please 
-      <span id="signUpLink" routerLink="/signUp" style="color:#dc3545">SignUp</span>
+      <span id="signUpLink" routerLink="/signUp">Sign Up</span>
       instead.</p>
+
       <!-- <form [formGroup]="logInForm">
         <mat-form-field>
           <input matInput type="email" placeholder="Email" formControlName="email">
@@ -26,7 +27,6 @@
           <input type="password" class="form-control" name="password"
           (keydown.enter)="logIn()" placeholder="Password" [(ngModel)]="credentials.password">
         </div>
-      
         <button type="submit" (click)="logIn()" class="btn btn-info">LogIn</button>
     </div>
   </div>

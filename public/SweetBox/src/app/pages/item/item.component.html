@@ -1,4 +1,8 @@
-<div class="col-lg-12 col-md-8 col-sm-10">
+<div *ngIf="!noItem">
+  <h1 style="color: white">There is no item to show.</h1>
+</div>
+
+<div *ngIf="noItem" class="col-lg-12 col-md-8 col-sm-10">
   <div id="itemBody" class="card border-info flex-row flex-wrap">
     <div class="card-header">
         <img class="card-img-left" src="//placehold.it/400" alt="Card image cap">
@@ -16,8 +20,69 @@
         </div>
       </span>
       <h4 class="card-text">Price: <a id="priceColor">{{item.price}}</a>֏</h4>
-      <button class="btn btn-info mr-2 mt-2">Buy</button>
-      <button class="btn btn-info mt-2">Add to cart</button>
+      <button class="btn btn-info mr-2 mt-2" data-toggle="modal"
+              data-target="#buyModal">Buy</button>
+      <button class="btn btn-info mt-2" data-toggle="modal"
+              data-target="#addToCartModal">Add to cart</button>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="buyModal" role="dialog">
+  <div *ngIf="authenticationService.isLoggedIn()" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Are you sure you want to Buy {{item.name}}?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-info mr-2" (click)="buy()" data-dismiss="modal">Buy</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!authenticationService.isLoggedIn()" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">You are not signed in please sign in, or sign up if you are new.</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-info mr-2" [routerLink]="['/logIn']"
+                (click)="showModal = false" data-dismiss="modal">Sign In</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/signUp']"
+                (click)="showModal = false" data-dismiss="modal">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addToCartModal" role="dialog">
+    <div *ngIf="authenticationService.isLoggedIn()" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Are you sure you want to Add {{item.name}} to cart?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <button type="button" class="btn btn-info mr-2" (click)="addToCart()" data-dismiss="modal">Add To Cart</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!authenticationService.isLoggedIn()" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">You are not signed in please sign in or, sign up if you are new.</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <button type="button" class="btn btn-info mr-2" [routerLink]="['/logIn']"
+                  (click)="showModal = false" data-dismiss="modal">Sign In</button>
+          <button type="button" class="btn btn-secondary" [routerLink]="['/signUp']"
+                  (click)="showModal = false" data-dismiss="modal">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -9,16 +9,29 @@ import { Item } from '../../interfaces/item'
 })
 export class AddItemComponent implements OnInit {
 
+
   public credentials: Item = {
-    id: 0,
+    id: null,
     type: '',
     name: '',
-    price: 0,
+    price: null,
     barcode: '',
-    count: 1
+    count: null,
+    image: null
   }
 
   constructor(private _itemRequests: ItemRequests) { }
+
+  public imputImage(event: any): void {
+    const reader = new FileReader()
+    reader.readAsDataURL(event.target.files[0])
+    reader.onload = () => {
+      this.credentials.image = reader.result
+    }
+    reader.onerror = (error) => {
+      console.log('Error =>', error)
+    }
+  }
 
   public addItem(): void {
     if (localStorage.getItem('role') === 'admin') {
@@ -29,7 +42,6 @@ export class AddItemComponent implements OnInit {
       },
       err => {
         console.log(err)
-        alert(err)
       })
     }
   }

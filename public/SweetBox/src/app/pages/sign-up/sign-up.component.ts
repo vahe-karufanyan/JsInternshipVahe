@@ -21,6 +21,7 @@ export class SignUpComponent {
   constructor(private _authenticationService: AuthenticationService, private router: Router) { }
 
   public register(): void {
+    console.log('im here')
     this._authenticationService.signUp(this.credentials).subscribe((res: User) => {
       localStorage.setItem('toPay', res.toPay.toString())
       localStorage.setItem('email', res.email)
@@ -29,7 +30,7 @@ export class SignUpComponent {
       this.router.navigateByUrl('')
     },
     err => {
-      alert(err)
+      console.error(err)
     })
   }
 }

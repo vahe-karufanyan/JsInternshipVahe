@@ -1,9 +1,9 @@
 <div class="card border-info">
   <div class="card-body">
-    <div *ngIf="_authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal"
+    <div *ngIf="authenticationService.isAdmin()" title="Delete" id="x" data-toggle="modal"
     (click)="showModal = true" data-target="#deleteModal"><h5>&times;</h5></div>
     <h4 class="card-title">
-      <a id="itemName" (click)="itemPage()">{{item.name}}</a><img *ngIf="_authenticationService.isAdmin()" 
+      <a id="itemName" (click)="itemPage()">{{item.name}}</a><img *ngIf="authenticationService.isAdmin()" 
           id="edit-icon" src="../../../assets/edit-icon.svg" title="Edit" (click)="edit()">
     </h4>
     <h5><a id="priceColor">{{item.price}}</a>֏</h5>
@@ -40,7 +40,7 @@
 
 <div *ngIf="showModal" (click)="showModal = false">
   <div class="modal fade" id="buyModal" role="dialog">
-    <div *ngIf="_authenticationService.isLoggedIn()" class="modal-dialog">
+    <div *ngIf="authenticationService.isLoggedIn()" class="modal-dialog">
       <div class="modal-content" (click)="eventStopPropagation($event)">
         <div class="modal-header">
           <h4 class="modal-title">Are you sure you want to Buy {{item.name}}?</h4>
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!_authenticationService.isLoggedIn()" class="modal-dialog">
+    <div *ngIf="!authenticationService.isLoggedIn()" class="modal-dialog">
       <div class="modal-content" (click)="eventStopPropagation($event)">
         <div class="modal-header">
           <h4 class="modal-title">You are not signed in please sign in or, sign up if you are new.</h4>
@@ -62,7 +62,6 @@
         <div class="modal-body">
           <button type="button" class="btn btn-info mr-2" [routerLink]="['/logIn']"
                   (click)="showModal = false" data-dismiss="modal">Sign In</button>
-          
           <button type="button" class="btn btn-secondary" [routerLink]="['/signUp']"
                   (click)="showModal = false" data-dismiss="modal">Sign Up</button>
         </div>

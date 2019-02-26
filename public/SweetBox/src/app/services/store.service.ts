@@ -16,12 +16,13 @@ export class StoreService {
     }]
   )
   public subjectForItem = new BehaviorSubject<Item>({
-      id: 0,
+      id: null,
       type: '',
       name: '',
-      price: 0,
+      price: null,
       barcode: '',
-      count: 1
+      count: null,
+      image: null
     }
   )
   public passingNamesToSearchSubject = new BehaviorSubject<string[]>([''])

@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
 import { validateForItems, validateForId } from '../../helpers/joiValidation';
@@ -41,7 +43,9 @@ export function update(req, res) {
     count: req.body.item.count,
   };
   validateForItems(updatedItem)
-    .then(() => Item.update({ id: updatedItem.id }, { $set: updatedItem }))
+    .then(() => {
+      Item.update({ id: updatedItem.id }, { $set: updatedItem });
+    })
     .then(result => {
       res.status(200).json(result);
     })
@@ -51,6 +55,7 @@ export function update(req, res) {
 }
 
 export function addItem(req, res) {
+  console.log('The file has been saved!');
   const newItem = {
     id: Math.round((Math.random() + 1) * 100000),
     type: req.body.item.type,
@@ -58,15 +63,25 @@ export function addItem(req, res) {
     price: req.body.item.price,
     barcode: req.body.item.barcode,
     count: req.body.item.count,
+    image: req.body.item.image,
   };
   validateForItems(newItem)
     .then(() => {
+      console.log('1');
+      fs.writeFile(path.resolve('./images', `${(Math.random() + 1) * 100000}.jpg`), newItem.image, 'binary', (error) => {
+        if (error) {
+          console.log(error);
+          return Error(res, 400, error);
+        }
+        console.log('The file has been saved!');
+      });
       return new Item(newItem).save();
     })
     .then(result => {
       res.status(201).json(result);
     })
     .catch(error => {
+      console.log(error);
       Error(res, 400, { error });
     });
 }

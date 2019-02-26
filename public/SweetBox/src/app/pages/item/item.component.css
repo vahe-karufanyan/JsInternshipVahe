@@ -19,3 +19,8 @@ div {
 #quantityBlock {
   margin-left: 0px;
 }
+
+#buyModal, #addToCartModal {
+  text-align: center;
+  justify-content: center;
+}

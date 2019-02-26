@@ -7,6 +7,7 @@ const itemSchema = mongoose.Schema({
   price: { type: Number, required: true },
   barcode: String,
   count: { type: Number },
+  image: { type: String },
 });
 
 export default mongoose.model('Item', itemSchema);
