@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost/mydb',
 
 app.use(cors({ origin: whitelist }));
 app.use(bodyParser.json());
-app.use(morgan('env'));
+app.use(morgan('dev'));
 
 routes(app);
 

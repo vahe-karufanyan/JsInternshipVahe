@@ -110,11 +110,12 @@ export function imageChunks(req, res) {
       return res.status(201).json({ updateMessage });
     }).catch(error => {
       Error(res, 400, { error });
-      console.log(error);
+      console.log(error + 'error');
     });
     console.log(image.length);
   }
-  return res.status(200);
+  console.log('image.length');
+  return res.status(200).json({ res: 'ok' });
 }
 
 export function remove(req, res) {
