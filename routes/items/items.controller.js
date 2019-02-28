@@ -4,6 +4,8 @@ import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
 import { validateForItems, validateForId } from '../../helpers/joiValidation';
 
+let _chunks = [];
+
 export function getAll(req, res) {
   Item.find().then(itemsList => {
     res.status(200).json(itemsList);
@@ -55,7 +57,7 @@ export function update(req, res) {
 }
 
 export function addItem(req, res) {
-  console.log('The file has been saved!');
+  console.log(req.file);
   const newItem = {
     id: Math.round((Math.random() + 1) * 100000),
     type: req.body.item.type,
@@ -65,27 +67,55 @@ export function addItem(req, res) {
     count: req.body.item.count,
     image: req.body.item.image,
   };
+  console.log(newItem.image);
   validateForItems(newItem)
     .then(() => {
       console.log('1');
-      fs.writeFile(path.resolve('./images', `${(Math.random() + 1) * 100000}.jpg`), newItem.image, 'binary', (error) => {
-        if (error) {
-          console.log(error);
-          return Error(res, 400, error);
-        }
-        console.log('The file has been saved!');
-      });
+      // fs.writeFile(path.resolve('./images', `${newItem.id}`), newItem.image,'base64',(error) => {
+      //   if (error) {
+      //     console.log(error);
+      //     return Error(res, 400, error);
+      //   }
+      //   console.log('The file has been saved!');
+      // });
       return new Item(newItem).save();
     })
     .then(result => {
-      res.status(201).json(result);
+      return res.status(201).json(result);
     })
     .catch(error => {
       console.log(error);
-      Error(res, 400, { error });
+      return Error(res, 400, { error });
     });
 }
 
+export function imageChunks(req, res) {
+  let image;
+  _chunks.push(req.body.chunk);
+  if (req.body.final === true) {
+    const name = req.body.name;
+    image = _chunks.join('');
+    _chunks = [];
+    fs.writeFile(path.resolve('./images', `${name}`), image, 'base64', (error) => {
+      if (error) {
+        console.log(error);
+        return Error(res, 400, error);
+      }
+    });
+    Item.findOne({ name }).then(item => {
+      item.image = `./images/${name}`;
+      return Item.update({ name }, { $set: item });
+    }).then(updateMessage => {
+      console.log('The file has been saved!');
+      return res.status(201).json({ updateMessage });
+    }).catch(error => {
+      Error(res, 400, { error });
+      console.log(error);
+    });
+    console.log(image.length);
+  }
+  return res.status(200);
+}
 
 export function remove(req, res) {
   const id = req.params.id;

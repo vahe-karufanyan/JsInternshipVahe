@@ -20,15 +20,18 @@ export class ItemRequests {
   }
 
   public addItem(item: Item, token: string): Observable<ResponseForItem> {
-    return this.http.post<ResponseForItem>(this._url, { item: item, token: token })
+    return this.http.post<ResponseForItem>(this._url, { item, token })
+  }
 
+  public sendChunks(chunk: string, name: string, token: string, final: boolean): Observable<any> {
+    return this.http.post<any>(this._url + '/imageChunks', { chunk, name, token, final })
   }
 
   public updateItem(item: Item, token: string): Observable<ResponseForItem> {
-    return this.http.put<ResponseForItem>(this._url + `/${item.id}`, { item: item, token: token })
+    return this.http.put<ResponseForItem>(this._url + `/${item.id}`, { item, token })
   }
 
   public remove(id: number, token: string): Observable<ResponseForItem> {
-    return this.http.request<ResponseForItem>('delete', `${this._url}/${id}`, { body: { token: token } })
+    return this.http.request<ResponseForItem>('delete', `${this._url}/${id}`, { body: { token } })
   }
 }

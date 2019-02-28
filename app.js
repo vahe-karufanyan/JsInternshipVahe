@@ -13,7 +13,6 @@ mongoose.connect('mongodb://localhost/mydb',
     useNewUrlParser: true,
   });
 
-
 app.use(cors({ origin: whitelist }));
 app.use(bodyParser.json());
 app.use(morgan('env'));

@@ -22,7 +22,6 @@ export class StoreService {
       price: null,
       barcode: '',
       count: null,
-      image: null
     }
   )
   public passingNamesToSearchSubject = new BehaviorSubject<string[]>([''])

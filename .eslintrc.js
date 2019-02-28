@@ -11,5 +11,6 @@ module.exports = {
         "class-methods-use-this": 0,
         "arrow-body-style": 0,
         "no-param-reassign": 0,
+        "no-underscore-dangle": 0,
     }
 };
