@@ -30,14 +30,14 @@ export class ShopComponent implements OnInit {
   }
 
   public getByType(category: string): void {
+    this.categoryItems = []
     this.currentCategory = category
-    this._itemRequest.getByType(category).subscribe(res => {
-      this.categoryItems = res
-      this.clickedOnType = true
-    },
-    err => {
-      alert(err)
+    this.item.forEach((item: Item) => {
+      if (item.type === category) {
+        this.categoryItems.push(item)
+      }
     })
+    this.clickedOnType = true
   }
 
   private _addAllItems(): void {

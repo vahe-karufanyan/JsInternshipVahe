@@ -15,10 +15,6 @@ export class ItemRequests {
     return this.http.get<ResponseForItem[]>(this._url)
   }
 
-  public getByType(type: string): Observable<ResponseForItem[]> {
-    return this.http.get<ResponseForItem[]>(this._url + `/getByType/${type}`)
-  }
-
   public addItem(item: Item, token: string): Observable<ResponseForItem> {
     return this.http.post<ResponseForItem>(this._url, { item, token })
   }

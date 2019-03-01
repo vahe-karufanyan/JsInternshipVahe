@@ -14,15 +14,6 @@ export function getAll(req, res) {
   });
 }
 
-export function getByType(req, res) {
-  const type = req.params.type;
-  Item.find({ type }).then((items) => {
-    res.status(200).json(items);
-  }).catch(error => {
-    Error(res, 400, { error });
-  });
-}
-
 export function getById(req, res) {
   const id = req.params.id;
   validateForId({ id })
