@@ -19,7 +19,7 @@ const itemSchema = Joi.object().keys({
   barcode: Joi.string(),
   price: Joi.number().max(10000).required(),
   count: Joi.number(),
-  image: Joi.array(),
+  image: Joi.string(),
   // image: Joi.binary().encoding('base64').max(2 * 1024 * 1024),
 });
 

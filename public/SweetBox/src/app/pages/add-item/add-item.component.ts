@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Ng2ImgMaxService } from 'ng2-img-max'
 import { AuthenticationService } from 'src/app/services/authentication.service'
 import { ItemRequests } from 'src/app/services/item-requests.service'
 import { Item } from '../../interfaces/item'
@@ -10,7 +11,6 @@ import { Item } from '../../interfaces/item'
 })
 export class AddItemComponent implements OnInit {
 
-
   public credentials: Item = {
     id: null,
     type: '',
@@ -18,28 +18,54 @@ export class AddItemComponent implements OnInit {
     price: null,
     barcode: '',
     count: null,
+    image: null,
   }
 
-  constructor(private _itemRequests: ItemRequests, private _authenticationService: AuthenticationService) { }
+  constructor(private _itemRequests: ItemRequests, private _ng2ImageMax: Ng2ImgMaxService,
+              private _authenticationService: AuthenticationService) { }
 
   private _imageChunks: string[] = []
   // private _uploadData = new FormData()
 
   public imputImage(event: any): void {
-    // this._upliadData.append('image', event.target.files[0])
-    const reader = new FileReader()
-    reader.readAsDataURL(event.target.files[0])
-    reader.onload = () => {
-      const image = reader.result
-      console.log(image.toString().length)
-      for (let i = 0; i < image.toString().length / 100000; i++) {
-        this._imageChunks.push(image.toString().slice(i * 100000, (i + 1) * 99999))  // or 90000
+    // this._uploadData.append('image', event.target.files[0])
+    const file = event.target.files[0]
+
+    this._ng2ImageMax.resizeImage(file, 400, 400).subscribe(
+      result => {
+        this._ng2ImageMax.compressImage(result, 0.070).subscribe(
+          result1 => {
+            const reader = new FileReader()
+            reader.readAsDataURL(result1)
+            reader.onload = () => {
+              this.credentials.image = reader.result
+            }
+            reader.onerror = (err) => {
+              console.log('Error => ', err)
+            }
+          },
+          error => {
+            console.log('Error =>', error)
+          }
+        )
+      },
+      error => {
+        console.log('Error => ', error)
       }
-      console.log(this._imageChunks)
-    }
-    reader.onerror = (error) => {
-      console.log('Error =>', error)
-    }
+    )
+    // const reader = new FileReader()
+    // reader.readAsDataURL(event.target.files[0])
+    // reader.onload = () => {
+    //   const image = reader.result
+    //   console.log(image.toString().length)
+    //   for (let i = 0; i < image.toString().length / 100000; i++) {
+    //     this._imageChunks.push(image.toString().slice(i * 100000, (i + 1) * 99999))  // or 90000
+    //   }
+    //   console.log(this._imageChunks)
+    // }
+    // reader.onerror = (error) => {
+    //   console.log('Error =>', error)
+    // }
   }
 
   public addItem(): void {
@@ -70,13 +96,13 @@ export class AddItemComponent implements OnInit {
       if (array.length === index + 1) {
         final = true
       }
-      this._itemRequests.sendChunks(chunk, this.credentials.name, localStorage.getItem('token'), final)
-      .subscribe(res => {
-        console.log(res)
-      },
-      error => {
-        console.error(error)
-      })
+      // this._itemRequests.sendChunks(chunk, this.credentials.name, localStorage.getItem('token'), final)
+      // .subscribe(res => {
+      //   console.log(res)
+      // },
+      // error => {
+      //   console.error(error)
+      // })
     })
   }
 

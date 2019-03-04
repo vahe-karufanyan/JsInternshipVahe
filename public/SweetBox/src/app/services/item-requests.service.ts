@@ -19,9 +19,13 @@ export class ItemRequests {
     return this.http.post<ResponseForItem>(this._url, { item, token })
   }
 
-  public sendChunks(chunk: string, name: string, token: string, final: boolean): Observable<any> {
-    return this.http.post<any>(this._url + '/imageChunks', { chunk, name, token, final })
+  public getImage(itemId: number): Observable<string> {
+    return this.http.get<string>(this._url + `/getImage/${itemId}`)
   }
+
+  // public sendChunks(chunk: string, name: string, token: string, final: boolean): Observable<any> {
+  //   return this.http.post<any>(this._url + '/imageChunks', { chunk, name, token, final })
+  // }
 
   public updateItem(item: Item, token: string): Observable<ResponseForItem> {
     return this.http.put<ResponseForItem>(this._url + `/${item.id}`, { item, token })

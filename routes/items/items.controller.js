@@ -4,7 +4,7 @@ import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
 import { validateForItems, validateForId } from '../../helpers/joiValidation';
 
-let _chunks = [];
+// let _chunks = [];
 
 export function getAll(req, res) {
   Item.find().then(itemsList => {
@@ -48,7 +48,7 @@ export function update(req, res) {
 }
 
 export function addItem(req, res) {
-  console.log(req.file);
+  // console.log(req.file);
   const newItem = {
     id: Math.round((Math.random() + 1) * 100000),
     type: req.body.item.type,
@@ -61,14 +61,14 @@ export function addItem(req, res) {
   console.log(newItem.image);
   validateForItems(newItem)
     .then(() => {
-      console.log('1');
-      // fs.writeFile(path.resolve('./images', `${newItem.id}`), newItem.image,'base64',(error) => {
-      //   if (error) {
-      //     console.log(error);
-      //     return Error(res, 400, error);
-      //   }
-      //   console.log('The file has been saved!');
-      // });
+      fs.writeFile(path.resolve('./images', `${newItem.id}`), newItem.image, 'base64', (error) => {
+        if (error) {
+          console.log(error);
+          return Error(res, 400, error);
+        }
+        console.log('The file has been saved!');
+      });
+      newItem.image = `C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${newItem.id}`;
       return new Item(newItem).save();
     })
     .then(result => {
@@ -80,34 +80,46 @@ export function addItem(req, res) {
     });
 }
 
-export function imageChunks(req, res) {
-  let image;
-  _chunks.push(req.body.chunk);
-  if (req.body.final === true) {
-    const name = req.body.name;
-    image = _chunks.join('');
-    _chunks = [];
-    fs.writeFile(path.resolve('./images', `${name}`), image, 'base64', (error) => {
-      if (error) {
-        console.log(error);
-        return Error(res, 400, error);
-      }
-    });
-    Item.findOne({ name }).then(item => {
-      item.image = `./images/${name}`;
-      return Item.update({ name }, { $set: item });
-    }).then(updateMessage => {
-      console.log('The file has been saved!');
-      return res.status(201).json({ updateMessage });
-    }).catch(error => {
-      Error(res, 400, { error });
-      console.log(error + 'error');
-    });
-    console.log(image.length);
-  }
-  console.log('image.length');
-  return res.status(200).json({ res: 'ok' });
+export function getImage(req, res) {
+  const id = req.params.id;
+  fs.readFile(`C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${id}`, (err, data) => {
+    if (err) {
+      console.log(err);
+      return Error(res, 400, { error: err });
+    }
+    const image = data;
+    res.status(200).send(image);
+  });
 }
+
+// export function imageChunks(req, res) {
+//   let image;
+//   _chunks.push(req.body.chunk);
+//   if (req.body.final === true) {
+//     const name = req.body.name;
+//     image = _chunks.join('');
+//     _chunks = [];
+//     fs.writeFile(path.resolve('./images', `${name}`), image, 'base64', (error) => {
+//       if (error) {
+//         console.log(error);
+//         return Error(res, 400, error);
+//       }
+//     });
+//     Item.findOne({ name }).then(item => {
+//       item.image = `./images/${name}`;
+//       return Item.update({ name }, { $set: item });
+//     }).then(updateMessage => {
+//       console.log('The file has been saved!');
+//       return res.status(201).json({ updateMessage });
+//     }).catch(error => {
+//       Error(res, 400, { error });
+//       console.log(error + 'error');
+//     });
+//     console.log(image.length);
+//   }
+//   console.log('image.length');
+//   return res.status(200).json({ res: 'ok' });
+// }
 
 export function remove(req, res) {
   const id = req.params.id;

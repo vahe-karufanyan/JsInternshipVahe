@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { Ng2ImgMaxModule } from 'ng2-img-max'
 import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component'
@@ -61,7 +62,8 @@ import { SearchComponent } from './components/search/search.component'
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    Ng2ImgMaxModule
   ],
   providers: [
     AuthenticationService,

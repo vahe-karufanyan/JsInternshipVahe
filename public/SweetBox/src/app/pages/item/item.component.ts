@@ -4,6 +4,7 @@ import { Item } from 'src/app/interfaces/item'
 import { Shopping } from 'src/app/interfaces/shopping'
 import { AuthenticationService } from 'src/app/services/authentication.service'
 import { BuyService } from 'src/app/services/buy.service'
+import { ItemRequests } from 'src/app/services/item-requests.service'
 import { StoreService } from 'src/app/services/store.service'
 
 @Component({
@@ -18,7 +19,7 @@ export class ItemComponent implements OnInit {
   public noItem = true
 
   constructor(private _storeService: StoreService, public authenticationService: AuthenticationService,
-              private router: Router, private _buyService: BuyService) { }
+              private router: Router, private _buyService: BuyService, private _itemRequests: ItemRequests) { }
 
   private _toPay: number
 
@@ -63,6 +64,16 @@ export class ItemComponent implements OnInit {
   public ngOnInit(): void {
     this._toPay = parseInt(localStorage.getItem('toPay'), 10)
     this._currentItem()
+    this._getImage()
+  }
+
+  private _getImage(): void {
+    this._itemRequests.getImage(this.item.id).subscribe(res => {
+      this.item.image = res
+    },
+    err => {
+      console.error(err)
+    })
   }
 
   private _currentItem(): void {
