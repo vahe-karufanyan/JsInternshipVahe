@@ -12,6 +12,8 @@ import { ItemRequests } from '../../services/item-requests.service'
 })
 export class ShopComponent implements OnInit {
 
+  public itemsQuantity: number
+  public page = 1
   public item: Item[]
   public currentCategory: string
   public categories: string[] = []
@@ -37,6 +39,7 @@ export class ShopComponent implements OnInit {
         this.categoryItems.push(item)
       }
     })
+    this.itemsQuantity = this.categoryItems.length
     this.clickedOnType = true
   }
 
@@ -44,6 +47,7 @@ export class ShopComponent implements OnInit {
     this._itemRequest.getAllItems().subscribe(res => {
       const names: string[] = []
       this.item = res
+      this.itemsQuantity = this.item.length
       this._noRepeatType()
       this.item.forEach((item: Item) => {
         names.push(item.name)

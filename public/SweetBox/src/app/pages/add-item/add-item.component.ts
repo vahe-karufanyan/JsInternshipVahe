@@ -11,6 +11,7 @@ import { Item } from '../../interfaces/item'
 })
 export class AddItemComponent implements OnInit {
 
+  public file: any
   public credentials: Item = {
     id: null,
     type: '',
@@ -29,15 +30,15 @@ export class AddItemComponent implements OnInit {
 
   public imputImage(event: any): void {
     // this._uploadData.append('image', event.target.files[0])
-    const file = event.target.files[0]
-
-    this._ng2ImageMax.resizeImage(file, 400, 400).subscribe(
+    this.file = event.target.files[0]
+    this._ng2ImageMax.resizeImage(this.file, 400, 400).subscribe(
       result => {
         this._ng2ImageMax.compressImage(result, 0.070).subscribe(
           result1 => {
             const reader = new FileReader()
             reader.readAsDataURL(result1)
             reader.onload = () => {
+              this.file = reader.result
               this.credentials.image = reader.result
             }
             reader.onerror = (err) => {
@@ -78,7 +79,7 @@ export class AddItemComponent implements OnInit {
       console.log(2)
       this._itemRequests.addItem(this.credentials, localStorage.getItem('token')).subscribe(res => {
         console.log(res)
-        this._sendImage()
+        // this._sendImage()
         alert('item has been added' + res)
       },
       err => {
@@ -90,20 +91,20 @@ export class AddItemComponent implements OnInit {
   public ngOnInit(): void {
   }
 
-  private _sendImage(): void {
-    let final = false
-    this._imageChunks.forEach((chunk: string, index: number, array: string[]) => {
-      if (array.length === index + 1) {
-        final = true
-      }
-      // this._itemRequests.sendChunks(chunk, this.credentials.name, localStorage.getItem('token'), final)
-      // .subscribe(res => {
-      //   console.log(res)
-      // },
-      // error => {
-      //   console.error(error)
-      // })
-    })
-  }
+  // private _sendImage(): void {
+  //   let final = false
+  //   this._imageChunks.forEach((chunk: string, index: number, array: string[]) => {
+  //     if (array.length === index + 1) {
+  //       final = true
+  //     }
+  //     // this._itemRequests.sendChunks(chunk, this.credentials.name, localStorage.getItem('token'), final)
+  //     // .subscribe(res => {
+  //     //   console.log(res)
+  //     // },
+  //     // error => {
+  //     //   console.error(error)
+  //     // })
+  //   })
+  // }
 
 }

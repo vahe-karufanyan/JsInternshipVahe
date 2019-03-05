@@ -6,5 +6,5 @@ export interface Item {
     price: number,
     barcode: string,
     count: number,
-    image: string | ArrayBuffer,
+    image?: string | ArrayBuffer,
 }

@@ -61,14 +61,14 @@ export function addItem(req, res) {
   console.log(newItem.image);
   validateForItems(newItem)
     .then(() => {
-      fs.writeFile(path.resolve('./images', `${newItem.id}`), newItem.image, 'base64', (error) => {
-        if (error) {
-          console.log(error);
-          return Error(res, 400, error);
-        }
-        console.log('The file has been saved!');
-      });
-      newItem.image = `C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${newItem.id}`;
+      // fs.writeFile(path.resolve('./images', `${newItem.id}`), newItem.image, 'base64', (error) => {
+      //   if (error) {
+      //     console.log(error);
+      //     return Error(res, 400, error);
+      //   }
+      //   console.log('The file has been saved!');
+      // });
+      // newItem.image = `C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${newItem.id}`;
       return new Item(newItem).save();
     })
     .then(result => {
@@ -82,14 +82,21 @@ export function addItem(req, res) {
 
 export function getImage(req, res) {
   const id = req.params.id;
-  fs.readFile(`C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${id}`, (err, data) => {
-    if (err) {
-      console.log(err);
-      return Error(res, 400, { error: err });
-    }
-    const image = data;
-    res.status(200).send(image);
+  Item.findOne({ id }).then(item => {
+    console.log(item.image);
+    return res.status(200).send(item.image);
+  }).catch(error => {
+    return Error(res, 400, { error });
   });
+  // fs.readFile(`C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${id}`, (err, data) => {
+  //   if (err) {
+  //     console.log(err);
+  //     return Error(res, 400, { error: err });
+  //   }
+  //   const image = data;
+  //   console.log(image);
+  //   res.status(200).send(image);
+  // });
 }
 
 // export function imageChunks(req, res) {
