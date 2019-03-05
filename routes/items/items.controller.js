@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+// import fs from 'fs';
+// import path from 'path';
 import Item from '../../models/itemRepositery';
 import Error from '../../helpers/error';
 import { validateForItems, validateForId } from '../../helpers/joiValidation';
@@ -34,6 +34,7 @@ export function update(req, res) {
     price: req.body.item.price,
     barcode: req.body.item.barcode,
     count: req.body.item.count,
+    image: req.body.item.image,
   };
   validateForItems(updatedItem)
     .then(() => {
@@ -61,14 +62,16 @@ export function addItem(req, res) {
   console.log(newItem.image);
   validateForItems(newItem)
     .then(() => {
-      // fs.writeFile(path.resolve('./images', `${newItem.id}`), newItem.image, 'base64', (error) => {
+      // fs.writeFile(path.resolve('./images', `${newItem.id}`),
+      // newItem.image, 'base64', (error) => {
       //   if (error) {
       //     console.log(error);
       //     return Error(res, 400, error);
       //   }
       //   console.log('The file has been saved!');
       // });
-      // newItem.image = `C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${newItem.id}`;
+      // newItem.image = `C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\
+      // \images\\${newItem.id}`;
       return new Item(newItem).save();
     })
     .then(result => {
@@ -88,7 +91,8 @@ export function getImage(req, res) {
   }).catch(error => {
     return Error(res, 400, { error });
   });
-  // fs.readFile(`C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${id}`, (err, data) => {
+  // fs.readFile(`C:\\Users\\vkarufanyan\\Work\\SweetBox\\JsInternshipVahe\\images\\${id}`,
+  // (err, data) => {
   //   if (err) {
   //     console.log(err);
   //     return Error(res, 400, { error: err });

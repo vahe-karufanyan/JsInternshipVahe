@@ -64,17 +64,17 @@ export class ItemComponent implements OnInit {
   public ngOnInit(): void {
     this._toPay = parseInt(localStorage.getItem('toPay'), 10)
     this._currentItem()
-    this._getImage()
+    // this._getImage()
   }
 
-  private _getImage(): void {
-    this._itemRequests.getImage(this.item.id).subscribe(res => {
-      this.item.image = res
-    },
-    err => {
-      console.error(err)
-    })
-  }
+  // private _getImage(): void {
+  //   this._itemRequests.getImage(this.item.id).subscribe(res => {
+  //     this.item.image = res
+  //   },
+  //   err => {
+  //     console.error(err)
+  //   })
+  // }
 
   private _currentItem(): void {
     this._storeService.getItemData().subscribe(item => {

@@ -24,6 +24,7 @@ export class ShopComponent implements OnInit {
     private router: Router, private _storeService: StoreService ) { }
 
   public showAllItems(): void {
+    this.itemsQuantity = this.item.length
     this.clickedOnType = false
   }
 
@@ -32,6 +33,7 @@ export class ShopComponent implements OnInit {
   }
 
   public getByType(category: string): void {
+    this.page = 1
     this.categoryItems = []
     this.currentCategory = category
     this.item.forEach((item: Item) => {

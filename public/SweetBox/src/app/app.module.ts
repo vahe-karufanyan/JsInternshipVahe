@@ -15,6 +15,7 @@ import { AppComponent } from './app.component'
 
 import { AuthenticationService } from './services/authentication.service'
 import { BuyService } from './services/buy.service'
+import { HelpersService } from './services/helpers.service'
 import { ItemRequests } from './services/item-requests.service'
 import { SearchService } from './services/search.service'
 import { StoreService } from './services/store.service'
@@ -66,6 +67,7 @@ import { SearchComponent } from './components/search/search.component'
     Ng2ImgMaxModule
   ],
   providers: [
+    HelpersService,
     AuthenticationService,
     ItemRequests,
     SearchService,

@@ -5,6 +5,6 @@ export interface ResponseForItem {
   price: number,
   barcode: string,
   count: number,
-  image: any,
+  image: string,
   error?: object,
 }
