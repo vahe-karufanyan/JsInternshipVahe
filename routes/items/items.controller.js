@@ -38,7 +38,7 @@ export function update(req, res) {
   };
   validateForItems(updatedItem)
     .then(() => {
-      Item.update({ id: updatedItem.id }, { $set: updatedItem });
+      return Item.update({ id: updatedItem.id }, { $set: updatedItem });
     })
     .then(result => {
       res.status(200).json(result);

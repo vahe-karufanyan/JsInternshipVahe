@@ -6,6 +6,8 @@ import { Shopping } from '../interfaces/shopping'
 @Injectable()
 export class StoreService {
 
+  public addedQuantity = new BehaviorSubject<number>(0)
+
   public subjectForShopping = new BehaviorSubject<Shopping[]>(
     [{
       name: '',
@@ -30,6 +32,14 @@ export class StoreService {
   constructor() { }
 
   private _products: Shopping[] = []
+
+  public storeAddedQuantity (addedQuantity: number): void {
+    this.addedQuantity.next(addedQuantity)
+  }
+
+  public getAddedQuantity (): BehaviorSubject<number> {
+    return this.addedQuantity
+  }
 
   public storePassingNamesToSearch (name: string[]): void {
     this.passingNamesToSearchSubject.next(name)

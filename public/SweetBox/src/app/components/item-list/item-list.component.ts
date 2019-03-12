@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { Item } from 'src/app/interfaces/item'
 import { Shopping } from 'src/app/interfaces/shopping'
 import { AuthenticationService } from 'src/app/services/authentication.service'
@@ -17,12 +17,22 @@ export class ItemListComponent implements OnInit {
   @Input() public item: Item
   public showModal = false
   public quantity = 1
+  public addedQuantity = 0
 
   constructor(private _storeService: StoreService, private _itemRequests: ItemRequests,
               public authenticationService: AuthenticationService, private router: Router,
               private  _buyService: BuyService) { }
 
   private _toPay: number
+
+  public buyButton(): void {
+    if ( this.quantity < 1 || this.quantity > this.item.count ||
+         this.quantity > this.item.count - this.addedQuantity ) {
+      alert('Invalid quantity.')
+    } else {
+      this.showModal = true
+    }
+  }
 
   public buy(): void {
     this.showModal = false
@@ -62,6 +72,7 @@ export class ItemListComponent implements OnInit {
     shoppingData.quantity = this.quantity
     console.log(shoppingData.quantity)
     this._storeService.storeShoppingData(shoppingData)
+    this._storeService.storeAddedQuantity(this.addedQuantity + this.quantity)
   }
 
   public edit(): void {
@@ -99,7 +110,11 @@ export class ItemListComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    // this.rateControl = [Validators.max(100), Validators.min(0)]
     this._toPay = parseInt(localStorage.getItem('toPay'), 10)
+    this._storeService.getAddedQuantity().subscribe(TotalAddedQuantity => {
+      this.addedQuantity = TotalAddedQuantity
+    })
   }
 
 }

@@ -75,7 +75,7 @@ export class AddItemComponent implements OnInit {
     // this._uploadData.append('price', this.credentials.price.toString())
     // this._uploadData.append('count', this.credentials.count.toString())
     // this._uploadData.append('barcode', this.credentials.barcode)
-    if (this._authenticationService.isAdmin()) {
+    if (this._authenticationService.isAdmin() && this.credentials.price > 0 && this.credentials.count > 0) {
       console.log(2)
       this._itemRequests.addItem(this.credentials, localStorage.getItem('token')).subscribe(res => {
         console.log(res)
@@ -85,6 +85,8 @@ export class AddItemComponent implements OnInit {
       err => {
         console.log(err)
       })
+    } else {
+      alert('Invalid price or count')
     }
   }
 

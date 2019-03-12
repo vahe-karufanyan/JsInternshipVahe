@@ -35,6 +35,7 @@ export class ShoppingCartComponent implements OnInit {
       this.showDeleteModal = false
       this.totalPrice -= this.itemToRemove.price * this.itemToRemove.quantity
       this._storeService.removeItemFromCart(this.itemToRemove.name)
+      this._storeService.storeAddedQuantity(0)
       this.addedItems.forEach((item: Shopping, index: number) => {
         if (item.name === this.itemToRemove.name) {
           this.addedItems.splice(index, 1)

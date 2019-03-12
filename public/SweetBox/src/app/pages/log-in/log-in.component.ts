@@ -19,11 +19,11 @@ export class LogInComponent implements OnInit {
     email: '',
     password: ''
   }
+  public logInForm: FormGroup
 
   constructor(private fb: FormBuilder, private _authenticationService: AuthenticationService,
     private router: Router) { }
 
-  private logInForm: FormGroup
 
   public logIn(): void {
     this._authenticationService.signIn(this.credentials).subscribe((res: User) => {

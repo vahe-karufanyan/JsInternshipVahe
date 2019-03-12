@@ -12,17 +12,32 @@
         </div>
         <div class="form-group">
           <label for="price">Price</label>
-          <input type="price" class="form-control" name="price" placeholder="{{itemToUpdate.price}}" [(ngModel)]="itemToUpdate.price" (keydown.enter)="addItem()">
+          <input type="number" class="form-control" name="price" placeholder="{{itemToUpdate.price}}" [(ngModel)]="itemToUpdate.price"
+                min="1" (keydown.enter)="addItem()">
         </div>
         <div class="form-group">
-          <label for="price">Barcode</label>
-          <input type="price" class="form-control" name="barcode" placeholder="{{itemToUpdate.barcode}}" [(ngModel)]="itemToUpdate.barcode">
+          <label for="barcode">Barcode</label>
+          <input type="text" class="form-control" name="barcode" placeholder="{{itemToUpdate.barcode}}" 
+                [(ngModel)]="itemToUpdate.barcode">
         </div>
         <div class="form-group">
-          <label for="price">count</label>
-          <input type="price" class="form-control" name="count" placeholder="{{itemToUpdate.count}}" [(ngModel)]="itemToUpdate.count" (keydown.enter)="updateItem()">
+          <label for="count">count</label>
+          <input type="number" class="form-control" name="count" placeholder="{{itemToUpdate.count}}" 
+                min="1" [(ngModel)]="itemToUpdate.count" (keydown.enter)="updateItem()">
         </div>
-        <button type="submit" class="btn btn-info" (click)="updateItem()">Update Item</button>
+        <div class="form-group">
+          <label style="margin-right: 10px;" for="selectImage">Image:</label>
+          <input type="file" class="form-control-file" (change)="imputImage($event)" name="file" id="file"
+                accept="image/png, image/jpeg, image/jpg" #fileInput>
+          <button class="btn btn-defauly" name="selectImage" id="selectImage" (click)="fileInput.click()">
+                  Select File</button>
+        </div>
+        <div *ngIf="file" class="img-preview-container">
+          <div class="img-preview"
+            [ngStyle]="{'background-image': 'url('+ file + ')'}">
+          </div>     
+        </div>
+        <button type="submit" class="btn btn-info mb-5" (click)="updateItem()">Update Item</button>
     </div>
   </div>
 </div>
